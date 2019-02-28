@@ -1,7 +1,6 @@
 package com.ordering.user.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,18 +9,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ordering.user.service.UserServiceImpl;
 
-//@Controller
-//@RequestMapping("userController")
-public class test {
-//	@Autowired
+import net.sf.json.JSONArray;
+
+@Controller
+@RequestMapping("userController")
+public class userController {
+	@Autowired
 	private UserServiceImpl userService;
 	
-//	@RequestMapping("test1")
-//	@ResponseBody
-	public String test1() {
+	@RequestMapping("getClassify.do")
+	@ResponseBody
+	public JSONArray getClassify() {
 		System.out.println("213");
-//		List<Map<String,Object>> list = userService.getData();
-//		String str = list.toString();
-		return "";
+		List list = userService.getClassify();
+		JSONArray data=JSONArray.fromObject(list);
+		System.out.println(data);
+		return data;
 	}
 }
