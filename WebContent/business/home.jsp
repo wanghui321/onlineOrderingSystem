@@ -44,7 +44,7 @@
      <div class="pageSidebar">
          <ul class="nav nav-stacked nav-pills">
              <li role="presentation">
-                 <a href="sales.jsp" target="mainFrame" >商家管理</a>
+                 <a href="sales.jsp" target="mainFrame" >1商家管理</a>
              </li>
              <li role="presentation">
                  <a href="adminLogin.jsp" target="mainFrame">用户管理</a>
