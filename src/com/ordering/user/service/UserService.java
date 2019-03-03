@@ -10,4 +10,6 @@ public interface UserService {
 	public boolean regist(User user);
 	
 	public String accountVerification(String accountNumber);
+	
+	public User login(User user);
 }

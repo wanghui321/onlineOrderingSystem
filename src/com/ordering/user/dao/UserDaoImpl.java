@@ -35,6 +35,7 @@ public class UserDaoImpl implements UserDao{
 		return list;
 	}
 
+	//新用户注册
 	@Override
 	public boolean regist(User user) {
 		// TODO Auto-generated method stub
@@ -45,6 +46,7 @@ public class UserDaoImpl implements UserDao{
 		return true;
 	}
 
+	//验证用户账号是否已被使用
 	@Override
 	public int accountVerification(String accountNumber) {
 		// TODO Auto-generated method stub
@@ -55,5 +57,17 @@ public class UserDaoImpl implements UserDao{
 		int count = list.size();
 		System.out.println(count);
 		return count;
+	}
+
+	//用户登录
+	@Override
+	public User login(User user) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from User where accountNumber = ? and password = ?");
+		query.setString(0, user.getAccountNumber());
+		query.setString(1, user.getPassword());
+		User u = (User)query.uniqueResult();
+		return u;
 	}
 }

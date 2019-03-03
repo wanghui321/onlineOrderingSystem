@@ -10,4 +10,6 @@ public interface UserDao {
 	public boolean regist(User user);
 
 	public int accountVerification(String accountNumber);
+
+	public User login(User user);
 }
