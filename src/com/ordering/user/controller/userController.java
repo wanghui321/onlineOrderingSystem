@@ -2,17 +2,19 @@ package com.ordering.user.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ordering.user.bean.User;
 import com.ordering.user.service.UserServiceImpl;
 
-import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 
 @Controller
@@ -48,6 +50,22 @@ public class userController {
 			model.addAttribute("msg","注册成功");
 		} else {
 			model.addAttribute("msg","注册失败");
+		}
+		return "user/regist";
+	}
+	
+	//用户登录
+	@RequestMapping("login")
+	public String login(HttpSession session,Model model,User user,String loginType) {
+		System.out.println(loginType);
+		if(loginType.equals("user")) {
+			User u = userService.login(user);
+			if(u != null) {
+				session.setAttribute("user", u);
+				return "user/home";
+			} 
+			model.addAttribute("msg","用户名或密码错误");
+			return "user/login";
 		}
 		return "";
 	}

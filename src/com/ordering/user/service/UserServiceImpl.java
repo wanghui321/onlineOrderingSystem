@@ -34,13 +34,23 @@ public class UserServiceImpl implements UserService{
 		return flag;
 	}
 
+	//验证账号是否已被注册
 	@Override
 	public String accountVerification(String accountNumber) {
 		// TODO Auto-generated method stub
 		int count = userDao.accountVerification(accountNumber);
 		if(count != 0) {
-			return "该用户已被注册";
+			return "false";
 		}
-		return "账号可以使用";
+		return "true";
 	}
+
+	//用户登录
+	@Override
+	public User login(User user) {
+		// TODO Auto-generated method stub
+		User u = userDao.login(user);
+		return u;
+	}
+
 }
