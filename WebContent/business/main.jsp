@@ -23,16 +23,36 @@ debugger;
 		success:function(msg){
 			alert(msg.newOrder);
  			if(msg != null && msg != undefined){
- 				var value = msg.newOrder;
- 				 
+ 				var newOrder = msg.newOrder;
+ 				var reminder = msg.reminder;
+ 				var chargeback = msg.chargeback;
+ 				var unusualOrder = msg.unusualOrder;
 			} 
- 			if(value == 3){
- 				$("#busi").css("color","red");
+ 			if(newOrder == 0){
+ 				$("#new").css("color","#c9c9c9");
  			}else{
- 				$("#busi").css("color","orange");
+ 				$("#new").css("color","blue");
  			}
-			$("#business").html(value);
-			alert(value);
+			$("#newOrder").html(newOrder);
+			if(reminder == 0){
+ 				$("#rem").css("color","#c9c9c9");
+ 			}else{
+ 				$("#rem").css("color","orange");
+ 			}
+			$("#reminder").html(reminder);
+			if(chargeback == 0){
+ 				$("#cha").css("color","#c9c9c9");
+ 			}else{
+ 				$("#cha").css("color","red");
+ 			}
+			$("#chargeback").html(chargeback);
+			if(unusualOrder == 0){
+ 				$("#unu").css("color","#c9c9c9");
+ 			}else{
+ 				$("#unu").css("color","yellow");
+ 			}
+			$("#unusualOrder").html(unusualOrder);
+			alert(newOrder);
 		}
 	})
 	
@@ -46,18 +66,18 @@ debugger;
 
             
 	<div align="center" style="width:100%;height:1222px;border:1px solid red;float: left; background-color: #F4F4F4">
-		<div style="width:60%;height: auto;float: left;background-color: #fff;border:1px solid red">
-			<div style="width:100%;height: 50px;background-color: #fff;border:1px solid red"align="left"><span style="line-height: 50px;margin-left:25px ">待处理订单：</span></div>
-			<div style="width:25%;height: auto;float: left;background-color: #fff"><span>新订单</span></div>
-			<div style="width:25%;height: auto;float: left;background-color: #fff"><span>催单</span></div>
-			<div style="width:25%;height: auto;float: left;background-color: #fff"><span>退单</span></div>
-			<div style="width:25%;height: auto;float: left;background-color: #fff"><span>异常订单</span></div>
-			<div style="width:25%;height: auto;float: left;background-color: #fff"><span id="business" style="font-size: 7;font-weight: 2"></span></div>
-			<div style="width:25%;height: auto;float: left;background-color: #fff;font-size: 55px" id="busi">444<span  style="font-size: 95px">jjj</span></div>
-			<div style="width:25%;height: auto;float: left;background-color: #fff">${business}</div>
-			<div style="width:25%;height: auto;float: left;background-color: #fff">sdsfsdfsdfdfs</div>
+		<div style="width:65%;height: auto;float: left;background-color: #fff;border:1px solid red;margin-top: 10px;margin-left: 10px">
+			<div style="width:100%;height: 50px;background-color: #fff;border-bottom:1px solid #c9c9c9"align="left"><span style="line-height: 70px;margin-left:25px;font-weight: 700 ;font-size: 20px">待处理订单：</span></div>
+			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">新订单</span></div>
+			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">催单</span></div>
+			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">退单</span></div>
+			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">异常订单</span></div>
+			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="new"><span id="newOrder" style="font-size: 95px"></span></div>
+			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="rem"><span id="reminder" style="font-size: 95px"></span></div>
+			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="cha"><span id="chargeback" style="font-size: 95px"></span></div>
+			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="unu"><span id="unusualOrder" style="font-size: 95px"></span></div>
 		</div>
-		<div style="width:30%;height: auto;float: right;background-color: #fff;border:1px solid red">sdsfsdfsdfdfs</div>
+		<div style="width:32%;height: auto;float: right;background-color: #fff;border:1px solid red;margin-right: 10px;margin-top: 10px">sdsfsdfsdfdfs</div>
 		<div style="width:60%;height: auto;float: left;background-color: #fff;border:1px solid red">sdsfsdfsdfdfs</div>
 		<div style="width:30%;height: auto;float: right;background-color: #fff;border:1px solid red">sdsfsdfsdfdfs</div>
 	</div>

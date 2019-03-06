@@ -6,7 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ordering.business.bean.Business;
 import com.ordering.business.dao.businessDao;
+import com.ordering.user.bean.User;
 
 @Service
 public class businessServiceImpl implements businessService{
@@ -23,6 +25,19 @@ public class businessServiceImpl implements businessService{
 		// TODO Auto-generated method stub
 		Map<String,String> list = businessDao.getState();
 		return list;
+	}
+	
+	public boolean regist(Business business) {
+		// TODO Auto-generated method stub
+		boolean flag = businessDao.regist(business);
+		return flag;
+	}
+	
+	@Override
+	public Business login(Business business) {
+		// TODO Auto-generated method stub
+		Business b = businessDao.login(business); 
+		return b;
 	}
 
 }
