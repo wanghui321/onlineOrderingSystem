@@ -70,4 +70,89 @@ public class UserDaoImpl implements UserDao{
 		User u = (User)query.uniqueResult();
 		return u;
 	}
+
+	//修改用户昵称
+	@Override
+	public boolean setNickName(String userId, String nickName) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("update User set nickName = ? where userId = ?");
+		query.setString(0, nickName);
+		query.setString(1, userId);
+		int count = query.executeUpdate();
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	//根据userId获取User对象
+	@Override
+	public User getUser(String userId) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from User where userId = ?");
+		query.setString(0, userId);
+		User user = (User)query.uniqueResult();
+		return user;
+	}
+
+	//修改用户手机号码
+	@Override
+	public boolean setPhoneNumber(String userId, String phoneNumber) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("update User set phoneNumber = ? where userId = ?");
+		query.setString(0, phoneNumber);
+		query.setString(1, userId);
+		int count = query.executeUpdate();
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	//修改用户信息
+	@Override
+	public boolean updateUser(User user) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("update User set nickName=?,phoneNumber=?,realName=?,sex=? where userId=?");
+		query.setString(0, user.getNickName());
+		query.setString(1, user.getPhoneNumber());
+		query.setString(2, user.getRealName());
+		query.setString(3, user.getSex());
+		query.setString(4, user.getUserId());
+		int count = query.executeUpdate();
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public String passwordVerification(String userId, String oldPassword) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("select password from User where userId = ?");
+		String password = (String)query.uniqueResult();
+		return password;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -26,16 +26,19 @@
 			$("#business").html(str);
 		}
 	})
-	debugger;
-	var nickName = '${user}';
-	if(nickName != null && nickName != ""){
-		$("#noLogin").css("display","none");
-		$("#logined").css("display","");
-	} else {
-		$("#logined").css("display","none");
-	}
 	
-
+	window.onload = function(){
+		var nickName = '${nickName}';
+		if(nickName != null && nickName != ""){
+			$(".noLogin").css("display","none");
+			$("#logined").css("display","");
+			$("#editLogin").css("display","");
+			$("#nickName").text('${nickName}');
+		} else {
+			$("#logined").css("display","none");
+			$("#editLogin").css("display","none");
+		}
+	}
 </script>
 <body>
 	<div align="center" style="width:100%;height: auto;border:1px solid red;float: left">
@@ -44,21 +47,22 @@
 			<div style="width:auto;height: auto;float: left">
 				<img src="../images/logo4.png" width="233px" height="73px"/>
 			</div>
- 			<div style="width:auto;height: auto;float: left;line-height: 73px;margin-left: 300px" >
+ 			<div style="width:auto;height: auto;float: left;line-height: 73px;margin-left: 250px" >
 				<form style="float: left;margin-right: 70px">
 					<input type="text">
 					<button type="button">搜索</button>
 				</form>
 			</div>
-			<div id="noLogin" style="width:auto;height: auto;float: left;line-height: 73px">
-				<a href="login.jsp" style="text-decoration:none">登录|</a>
-				<a href="regist.jsp" style="text-decoration:none">注册</a>
+			<div class="noLogin" style="width:auto;height: auto;float: left;line-height: 73px;display:''">
+				<a href="<%=request.getContextPath()%>/user/login.jsp" style="text-decoration:none">登录|</a>
+				<a href="<%=request.getContextPath()%>/user/regist.jsp" style="text-decoration:none">注册</a>
 			</div>
-			<div id="logined" style="width:auto;height: auto;float: left;line-height: 73px;display: none">
-				<span>欢迎您：</span><a href="#">${user.nickName}</a>
+			<div id="logined" style="width:auto;height: auto;float: left;line-height: 73px;display:none">
+				<span>欢迎您：</span><a href="<%=request.getContextPath()%>/user/personalHomepage.jsp" id="nickName">${user.nickName}</a>
 			</div>
-			<div style="width:auto;height: auto;float: left;line-height: 73px;margin-left: 30px">
-				<a href="#" style="text-decoration:none">我要开店</a>
+			<div style="width:auto;height: auto;float: left;line-height: 73px;margin-left: 20px">
+				<a class="noLogin" href="<%=request.getContextPath()%>/business/regist.jsp" style="text-decoration:none">我要开店</a>
+				<a id="editLogin" href="<%=request.getContextPath()%>/userController/editLogin.do" style="text-decoration: none">退出登录</a>
 				<a href="#" style="text-decoration: none">我的订单</a> 
 			</div>
 		</div>
@@ -82,6 +86,6 @@
            <span style="color:#fff;align-content: center;">&copy; Copyright 2019, A OnlineOrderingSystem Apart</span>&nbsp;&nbsp;
         </div>
         
-		</div>
+	</div>
 </body>
 </html>

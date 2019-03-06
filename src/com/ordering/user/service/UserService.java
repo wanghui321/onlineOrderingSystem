@@ -12,4 +12,12 @@ public interface UserService {
 	public String accountVerification(String accountNumber);
 	
 	public User login(User user);
+	
+	public User setNickName(String userId,String nickName);
+	
+	public User setPhoneNumber(String userId,String phoneNumber);
+	
+	public User updateUser(User user);
+	
+	public boolean passwordVerification(String userId,String oldPassword);
 }

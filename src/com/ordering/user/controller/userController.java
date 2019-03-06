@@ -22,6 +22,7 @@ import net.sf.json.JSONArray;
 public class userController {
 	@Autowired
 	private UserServiceImpl userService;
+	private JSONArray json;
 	
 	@RequestMapping("getClassify")
 	@ResponseBody
@@ -33,9 +34,9 @@ public class userController {
 	}
 	
 	//用户账号验证
-	@RequestMapping("accountVerification")
 	@ResponseBody
-	public JSONArray accountVerification(@PathVariable String accountNumber) {
+	@RequestMapping("accountVerification/{accountNumber}")
+	public JSONArray accountVerification(@PathVariable String accountNumber) {		
 		String msg = userService.accountVerification(accountNumber);
 		JSONArray json = new JSONArray();
 		json.add(msg);
@@ -57,11 +58,11 @@ public class userController {
 	//用户登录
 	@RequestMapping("login")
 	public String login(HttpSession session,Model model,User user,String loginType) {
-		System.out.println(loginType);
 		if(loginType.equals("user")) {
 			User u = userService.login(user);
 			if(u != null) {
 				session.setAttribute("user", u);
+				session.setAttribute("nickName", u.getNickName());
 				return "user/home";
 			} 
 			model.addAttribute("msg","用户名或密码错误");
@@ -69,4 +70,74 @@ public class userController {
 		}
 		return "";
 	}
+	
+	//退出登录
+	@RequestMapping("editLogin")
+	public String editLogin(HttpSession session) {
+		session.removeAttribute("user");
+		session.removeAttribute("nickName");
+		return "user/home";
+	}
+	
+	//修改昵称，并更新session中的用户信息
+	@ResponseBody
+	@RequestMapping("setNickName/{nickName}")
+	public JSONArray setNickName(@PathVariable String nickName,HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		User newUser = userService.setNickName(user.getUserId(),nickName);
+		session.setAttribute("user", newUser);
+		session.setAttribute("nickName", newUser.getNickName());
+		JSONArray json = new JSONArray();
+		json.add("true");
+		return json;
+	}
+	
+	//修改电话号码，并更新session中的用户信息
+	@ResponseBody
+	@RequestMapping("setPhoneNumber/{phoneNumber}")
+	public JSONArray setPhoneNumber(@PathVariable String phoneNumber,HttpSession session) {
+		int length = phoneNumber.length();
+		JSONArray json = new JSONArray();
+		if(length != 11) {
+			json.add("false");
+		} else {
+			User user = (User) session.getAttribute("user");
+			User newUser = userService.setPhoneNumber(user.getUserId(),phoneNumber);
+			session.setAttribute("user", newUser);
+			json.add("true");
+		}
+		
+		return json;
+	}
+	
+	//修改用户信息，并更新session中的用户信息
+	@RequestMapping("updateUser")
+	public String updateUser(User user,HttpSession session,Model model) {
+		User u = (User)session.getAttribute("user");
+		user.setUserId(u.getUserId());
+		User newUser = userService.updateUser(user);
+		session.setAttribute("user", newUser);
+		session.setAttribute("nickName", newUser.getNickName());
+		model.addAttribute("msg","修改成功");
+		return "user/getUser";
+	}
+	
+	//验证初始密码
+	@ResponseBody
+	@RequestMapping("passwordVerification/{oldPassword}")
+	public JSONArray passwordVerification(@PathVariable String oldPassword,HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		boolean flag = userService.passwordVerification(user.getUserId(),oldPassword);
+		JSONArray json = new JSONArray();
+		if(!flag) {
+			json.add("false");
+		}
+		return json;
+	}
+	
+	
+	
+	
+	
+	
 }

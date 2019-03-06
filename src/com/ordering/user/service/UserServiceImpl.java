@@ -53,4 +53,50 @@ public class UserServiceImpl implements UserService{
 		return u;
 	}
 
+	//修改用户的昵称，并返回最新的User对象。
+	@Override
+	public User setNickName(String userId,String nickName) {
+		// TODO Auto-generated method stub
+		boolean flag = userDao.setNickName(userId,nickName);
+		if(flag) {
+			User u = userDao.getUser(userId);
+			return u;
+		}
+		return null;
+	}
+
+	//修改用户的手机号，并返回最新的User对象。
+	@Override
+	public User setPhoneNumber(String userId, String phoneNumber) {
+		// TODO Auto-generated method stub
+		boolean flag = userDao.setPhoneNumber(userId,phoneNumber);
+		if(flag) {
+			User u = userDao.getUser(userId);
+			return u;
+		}
+		return null;
+	}
+
+	//修改用户信息，并返回最新的用户对象
+	@Override
+	public User updateUser(User user) {
+		// TODO Auto-generated method stub
+		boolean flag = userDao.updateUser(user);
+		if(flag) {
+			User u = userDao.getUser(user.getUserId());
+			return u;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean passwordVerification(String userId, String oldPassword) {
+		// TODO Auto-generated method stub
+		String password = userDao.passwordVerification(userId,oldPassword);
+		if(password.equals(oldPassword)) {
+			return true;
+		}
+		return false;
+	}
+	
 }

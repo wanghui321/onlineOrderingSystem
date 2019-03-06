@@ -11,16 +11,16 @@
 	//账号验证
 	function accountVerification(){
 		var accountNumber = $("#newAccountNumber").val();
-		$.ajax({
-			type:'get',
-			url:"<%=request.getContextPath()%>/userController/accountVerification.do?accountNumber="+accountNumber,
-			data:"",
-			dataType:"json",
-			success:function(msg){
-				if(accountNumber == null || accountNumber == ""){
-					$("#newAccountNumberMsg").html("账号不能为空");
-					$("#newAccountNumberMsg").attr("style","color:red");
-				} else {
+		if(accountNumber == null || accountNumber == ""){
+			$("#newAccountNumberMsg").html("账号不能为空");
+			$("#newAccountNumberMsg").attr("style","color:red");
+		} else {
+			$.ajax({
+				type:'post',
+				url:"<%=request.getContextPath()%>/userController/accountVerification/"+accountNumber+".do",
+				data:"",
+				dataType:"json",
+				success:function(msg){
 					if(msg != null && msg != "" && msg == "true"){
 						$("#newAccountNumberMsg").html("该账号可以使用");
 						$("#newAccountNumberMsg").attr("style","color:green");
@@ -29,10 +29,11 @@
 						$("#newAccountNumberMsg").html("该账号已被注册");
 						$("#newAccountNumberMsg").attr("style","color:red");
 					}
+					
 				}
-				
-			}
-		})
+			})
+		}
+		
 	}
 
 	//密码验证
@@ -46,12 +47,15 @@
 		}
 	}
 	
-	var msg = '${msg}';
-	if(msg != null && msg != "" && msg != undefined){
-		if(msg == "注册成功"){
-			$("#msg").css('display',"");
+	window.onload=function(){
+		var msg = '${msg}';
+		if(msg != null && msg != "" && msg != undefined){
+			if(msg == "注册成功"){
+				$("#msg").css("display","");
+			}
 		}
 	}
+	
 </script>
 <body>
 	<div style="width:100%;height: auto;float: left">

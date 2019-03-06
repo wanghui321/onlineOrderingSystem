@@ -12,4 +12,14 @@ public interface UserDao {
 	public int accountVerification(String accountNumber);
 
 	public User login(User user);
+
+	public boolean setNickName(String userId, String nickName);
+
+	public User getUser(String userId);
+
+	public boolean setPhoneNumber(String userId, String phoneNumber);
+
+	public boolean updateUser(User user);
+
+	public String passwordVerification(String userId, String oldPassword);
 }

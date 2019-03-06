@@ -14,6 +14,20 @@ public class User {
 	private String password;	//用户密码
 	private String phoneNumber;		//电话号码
 	private String headPicture;		//用户头像
+	private String realName;	//真实姓名
+	private String sex;		//性别
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 	public String getUserId() {
 		return userId;
 	}
