@@ -14,7 +14,7 @@
 		var accountNumber = $("#newAccountNumber").val();
 		$.ajax({
 			type:'get',
-			url:"<%=request.getContextPath()%>/userController/accountVerification.do?accountNumber="+accountNumber,
+			url:"<%=request.getContextPath()%>/businessController/accountVerification/"+accountNumber+".do",
 			data:"",
 			dataType:"json",
 			success:function(msg){
@@ -72,7 +72,7 @@
  						<td>用户账号：</td>
  						<td>
 	 						<input id="newAccountNumber" name="accountNumber" type="text"
-	 							 style="height: 25px;width: 200px" />
+	 							 style="height: 25px;width: 200px" onblur="accountVerification()"/>
 	 						<span id="newAccountNumberMsg" style="color: red"></span>
 	 					</td>
  					</tr>

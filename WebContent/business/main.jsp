@@ -31,7 +31,7 @@ debugger;
  			if(newOrder == 0){
  				$("#new").css("color","#c9c9c9");
  			}else{
- 				$("#new").css("color","blue");
+ 				$("#new").css("color","#0085e6");
  			}
 			$("#newOrder").html(newOrder);
 			if(reminder == 0){
@@ -43,18 +43,45 @@ debugger;
 			if(chargeback == 0){
  				$("#cha").css("color","#c9c9c9");
  			}else{
- 				$("#cha").css("color","red");
+ 				$("#cha").css("color","#C91D32");
  			}
 			$("#chargeback").html(chargeback);
 			if(unusualOrder == 0){
  				$("#unu").css("color","#c9c9c9");
  			}else{
- 				$("#unu").css("color","yellow");
+ 				$("#unu").css("color","#E3DE02");
  			}
 			$("#unusualOrder").html(unusualOrder);
 			alert(newOrder);
 		}
 	})
+	
+	
+ 	$.ajax({
+		type:"post",
+		url:"<%=request.getContextPath()%>/businessController/getCommentState.do",
+		dataType:'json',
+		success:function(msg1){
+			alert(msg1.noResponseToNegativeComment);
+ 			if(msg1 != null && msg1 != undefined){
+ 				var noResponseToComments = msg1.noResponseToComments;
+ 				var noResponseToNegativeComment = msg1.noResponseToNegativeComment;
+			} 
+ 			if(noResponseToComments == 0){
+ 				$("#nor").css("color","#c9c9c9");
+ 			}else{
+ 				$("#nor").css("color","#FF6B07");
+ 			}
+			$("#noResponseToComments").html(noResponseToComments);
+			if(noResponseToNegativeComment == 0){
+ 				$("#nrn").css("color","#c9c9c9");
+ 			}else{
+ 				$("#nrn").css("color","#676767");
+ 			}
+			$("#noResponseToNegativeComment").html(noResponseToNegativeComment);
+		
+		}
+	}) 
 	
 	//显示登录窗口
 	function showWindow(){
@@ -77,7 +104,13 @@ debugger;
 			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="cha"><span id="chargeback" style="font-size: 95px"></span></div>
 			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="unu"><span id="unusualOrder" style="font-size: 95px"></span></div>
 		</div>
-		<div style="width:32%;height: auto;float: right;background-color: #fff;border:1px solid red;margin-right: 10px;margin-top: 10px">sdsfsdfsdfdfs</div>
+		<div style="width:32%;height: auto;float: right;background-color: #fff;border:1px solid red;margin-right: 10px;margin-top: 10px">
+			 <div style="width:100%;height: 50px;background-color: #fff;border-bottom:1px solid #c9c9c9"align="left"><span style="line-height: 70px;margin-left:25px;font-weight: 700 ;font-size: 20px">待处理订单：</span></div>
+			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">未回复差评</span></div>
+			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">未回复评论</span></div>
+			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="nrn"><span id="noResponseToNegativeComment" style="font-size: 95px"></span></div>
+			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="nor"><span id="noResponseToComments" style="font-size: 95px"></span></div>
+		</div>
 		<div style="width:60%;height: auto;float: left;background-color: #fff;border:1px solid red">sdsfsdfsdfdfs</div>
 		<div style="width:30%;height: auto;float: right;background-color: #fff;border:1px solid red">sdsfsdfsdfdfs</div>
 	</div>

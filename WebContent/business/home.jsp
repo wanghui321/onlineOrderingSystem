@@ -17,6 +17,13 @@
 <title>bootstrap后台模板设计</title>
 
 </head>
+<script type="text/javascript">
+window.onload=function(){
+var nickName = '${business.nickName}';
+var a = 1 ;
+alert(nickName);
+}
+</script>
 <body>
 <!--顶部导航栏部分-->
 <nav class="navbar navbar-inverse">
@@ -27,7 +34,7 @@
        <div class="collapse navbar-collapse">
            <ul class="nav navbar-nav navbar-right">
                <li role="presentation">
-                   <a href="#">当前用户：<span class="badge">柒晓白</span></a>
+                   <a href="#">当前用户：<span class="badge">${bnickName}</span></a>
                </li>
                <li>
                    <a href="../login/logout">

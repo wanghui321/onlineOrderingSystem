@@ -12,4 +12,8 @@ public interface businessDao {
 	public boolean regist(Business business);
 	
 	public Business login(Business business);
+	
+	public int accountVerification(String accountNumber);
+	
+	public Map<String,String> getCommentState();
 }
