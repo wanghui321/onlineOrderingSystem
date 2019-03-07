@@ -10,7 +10,7 @@
 <!-- 引入样式文件和动态控制 -->
         <link href="<%=path %>/css/business/bootstrap.min.css" rel="stylesheet">
         <script src="<%=path %>/js/jquery-1.11.1.min.js"></script>
-        <script src="<%=path %>/js/admin/bootstrap.min.js"></script>
+        <script src="<%=path %>/js/bootstrap.min.js"></script>
         <!--主要样式控制-->
         <link href="<%=path %>/css/business/main.css" rel="stylesheet">
 
@@ -44,7 +44,7 @@
      <div class="pageSidebar">
          <ul class="nav nav-stacked nav-pills">
              <li role="presentation">
-                 <a href="sales.jsp" target="mainFrame" >1商家管理</a>
+                 <a href="sales.jsp" target="mainFrame" >商家管理</a>
              </li>
              <li role="presentation">
                  <a href="adminLogin.jsp" target="mainFrame">用户管理</a>
@@ -53,21 +53,8 @@
                  <a href="adminLogin.jsp" target="mainFrame">订单管理</a>
              </li>
              <!-- 开始 -->
-             <li class="dropdown">
-                 <a class="dropdown-toggle" data-toggle="dropdown" href="nav4.html" target="mainFrame">
-                     个人设置<span class="caret"></span>
-                 </a>
-                 <ul class="dropdown-menu">
-                     <li>
-                         <a href="nav1.html" target="mainFrame">修改密码</a>
-                     </li>
-                     <li>
-                         <a href="nav2.html" target="mainFrame">退出系统</a>
-                     </li>
-                     <li>
-                         <a href="nav3.html" target="mainFrame">查看个人信息</a>
-                     </li>
-                 </ul>
+             <li role="presentation">
+                     <a href="adminLogin.jsp" target="mainFrame">个人设置</a>
              </li>
              <!-- 结束 -->
              <li role="presentation">
@@ -83,7 +70,7 @@
      <div class="splitter"></div>
      <!-- 正文内容部分 -->
      <div class="pageContent">
-       <iframe src="adminLogin.jsp" id="mainFrame" name="mainFrame" 
+       <iframe src="<%=request.getContextPath()%>/business/main.jsp" id="mainFrame" name="mainFrame" 
        frameborder="0" width="100%"  height="100%" frameBorder="0">
        </iframe> 
      </div>
