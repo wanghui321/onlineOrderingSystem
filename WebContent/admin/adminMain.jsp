@@ -8,33 +8,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- 引入样式文件和动态控制 -->
-        <link href="<%=path %>/css/business/bootstrap.min.css" rel="stylesheet">
+        <link href="<%=path %>/css/admin/bootstrap.min.css" rel="stylesheet">
         <script src="<%=path %>/js/jquery-1.11.1.min.js"></script>
-        <script src="<%=path %>/js/bootstrap.min.js"></script>
+        <script src="<%=path %>/js/admin/bootstrap.min.js"></script>
         <!--主要样式控制-->
-        <link href="<%=path %>/css/business/main.css" rel="stylesheet">
+        <link href="<%=path %>/css/admin/main.css" rel="stylesheet">
 
 <title>bootstrap后台模板设计</title>
 
 </head>
-<script type="text/javascript">
-window.onload=function(){
-var nickName = '${business.nickName}';
-var a = 1 ;
-alert(nickName);
-}
-</script>
 <body>
 <!--顶部导航栏部分-->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <img src="../images/apex.png" width="175px" height="60px"/>
+            <a class="navbar-brand" title="logoTitle" href="#">logo</a>
        </div>
        <div class="collapse navbar-collapse">
            <ul class="nav navbar-nav navbar-right">
                <li role="presentation">
-                   <a href="#">当前用户：<span class="badge">${bnickName}</span></a>
+                   <a href="#">当前用户：<span class="badge">柒晓白</span></a>
                </li>
                <li>
                    <a href="../login/logout">
@@ -60,8 +53,21 @@ alert(nickName);
                  <a href="adminLogin.jsp" target="mainFrame">订单管理</a>
              </li>
              <!-- 开始 -->
-             <li role="presentation">
-                     <a href="adminLogin.jsp" target="mainFrame">个人设置</a>
+             <li class="dropdown">
+                 <a class="dropdown-toggle" data-toggle="dropdown" href="nav4.html" target="mainFrame">
+                     个人设置<span class="caret"></span>
+                 </a>
+                 <ul class="dropdown-menu">
+                     <li>
+                         <a href="nav1.html" target="mainFrame">修改密码</a>
+                     </li>
+                     <li>
+                         <a href="nav2.html" target="mainFrame">退出系统</a>
+                     </li>
+                     <li>
+                         <a href="nav3.html" target="mainFrame">查看个人信息</a>
+                     </li>
+                 </ul>
              </li>
              <!-- 结束 -->
              <li role="presentation">
@@ -77,7 +83,7 @@ alert(nickName);
      <div class="splitter"></div>
      <!-- 正文内容部分 -->
      <div class="pageContent">
-       <iframe src="<%=request.getContextPath()%>/business/main.jsp" id="mainFrame" name="mainFrame" 
+       <iframe src="adminLogin.jsp" id="mainFrame" name="mainFrame" 
        frameborder="0" width="100%"  height="100%" frameBorder="0">
        </iframe> 
      </div>
@@ -86,7 +92,7 @@ alert(nickName);
   <!-- 底部页脚部分 -->
  <div class="footer">
      <p class="text-center">
-         <span style="color:#fff;align-content: center;">&copy; Copyright 2019, A OnlineOrderingSystem Apart</span>&nbsp;&nbsp;
+         2018 © 柒晓白.
      </p>
  </div>
 

@@ -27,6 +27,14 @@ public class businessServiceImpl implements businessService{
 		return list;
 	}
 	
+	@Override
+	public Map<String,String> getCommentState(){
+		// TODO Auto-generated method stub
+		Map<String,String> list = businessDao.getCommentState();
+		return list;
+	}
+	
+	@Override
 	public boolean regist(Business business) {
 		// TODO Auto-generated method stub
 		boolean flag = businessDao.regist(business);
@@ -39,5 +47,22 @@ public class businessServiceImpl implements businessService{
 		Business b = businessDao.login(business); 
 		return b;
 	}
+	
+	//验证账号是否已被注册
+		@Override
+		public String accountVerification(String accountNumber) {
+			// TODO Auto-generated method stub
+			int count = businessDao.accountVerification(accountNumber);
+			if(count != 0) {
+				return "false";
+			}
+			return "true";
+		}
+		
+		@Override
+		public Map<String, String> getsales(){
+			Map<String,String> list = businessDao.getsales();
+			return list;
+		}
 
 }

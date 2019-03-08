@@ -12,4 +12,10 @@ public interface businessService {
 	public boolean regist(Business business);
 	
 	public Business login(Business business);
+	
+	public String accountVerification(String accountNumber);
+	
+	public Map<String,String> getCommentState();
+
+	public Map<String, String> getsales();
 }
