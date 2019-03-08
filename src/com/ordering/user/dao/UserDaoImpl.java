@@ -1,5 +1,7 @@
 package com.ordering.user.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ordering.user.bean.ConsigneeAddress;
 import com.ordering.user.bean.User;
 
 @Repository
@@ -71,21 +74,6 @@ public class UserDaoImpl implements UserDao{
 		return u;
 	}
 
-	//修改用户昵称
-	@Override
-	public boolean setNickName(String userId, String nickName) {
-		// TODO Auto-generated method stub
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("update User set nickName = ? where userId = ?");
-		query.setString(0, nickName);
-		query.setString(1, userId);
-		int count = query.executeUpdate();
-		if(count > 0) {
-			return true;
-		}
-		return false;
-	}
-
 	//根据userId获取User对象
 	@Override
 	public User getUser(String userId) {
@@ -97,13 +85,29 @@ public class UserDaoImpl implements UserDao{
 		return user;
 	}
 
-	//修改用户手机号码
+	//修改用户信息
 	@Override
-	public boolean setPhoneNumber(String userId, String phoneNumber) {
+	public boolean updateUser(User user) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("update User set phoneNumber = ? where userId = ?");
-		query.setString(0, phoneNumber);
+		Query query = session.createQuery("update User set nickName=?,phone=? where userId=?");
+		query.setString(0, user.getNickName());
+		query.setString(1, user.getPhone());
+		query.setString(2, user.getUserId());
+		int count = query.executeUpdate();
+		if(count > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	//修改用户密码
+	@Override
+	public boolean updatePassword(String userId, String password) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("update User set password = ? where userId = ?");
+		query.setString(0, password);
 		query.setString(1, userId);
 		int count = query.executeUpdate();
 		if(count > 0) {
@@ -112,17 +116,46 @@ public class UserDaoImpl implements UserDao{
 		return false;
 	}
 
-	//修改用户信息
+	//添加用户收货地址
 	@Override
-	public boolean updateUser(User user) {
+	public boolean addAddress(ConsigneeAddress address) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("update User set nickName=?,phoneNumber=?,realName=?,sex=? where userId=?");
-		query.setString(0, user.getNickName());
-		query.setString(1, user.getPhoneNumber());
-		query.setString(2, user.getRealName());
-		query.setString(3, user.getSex());
-		query.setString(4, user.getUserId());
+		String uuid = UUID.randomUUID().toString().replaceAll("-","");
+		address.setId(uuid);
+		session.save(address);
+		return true;
+	}
+
+	//获取用户收货地址
+	@Override
+	public List<Map<String, Object>> getAddress(String userId) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from ConsigneeAddress where userId = ?");
+		query.setString(0, userId);
+		List<ConsigneeAddress> list = query.list();
+		List<Map<String,Object>> addressList = new ArrayList<Map<String,Object>>();
+		for(ConsigneeAddress address : list) {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("id", address.getId());
+			map.put("address",address.getAddress());
+			map.put("phone",address.getPhone());
+			map.put("name", address.getName());
+			map.put("sex",address.getSex());
+			addressList.add(map);
+			
+		}
+		return addressList;
+	}
+
+	//删除用户地址
+	@Override
+	public boolean delAddress(String id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("delete from ConsigneeAddress where id = ?");
+		query.setString(0, id);
 		int count = query.executeUpdate();
 		if(count > 0) {
 			return true;
@@ -130,13 +163,32 @@ public class UserDaoImpl implements UserDao{
 		return false;
 	}
 
+	//获取用户详细地址信息
 	@Override
-	public String passwordVerification(String userId, String oldPassword) {
+	public ConsigneeAddress getOneAddress(String id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("select password from User where userId = ?");
-		String password = (String)query.uniqueResult();
-		return password;
+		Query query = session.createQuery("from ConsigneeAddress where id = ?");
+		query.setString(0, id);
+		ConsigneeAddress address = (ConsigneeAddress)query.uniqueResult();
+		return address;
+	}
+
+	//修改用户地址
+	@Override
+	public boolean updateAddress(ConsigneeAddress address) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("update ConsigneeAddress set name=?,sex=?,phone=?,address=? where id = ?");
+		query.setString(0, address.getName());
+		query.setString(1,address.getSex());
+		query.setString(2,address.getPhone());
+		query.setString(3,address.getAddress());
+		query.setString(4,address.getId());
+		int count = query.executeUpdate();
+		if(count > 0)
+			return true;
+		return false;
 	}
 	
 	

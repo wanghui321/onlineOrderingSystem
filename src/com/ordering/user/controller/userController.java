@@ -1,7 +1,10 @@
 package com.ordering.user.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ordering.user.bean.ConsigneeAddress;
 import com.ordering.user.bean.User;
 import com.ordering.user.service.UserServiceImpl;
 
@@ -79,37 +82,6 @@ public class userController {
 		return "user/home";
 	}
 	
-	//修改昵称，并更新session中的用户信息
-	@ResponseBody
-	@RequestMapping("setNickName/{nickName}")
-	public JSONArray setNickName(@PathVariable String nickName,HttpSession session) {
-		User user = (User) session.getAttribute("user");
-		User newUser = userService.setNickName(user.getUserId(),nickName);
-		session.setAttribute("user", newUser);
-		session.setAttribute("nickName", newUser.getNickName());
-		JSONArray json = new JSONArray();
-		json.add("true");
-		return json;
-	}
-	
-	//修改电话号码，并更新session中的用户信息
-	@ResponseBody
-	@RequestMapping("setPhoneNumber/{phoneNumber}")
-	public JSONArray setPhoneNumber(@PathVariable String phoneNumber,HttpSession session) {
-		int length = phoneNumber.length();
-		JSONArray json = new JSONArray();
-		if(length != 11) {
-			json.add("false");
-		} else {
-			User user = (User) session.getAttribute("user");
-			User newUser = userService.setPhoneNumber(user.getUserId(),phoneNumber);
-			session.setAttribute("user", newUser);
-			json.add("true");
-		}
-		
-		return json;
-	}
-	
 	//修改用户信息，并更新session中的用户信息
 	@RequestMapping("updateUser")
 	public String updateUser(User user,HttpSession session,Model model) {
@@ -122,17 +94,77 @@ public class userController {
 		return "user/getUser";
 	}
 	
-	//验证初始密码
-	@ResponseBody
-	@RequestMapping("passwordVerification/{oldPassword}")
-	public JSONArray passwordVerification(@PathVariable String oldPassword,HttpSession session) {
+	//修改用户密码，并重新登录
+	@RequestMapping("updatePassword")
+	public String updatePassword(String password,HttpSession session,Model model) {
 		User user = (User)session.getAttribute("user");
-		boolean flag = userService.passwordVerification(user.getUserId(),oldPassword);
-		JSONArray json = new JSONArray();
-		if(!flag) {
-			json.add("false");
+		boolean flag = userService.updatePassword(user.getUserId(),password);
+		if(flag) {
+			session.removeAttribute("user");
+			model.addAttribute("repasswordSeccess","修改密码成功");
+			return "user/updatePassword";
 		}
+		
+		return "";
+	}
+	
+	//添加收货地址
+	@RequestMapping("addAddress")
+	public String addAddress(ConsigneeAddress address,HttpSession session,Model model,
+			HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		User user = (User)session.getAttribute("user");
+		address.setUser(user);
+		boolean flag = userService.addAddress(address);
+		model.addAttribute("msg","添加成功");
+		return "user/addressManager";
+	}
+	
+	//获取用户收货地址
+	@RequestMapping("getAddress")
+	@ResponseBody
+	public JSONArray getAddress(HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		List<Map<String,Object>> list = userService.getAddress(user.getUserId());
+		JSONArray json = JSONArray.fromObject(list);
 		return json;
+	}
+	
+	//删除用户地址
+	@RequestMapping("delAddress/{id}")
+	public String delAddress(@PathVariable String id,Model model) {
+		boolean flag = userService.delAddress(id);
+		if(flag) {
+			model.addAttribute("msg","删除成功");
+		} else {
+			model.addAttribute("msg","删除失败");
+		}
+		return "user/addressManager";
+	}
+	
+	//获取用户详细地址
+	@RequestMapping("getOneAddress")
+	public String getOneAddress(String id,Model model) {
+		ConsigneeAddress address = userService.getOneAddress(id);
+		model.addAttribute("address",address);
+		return "user/updateAddress";
+	}
+	
+	//修改用户地址
+	@RequestMapping("updateAddress")
+	public String updateAddress(ConsigneeAddress address,Model model) {
+		boolean flag = userService.updateAddress(address);
+		if(flag) {
+			model.addAttribute("msg","修改成功");
+			return "user/addressManager";
+		}
+		model.addAttribute("msg","修改失败");
+		return "user/updateAddress";
 	}
 	
 	

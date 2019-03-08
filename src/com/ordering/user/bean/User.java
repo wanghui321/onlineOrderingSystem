@@ -1,8 +1,13 @@
 package com.ordering.user.bean;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="user")
@@ -12,21 +17,15 @@ public class User {
 	private String accountNumber;	//用户账号
 	private String nickName;	//用户昵称
 	private String password;	//用户密码
-	private String phoneNumber;		//电话号码
 	private String headPicture;		//用户头像
-	private String realName;	//真实姓名
-	private String sex;		//性别
-	public String getRealName() {
-		return realName;
+	private String phone;	//联系电话
+	@OneToMany(mappedBy="user",targetEntity=ConsigneeAddress.class,cascade=CascadeType.ALL)
+	private Set<ConsigneeAddress> consigneeAddressSet;	//收货地址
+	public Set<ConsigneeAddress> getConsigneeAddressSet() {
+		return consigneeAddressSet;
 	}
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
-	public String getSex() {
-		return sex;
-	}
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setConsigneeAddressSet(Set<ConsigneeAddress> consigneeAddressSet) {
+		this.consigneeAddressSet = consigneeAddressSet;
 	}
 	public String getUserId() {
 		return userId;
@@ -52,16 +51,16 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
 	public String getHeadPicture() {
 		return headPicture;
 	}
 	public void setHeadPicture(String headPicture) {
 		this.headPicture = headPicture;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 }

@@ -1,10 +1,12 @@
 package com.ordering.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ordering.user.bean.ConsigneeAddress;
 import com.ordering.user.bean.User;
 import com.ordering.user.dao.UserDao;
 
@@ -53,30 +55,6 @@ public class UserServiceImpl implements UserService{
 		return u;
 	}
 
-	//修改用户的昵称，并返回最新的User对象。
-	@Override
-	public User setNickName(String userId,String nickName) {
-		// TODO Auto-generated method stub
-		boolean flag = userDao.setNickName(userId,nickName);
-		if(flag) {
-			User u = userDao.getUser(userId);
-			return u;
-		}
-		return null;
-	}
-
-	//修改用户的手机号，并返回最新的User对象。
-	@Override
-	public User setPhoneNumber(String userId, String phoneNumber) {
-		// TODO Auto-generated method stub
-		boolean flag = userDao.setPhoneNumber(userId,phoneNumber);
-		if(flag) {
-			User u = userDao.getUser(userId);
-			return u;
-		}
-		return null;
-	}
-
 	//修改用户信息，并返回最新的用户对象
 	@Override
 	public User updateUser(User user) {
@@ -89,14 +67,53 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 
+	//修改密码
 	@Override
-	public boolean passwordVerification(String userId, String oldPassword) {
+	public boolean updatePassword(String userId, String password) {
 		// TODO Auto-generated method stub
-		String password = userDao.passwordVerification(userId,oldPassword);
-		if(password.equals(oldPassword)) {
-			return true;
-		}
+		boolean flag = userDao.updatePassword(userId,password);
+		return flag;
+	}
+
+	//添加用户收货地址
+	@Override
+	public boolean addAddress(ConsigneeAddress address) {
+		// TODO Auto-generated method stub
+		boolean flag = userDao.addAddress(address);
 		return false;
+	}
+
+	//获取用户收货地址
+	@Override
+	public List<Map<String, Object>> getAddress(String userId) {
+		// TODO Auto-generated method stub
+		List<Map<String, Object>> list = userDao.getAddress(userId);
+		return list;
+	}
+
+	//删除用户地址
+	@Override
+	public boolean delAddress(String id) {
+		// TODO Auto-generated method stub
+		boolean flag = userDao.delAddress(id);
+		return flag;
+	}
+
+	//获得详细地址
+	@Override
+	public ConsigneeAddress getOneAddress(String id) {
+		// TODO Auto-generated method stub
+		ConsigneeAddress address = userDao.getOneAddress(id);
+		return address;
+	}
+	
+	//修改用户地址
+	@Override
+	public boolean updateAddress(ConsigneeAddress address) {
+		// TODO Auto-generated method stub
+		boolean flag = userDao.updateAddress(address);
+		return flag;
 	}
 	
 }
+

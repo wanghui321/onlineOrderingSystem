@@ -29,7 +29,7 @@
 	
 	function setPhoneNumber(){
 		debugger;
-		var phoneNumber = $("#phoneNumber").val();
+		var phoneNumber = $("#phone").val();
 		if(phoneNumber != "" && phoneNumber != null){
 			var length = phoneNumber.length;
 			if(length != 11){
@@ -41,7 +41,7 @@
 <body>
 	<div style="margin: 20px">
 		<form action="<%=path%>/userController/updateUser.do">
-			<table border="1px">
+			<table border="1px" bordercolor="#EBEBEB" cellspacing="0px">
 				<tr>
 					<td>用户账号：</td>
 					<td>
@@ -55,22 +55,10 @@
  						value="${user.nickName}" onblur="setNickName()"/></td>
  				</tr>
   				<tr>
- 					<td>真实姓名：</td>
- 					<td><input id="realName" name="realName" type="text"  style="height: 25px;width: 200px"
- 						value="${user.realName}"/></td>
- 				</tr>
- 				<tr>
- 					<td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</td>
- 					<td>
- 						<input name="sex" type="radio" checked="checked" value="man"/>男
-						<input name="sex" type="radio" value="woman"/>女
- 					</td>
- 				</tr>
-				<tr>
 					<td>联系电话：</td>
 					<td>
-						<input id="phoneNumber" name="phoneNumber" type="text" style="height: 25px;width: 200px"
-							value="${user.phoneNumber}" onblur="setPhoneNumber()"/>
+						<input id="phone" name="phone" type="text" style="height: 25px;width: 200px"
+							value="${user.phone}" onblur="setPhoneNumber()"/>
 					</td>
 				</tr>
 				<tr>
