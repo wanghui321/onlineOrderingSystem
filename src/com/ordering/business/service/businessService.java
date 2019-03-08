@@ -16,4 +16,6 @@ public interface businessService {
 	public String accountVerification(String accountNumber);
 	
 	public Map<String,String> getCommentState();
+
+	public Map<String, String> getsales();
 }

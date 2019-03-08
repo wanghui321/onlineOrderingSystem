@@ -16,4 +16,6 @@ public interface businessDao {
 	public int accountVerification(String accountNumber);
 	
 	public Map<String,String> getCommentState();
+
+	public Map<String, String> getsales();
 }

@@ -90,5 +90,16 @@ public class businessController {
 			json.add(msg);
 			return json;
 		}
+		
+		//
+		@RequestMapping("getsales")
+		@ResponseBody
+		public JSONObject getsales() {
+			System.out.println("222222222213");
+			Map<String,String> map = businessService.getsales();
+			JSONObject data=JSONObject.fromObject(map);
+			System.out.println(data);
+			return data;
+		}
 
 }

@@ -58,5 +58,11 @@ public class businessServiceImpl implements businessService{
 			}
 			return "true";
 		}
+		
+		@Override
+		public Map<String, String> getsales(){
+			Map<String,String> list = businessDao.getsales();
+			return list;
+		}
 
 }
