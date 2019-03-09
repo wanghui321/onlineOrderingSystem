@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
     String path = request.getContextPath();
 %>
@@ -14,7 +15,7 @@
         <!--主要样式控制-->
         <link href="<%=path %>/css/admin/main.css" rel="stylesheet">
 
-<title>bootstrap后台模板设计</title>
+<title>管理员后台</title>
 
 </head>
 <body>
@@ -27,7 +28,7 @@
        <div class="collapse navbar-collapse">
            <ul class="nav navbar-nav navbar-right">
                <li role="presentation">
-                   <a href="#">当前用户：<span class="badge">柒晓白</span></a>
+                   <a href="#">当前用户：<span class="badge">${adminName}</span></a>
                </li>
                <li>
                    <a href="../login/logout">
@@ -47,14 +48,14 @@
                  <a href="sales.jsp" target="mainFrame" >商家管理</a>
              </li>
              <li role="presentation">
-                 <a href="adminLogin.jsp" target="mainFrame">用户管理</a>
+                 <a href="sales.jsp" target="mainFrame">用户管理</a>
              </li>
              <li role="presentation">
-                 <a href="adminLogin.jsp" target="mainFrame">订单管理</a>
+                 <a href="sales.jsp" target="mainFrame">订单管理</a>
              </li>
              <!-- 开始 -->
              <li class="dropdown">
-                 <a class="dropdown-toggle" data-toggle="dropdown" href="nav4.html" target="mainFrame">
+                 <a class="dropdown-toggle" data-toggle="dropdown" href="adminPerson.jsp" target="mainFrame">
                      个人设置<span class="caret"></span>
                  </a>
                  <ul class="dropdown-menu">
@@ -65,7 +66,7 @@
                          <a href="nav2.html" target="mainFrame">退出系统</a>
                      </li>
                      <li>
-                         <a href="nav3.html" target="mainFrame">查看个人信息</a>
+                         <a href="adminPerson.jsp" target="mainFrame">查看个人信息</a>
                      </li>
                  </ul>
              </li>
@@ -83,7 +84,7 @@
      <div class="splitter"></div>
      <!-- 正文内容部分 -->
      <div class="pageContent">
-       <iframe src="adminLogin.jsp" id="mainFrame" name="mainFrame" 
+       <iframe src="adminLoginSuccess.jsp" id="mainFrame" name="mainFrame" 
        frameborder="0" width="100%"  height="100%" frameBorder="0">
        </iframe> 
      </div>
@@ -92,7 +93,7 @@
   <!-- 底部页脚部分 -->
  <div class="footer">
      <p class="text-center">
-         2018 © 柒晓白.
+         Copyright 2019, A OnlineOrderingSystem Apart
      </p>
  </div>
 

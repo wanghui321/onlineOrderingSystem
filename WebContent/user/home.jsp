@@ -13,6 +13,8 @@
 <title>网上订餐系统</title>
 </head>
 <script src="<%=path%>/js/jquery-1.11.1.min.js"></script>
+
+
 <script type="text/javascript">
 	$.ajax({
 		type:"post",
