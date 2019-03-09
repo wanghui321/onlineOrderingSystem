@@ -22,6 +22,7 @@
         </bean>
         	  <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >  
 
+
 		     <!-- 防止返回json乱码 -->  
 
 		     <property name="messageConverters">    
