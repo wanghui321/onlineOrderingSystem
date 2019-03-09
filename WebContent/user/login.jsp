@@ -19,7 +19,7 @@
  					<td colspan="2" align="center"><img src="../images/logo4.png"width="290px" height="80px"></td>
  				</tr>
 			</table>
- 			<form action="<%=request.getContextPath()%>/userController/login.do" method="post">
+ 			<form action="<%=request.getContextPath()%>/businessController/login.do" method="post">
  				<table>
  					<tr>
  						<td>用户账号：</td>
@@ -41,7 +41,7 @@
  						<td>
  							<select style="width: 205px;height: 30px" name="loginType">
 							  <option value ="user">用户登录</option>
-							  <option value ="buiness">商家登录</option>
+							  <option value ="business">商家登录</option>
 							</select>
  						</td>
  					</tr>

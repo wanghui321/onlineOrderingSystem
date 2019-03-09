@@ -30,9 +30,10 @@ public class businessDaoImpl implements businessDao{
 	
 	//获取订单类别
 	@Override
-	public Map<String,String> getState(){
+	public Map<String,String> getState(String id){
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("select state from Order");
+		Query query = session.createQuery("select state from Order where businessNumber = ?");
+		query.setString(0, id);
 		List<String> state = query.list();
 		List<Map<String,Integer>> list = new ArrayList();
 		int a = 0 ;
@@ -65,10 +66,11 @@ public class businessDaoImpl implements businessDao{
 	
 	//今日销售总金额
 	@Override
-	public Map<String,String> getsales(){
+	public Map<String,String> getsales(String id){
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Order where state = ?");
+		Query query = session.createQuery("from Order where state = ? and businessNumber = ?");
 		query.setString(0, "4");
+		query.setString(1, id);
 		List<Order> orders = query.list();
 		double a = 0;
 		for(Order o : orders) {
@@ -91,21 +93,28 @@ public class businessDaoImpl implements businessDao{
 	
 	//获取评论类别
 	@Override
-	public Map<String,String> getCommentState(){
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Comment");
-		List<Comment> comment = query.list();
-		List<Map<String,Integer>> list = new ArrayList();
+	public Map<String,String> getCommentState(String id){
 		int a = 0 ;
 		int b = 0 ;
-		for (Comment c : comment) {
-			if (c.getState()==0) {
-			if(c.getLevel()<=2) {
-				b=b+1;
-				}else {
-					a=a+1;
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from Food where businessId = ?");
+		query.setString(0, id);
+		List<Food> food = query.list();
+		for(Food f : food) {
+			Query query1 = session.createQuery("from Comment where foodId = ?");
+			query1.setString(0, f.getId());
+			List<Comment> comment = query1.list();
+			List<Map<String,Integer>> list = new ArrayList();
+			
+			for (Comment c : comment) {
+				if (c.getState()==0) {
+				if(c.getLevel()<=2) {
+					b=b+1;
+					}else {
+						a=a+1;
+					}
+				System.out.println(c);
 				}
-			System.out.println(c);
 			}
 		}
 		Map map = new HashMap();
@@ -150,4 +159,68 @@ public class businessDaoImpl implements businessDao{
 			System.out.println(count);
 			return count;
 		}
+		
+		//根据businessId获取Business对象
+		@Override
+		public Business getBusiness(String businessId) {
+			// TODO Auto-generated method stub
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from Business where businessId = ?");
+			query.setString(0, businessId);
+			Business business = (Business)query.uniqueResult();
+			return business;
+		}
+		
+		//修改用户信息
+		@Override
+		public boolean updateBusiness(Business business) {
+			// TODO Auto-generated method stub
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("update Business set state=?,nickName=?,notice=?,phoneNumber=?,address=?,introduce=? where businessId=?");
+			query.setString(0, business.getState());
+			query.setString(1, business.getNickName());
+			query.setString(2, business.getNotice());
+			query.setString(3, business.getPhoneNumber());
+			query.setString(4, business.getAddress());
+			query.setString(5, business.getIntroduce());
+			query.setString(6, business.getBusinessId());
+			int count = query.executeUpdate();
+			if(count > 0) {
+				return true;
+			}
+			return false;
+		}
+		
+		//修改用户信息
+		@Override
+		public boolean updateQualification(Business business) {
+			// TODO Auto-generated method stub
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("update Business set businessLicence=?,corporation=? where businessId=?");
+			query.setString(0, business.getBusinessLicence());
+			query.setString(1, business.getCorporation());
+			query.setString(2, business.getBusinessId());
+			int count = query.executeUpdate();
+		if(count > 0) {
+				return true;
+			}
+			return false;
+		}
+		
+		//修改用户密码
+		@Override
+		public boolean updatePassword(String businessId, String password) {
+			// TODO Auto-generated method stub
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("update Business set password = ? where businessId = ?");
+			query.setString(0, password);
+			query.setString(1, businessId);
+			int count = query.executeUpdate();
+			if(count > 0) {
+				return true;
+			}
+			return false;
+		}
+				
+
 }

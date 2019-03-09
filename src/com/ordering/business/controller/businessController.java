@@ -28,9 +28,11 @@ public class businessController {
 	//获取订单状态
 	@RequestMapping("getState")
 	@ResponseBody
-	public JSONObject getState() {
+	public JSONObject getState(HttpSession session) {
 		System.out.println("213");
-		Map<String,String> map = businessService.getState();
+		Business b = (Business)session.getAttribute("business");
+		String id = b.getBusinessId();
+		Map<String,String> map = businessService.getState(id);
 		JSONObject data=JSONObject.fromObject(map);
 		System.out.println(data);
 		return data;
@@ -39,9 +41,11 @@ public class businessController {
 	//获取评论状态
 		@RequestMapping("getCommentState")
 		@ResponseBody
-		public JSONObject getCommentState() {
+		public JSONObject getCommentState(HttpSession session) {
 			System.out.println("213333");
-			Map<String,String> map = businessService.getCommentState();
+			Business b = (Business)session.getAttribute("business");
+			String id = b.getBusinessId();
+			Map<String,String> map = businessService.getCommentState(id);
 			JSONObject data=JSONObject.fromObject(map);
 			System.out.println(data);
 			return data;
@@ -91,15 +95,78 @@ public class businessController {
 			return json;
 		}
 		
-		//
+		//销售金额
 		@RequestMapping("getsales")
 		@ResponseBody
-		public JSONObject getsales() {
+		public JSONObject getsales(HttpSession session) {
 			System.out.println("222222222213");
-			Map<String,String> map = businessService.getsales();
+			Business b = (Business)session.getAttribute("business");
+			String id = b.getBusinessId();
+			Map<String,String> map = businessService.getsales(id);
 			JSONObject data=JSONObject.fromObject(map);
 			System.out.println(data);
 			return data;
 		}
+		
+		//退出登录
+		@RequestMapping("editLogin")
+		public String editLogin(HttpSession session) {
+			session.removeAttribute("user");
+			session.removeAttribute("bnickName");
+			return "user/home";
+		}
+		
+		//修改用户信息，并更新session中的用户信息
+		@RequestMapping("updateBusiness")
+		public String updateBusiness(Business business,HttpSession session,Model model) {
+			Business b = (Business)session.getAttribute("business");
+			if(business.getNickName()!=null && business.getNickName()!= "")
+				b.setNickName(business.getNickName());
+			if(business.getPhoneNumber()!=null && business.getPhoneNumber()!= "")
+				b.setPhoneNumber( business.getPhoneNumber());
+			if(business.getIntroduce()!=null && business.getIntroduce()!= "")
+				b.setIntroduce(business.getIntroduce()); 
+			if(business.getNotice()!=null && business.getNotice()!= "")
+				b.setNotice(business.getNotice());
+			if(business.getState()!=null && business.getState()!= "")
+				b.setState(business.getState());
+			business.setBusinessId(b.getBusinessId());
+			Business newBusiness = businessService.updateBusiness(b);
+			session.setAttribute("business", newBusiness);
+			session.setAttribute("bnickName", newBusiness.getNickName());
+			model.addAttribute("msg","修改成功");
+			return "business/manager";
+		}
+		
+		//商户营业许可证名修改
+		@RequestMapping("updateQualification")
+		public String updateQualification(Business business,HttpSession session,Model model) {
+			Business b = (Business)session.getAttribute("business");
+			if(business.getBusinessLicence()!=null && business.getBusinessLicence()!= "")
+				b.setBusinessLicence(business.getBusinessLicence());
+			if(business.getCorporation()!=null && business.getCorporation()!= "")
+				b.setCorporation(business.getCorporation());
+			business.setBusinessId(b.getBusinessId());
+			Business newBusiness = businessService.updateQualification(b);
+			session.setAttribute("business", newBusiness);
+			session.setAttribute("bnickName", newBusiness.getNickName());
+			model.addAttribute("msg","修改成功");
+			return "business/qualification";
+		}
+		
+		//修改用户密码，并重新登录
+		@RequestMapping("updatePassword")
+		public String updatePassword(String password,HttpSession session,Model model) {
+			Business business = (Business)session.getAttribute("business");
+			boolean flag = businessService.updatePassword(business.getBusinessId(),password);
+			if(flag) {
+				session.removeAttribute("business");
+				model.addAttribute("repasswordSeccess","修改密码成功");
+				return "business/updatePassword";
+			}
+			
+			return "";
+		}
+		
 
 }

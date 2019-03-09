@@ -19,6 +19,20 @@ public class Business {
 	private String phoneNumber;			//商家电话
 	private String businessLicence;			//营业执照
 	private String corporation;			//法人
+	private String notice;			//店铺公告
+	private String state;		//是否开店
+	public String getNotice() {
+		return notice;
+	}
+	public void setNotice(String notice) {
+		this.notice = notice;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public String getBusinessId() {
 		return businessId;
 	}

@@ -7,7 +7,7 @@ import com.ordering.business.bean.Business;
 import com.ordering.user.bean.User;
 
 public interface businessService {
-	public Map<String,String> getState();
+	public Map<String,String> getState(String id);
 	
 	public boolean regist(Business business);
 	
@@ -15,7 +15,13 @@ public interface businessService {
 	
 	public String accountVerification(String accountNumber);
 	
-	public Map<String,String> getCommentState();
+	public Map<String,String> getCommentState(String id);
 
-	public Map<String, String> getsales();
+	public Map<String, String> getsales(String id);
+	
+	public Business updateBusiness(Business business);
+	
+	public Business updateQualification(Business business);
+	
+	public boolean updatePassword(String businessId,String password);
 }

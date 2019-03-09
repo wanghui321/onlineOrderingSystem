@@ -34,10 +34,10 @@ alert(nickName);
        <div class="collapse navbar-collapse">
            <ul class="nav navbar-nav navbar-right">
                <li role="presentation">
-                   <a href="#">当前用户：<span class="badge">${bnickName}</span></a>
+                   <a href="#">当前商铺：<span class="badge">${bnickName}</span></a>
                </li>
                <li>
-                   <a href="../login/logout">
+                   <a href="<%=path%>/businessController/editLogin.do" target="_parent">
                          <span class="glyphicon glyphicon-lock"></span>退出登录</a>
                 </li>
             </ul>
@@ -50,24 +50,29 @@ alert(nickName);
      <!-- 左侧导航栏 -->
      <div class="pageSidebar">
          <ul class="nav nav-stacked nav-pills">
-             <li role="presentation">
-                 <a href="sales.jsp" target="mainFrame" >商家管理</a>
+         <li role="presentation">
+                 <a href="<%=path %>/business/main.jsp" target="mainFrame" >首页</a>
              </li>
              <li role="presentation">
-                 <a href="adminLogin.jsp" target="mainFrame">用户管理</a>
+                 <a href="sales.jsp" target="mainFrame" >订单</a>
              </li>
              <li role="presentation">
-                 <a href="adminLogin.jsp" target="mainFrame">订单管理</a>
+                 <a href="adminLogin.jsp" target="mainFrame">商品</a>
+             </li>
+             <li role="presentation">
+                 <a href="adminLogin.jsp" target="mainFrame">财务</a>
              </li>
              <!-- 开始 -->
              <li role="presentation">
-                     <a href="adminLogin.jsp" target="mainFrame">个人设置</a>
+                     <a href="adminLogin.jsp" target="mainFrame">顾客</a>
              </li>
              <!-- 结束 -->
              <li role="presentation">
-                 <a href="nav5.html" target="mainFrame">权限设置</a>
+                 <a href="<%=path%>/business/shop.jsp" target="mainFrame">商铺</a>
              </li>
-
+			<li role="presentation">
+                 <a href="<%=path%>/business/updatePassword.jsp" target="mainFrame">密码</a>
+             </li>
 
 
          </ul>

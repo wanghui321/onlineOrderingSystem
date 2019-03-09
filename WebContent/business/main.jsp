@@ -21,7 +21,6 @@ debugger;
 		url:"<%=request.getContextPath()%>/businessController/getState.do",
 		dataType:'json',
 		success:function(msg){
-			alert(msg.newOrder);
  			if(msg != null && msg != undefined){
  				var newOrder = msg.newOrder;
  				var reminder = msg.reminder;
@@ -59,7 +58,6 @@ debugger;
  				$("#cmp").css("color","#FF6B07");
  			}
 			$("#completedOrder").html(completedOrder);
-			alert(newOrder);
 		}
 	})
 	
@@ -69,7 +67,6 @@ debugger;
 		url:"<%=request.getContextPath()%>/businessController/getCommentState.do",
 		dataType:'json',
 		success:function(msg1){
-			alert(msg1.noResponseToNegativeComment);
  			if(msg1 != null && msg1 != undefined){
  				var noResponseToComments = msg1.noResponseToComments;
  				var noResponseToNegativeComment = msg1.noResponseToNegativeComment;
@@ -94,7 +91,6 @@ debugger;
 		url:"<%=request.getContextPath()%>/businessController/getsales.do",
 		dataType:'json',
 		success:function(msg1){
-			alert(msg1.sales);
  			if(msg1 != null && msg1 != undefined){
  				var sales = msg1.sales;
 			} 
@@ -117,7 +113,7 @@ debugger;
 
 
             
-	<div align="center" style="width:100%;height:1222px;border:1px solid red;float: left; background-color: #F4F4F4">
+	<div align="center" style="width:100%;height:100%;border:1px solid red;float: left; background-color: #F4F4F4">
 		<div style="width:98%;height: auto;float: left;background-color: #fff;border:1px solid red;margin-top: 10px;margin-left: 1%">
 			<div style="width:100%;height: 50px;background-color: #fff;border-bottom:1px solid #c9c9c9"align="left"><span style="line-height: 70px;margin-left:25px;font-weight: 700 ;font-size: 20px">待处理订单：</span></div>
 			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">新订单</span></div>

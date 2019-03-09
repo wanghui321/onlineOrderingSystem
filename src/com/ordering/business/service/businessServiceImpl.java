@@ -21,16 +21,16 @@ public class businessServiceImpl implements businessService{
 //	}
 
 	@Override
-	public Map<String,String> getState(){
+	public Map<String,String> getState(String id){
 		// TODO Auto-generated method stub
-		Map<String,String> list = businessDao.getState();
+		Map<String,String> list = businessDao.getState(id);
 		return list;
 	}
 	
 	@Override
-	public Map<String,String> getCommentState(){
+	public Map<String,String> getCommentState(String id){
 		// TODO Auto-generated method stub
-		Map<String,String> list = businessDao.getCommentState();
+		Map<String,String> list = businessDao.getCommentState(id);
 		return list;
 	}
 	
@@ -59,10 +59,43 @@ public class businessServiceImpl implements businessService{
 			return "true";
 		}
 		
+		//获取销售金额
 		@Override
-		public Map<String, String> getsales(){
-			Map<String,String> list = businessDao.getsales();
+		public Map<String, String> getsales(String id){
+			Map<String,String> list = businessDao.getsales(id);
 			return list;
+		}
+		
+		//修改用户信息，并返回最新的用户对象
+		@Override
+		public Business updateBusiness(Business business) {
+			// TODO Auto-generated method stub
+			boolean flag = businessDao.updateBusiness(business);
+			if(flag) {
+				Business b = businessDao.getBusiness(business.getBusinessId());
+				return b;
+			}
+			return null;
+		}
+		
+		//修改用户信息，并返回最新的用户对象
+		@Override
+		public Business updateQualification(Business business) {
+			// TODO Auto-generated method stub
+			boolean flag = businessDao.updateQualification(business);
+			if(flag) {
+				Business b = businessDao.getBusiness(business.getBusinessId());
+				return b;
+			}
+			return null;
+		}
+				
+		//修改密码
+		@Override
+		public boolean updatePassword(String businessId, String password) {
+			// TODO Auto-generated method stub
+			boolean flag = businessDao.updatePassword(businessId,password);
+			return flag;
 		}
 
 }
