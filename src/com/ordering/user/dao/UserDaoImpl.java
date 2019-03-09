@@ -10,10 +10,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ordering.user.bean.ConsigneeAddress;
+import com.ordering.user.bean.ShopType;
 import com.ordering.user.bean.User;
 
 @Repository
@@ -21,6 +23,8 @@ import com.ordering.user.bean.User;
 public class UserDaoImpl implements UserDao{
 	@Autowired
 	private SessionFactory sessionFactory;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 	
 	public List<Map<String,Object>> getData(){
 		Session session = sessionFactory.getCurrentSession();
@@ -29,13 +33,21 @@ public class UserDaoImpl implements UserDao{
 		return list;
 	}
 
+	//获取商店类别
 	@Override
-	public List getClassify() {
+	public List<Map<String,Object>> getClassify() {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("select typeName from ShopType");
-		List list = query.list();
-		return list;
+		Query query = session.createQuery("from ShopType");
+		List<ShopType> list = query.list();
+		List<Map<String,Object>> typeList = new ArrayList<Map<String,Object>>();
+		for(ShopType type : list) {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("id",type.getId());
+			map.put("typeName",type.getTypeName());
+			typeList.add(map);
+		}
+		return typeList;
 	}
 
 	//新用户注册
@@ -189,6 +201,19 @@ public class UserDaoImpl implements UserDao{
 		if(count > 0)
 			return true;
 		return false;
+	}
+
+	//获得商店信息
+	@Override
+	public List<Map<String, Object>> getBusiness(String id) {
+		// TODO Auto-generated method stub
+		StringBuilder str = new StringBuilder();
+		str.append("select * from business ");
+		if(!id.equals("0")) {
+			str.append("where shopType = " + id);
+		}
+		List<Map<String,Object>> list = jdbcTemplate.queryForList(str.toString());
+		return list;
 	}
 	
 	

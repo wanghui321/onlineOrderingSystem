@@ -25,14 +25,12 @@ import net.sf.json.JSONArray;
 public class userController {
 	@Autowired
 	private UserServiceImpl userService;
-	private JSONArray json;
 	
 	@RequestMapping("getClassify")
 	@ResponseBody
 	public JSONArray getClassify() {
-		List list = userService.getClassify();
+		List<Map<String,Object>> list = userService.getClassify();
 		JSONArray data=JSONArray.fromObject(list);
-		System.out.println(data);
 		return data;
 	}
 	
@@ -167,7 +165,14 @@ public class userController {
 		return "user/updateAddress";
 	}
 	
-	
+	//获取商家信息
+	@RequestMapping("getBusiness")
+	@ResponseBody
+	public JSONArray getBusiness(String id) {
+		List<Map<String,Object>> list = userService.getBusiness(id);
+		JSONArray json = JSONArray.fromObject(list);
+		return json;
+	}
 	
 	
 	

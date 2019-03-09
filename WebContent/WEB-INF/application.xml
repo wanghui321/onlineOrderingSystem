@@ -15,7 +15,7 @@
         http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-        <context:component-scan base-package="com.ordering.user" />
+        <context:component-scan base-package="com.ordering.*" />
         <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
        	 <property name="prefix" value="/"></property>
        	 <property name="suffix" value=".jsp"></property>
@@ -64,9 +64,18 @@
 			<property name="username" value="root"></property>
 			<property name="password" value=""></property>
 		</bean>
+		
+		<!-- jdbc注入 -->
+		<bean id="jdbcTemplate"
+			class="org.springframework.jdbc.core.JdbcTemplate">
+			<property name="dataSource">
+				<ref bean="dataSource" />
+			</property>
+		</bean>
+		
 		<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 				<property name="dataSource" ref="dataSource"></property>
-				<property name="packagesToScan" value="com.ordering.user.bean" />
+				<property name="packagesToScan" value="com.ordering.*.bean" />
 				<property name="hibernateProperties">
 					<props>
 						<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
