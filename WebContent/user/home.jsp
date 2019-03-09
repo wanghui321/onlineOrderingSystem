@@ -21,10 +21,8 @@
 		url:"<%=path%>/userController/getClassify.do",
 		dataType:'json',
 		success:function(data){
-			<%-- var str = "<a href='<%=path%>/userController/getBusiness.do?id=0' style='text-decoration: none'>全部商家</a>&nbsp;&nbsp;&nbsp;"; --%>
 			str = "<a href='#' onclick='getBusiness(0)' style='text-decoration: none'>全部商家</a>&nbsp;&nbsp;&nbsp;";
 			for(var i = 0; i < data.length; i++){
-				<%-- str += "<a href='<%=path%>/userController/getBusiness.do?id="+data[i].id+"' style='text-decoration: none'>"+data[i].typeName+"</a>&nbsp;&nbsp;&nbsp;" --%>
 				 str += "<a href='#' onclick='getBusiness("+data[i].id+")' style='text-decoration: none'>"+data[i].typeName+"</a>&nbsp;&nbsp;&nbsp;"
 			}
 			$("#business").html(str);
