@@ -7,7 +7,7 @@ import com.ordering.user.bean.ConsigneeAddress;
 import com.ordering.user.bean.User;
 
 public interface UserDao {
-	public List getClassify();
+	public List<Map<String,Object>> getClassify();
 	
 	public boolean regist(User user);
 
@@ -30,5 +30,7 @@ public interface UserDao {
 	public ConsigneeAddress getOneAddress(String id);
 
 	public boolean updateAddress(ConsigneeAddress address);
+
+	public List<Map<String, Object>> getBusiness(String id);
 	
 }

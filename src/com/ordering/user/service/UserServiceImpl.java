@@ -21,10 +21,11 @@ public class UserServiceImpl implements UserService{
 //		return list;
 //	}
 
+	//获取商店类别
 	@Override
-	public List getClassify() {
+	public List<Map<String,Object>> getClassify() {
 		// TODO Auto-generated method stub
-		List list = userDao.getClassify();
+		List<Map<String,Object>> list = userDao.getClassify();
 		return list;
 	}
 
@@ -113,6 +114,14 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		boolean flag = userDao.updateAddress(address);
 		return flag;
+	}
+
+	//获得商家信息
+	@Override
+	public List<Map<String, Object>> getBusiness(String id) {
+		// TODO Auto-generated method stub
+		List<Map<String,Object>> list = userDao.getBusiness(id);
+		return list;
 	}
 	
 }

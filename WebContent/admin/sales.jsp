@@ -74,7 +74,7 @@
                                     <td>
                                         <img src="images/a.jpg" class="img-thumbnail" style="height: 30px;" />
                                     </td>
-                                    <td>宝马</td>
+                                    <td>麦当劳</td>
                                     <td>1800000.00￥</td>
                                     <td>1800000.00￥</td>
                                     <td>上架</td>
