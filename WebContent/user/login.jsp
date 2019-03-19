@@ -19,7 +19,7 @@
  					<td colspan="2" align="center"><img src="../images/logo4.png"width="290px" height="80px"></td>
  				</tr>
 			</table>
- 			<form action="<%=request.getContextPath()%>/businessController/login.do" method="post">
+ 			<form action="<%=request.getContextPath()%>/userController/login.do" method="post">
  				<table>
  					<tr>
  						<td>用户账号：</td>

@@ -31,4 +31,6 @@ public interface UserService {
 	
 	public List<Map<String,Object>> getBusiness(String id);
 	
+	public List<Map<String,Object>> getBusinessByBusinessName(String name);
+	
 }

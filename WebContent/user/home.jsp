@@ -38,7 +38,7 @@
 			},
 			dataType:'json',
 			success:function(data){
-				var str = "";
+			<%-- 	var str = "";
 				for(var i = 0; i < data.length; i++){
 					str += '<a href="#">';
 					str += '<div style="width:95%;height: 115px;margin: 10px;line-height: 39px" class="business">';
@@ -52,11 +52,47 @@
 					str += '</div>'
 					str += '</div>';
 					str += '</a>';
-				}
+				} --%>
+				var str = getBusinessList(data);
 				$("#businessMsg").html(str);
 			}
 					
 		})
+	}
+	
+	function getBusinessByName(){
+		$.ajax({
+			type:'post',
+			url:"<%=path%>/userController/getBusinessByName.do",
+			data:{
+				name:$("#name").val(),
+			},
+			dataType:'json',
+			success:function(data){
+				var str = getBusinessList(data);
+				$("#businessMsg").html(str);
+			}
+					
+		})
+	}
+	
+	function getBusinessList(data){
+		var str = "";
+		for(var i = 0; i < data.length; i++){
+			str += '<a href="#">';
+			str += '<div style="width:95%;height: 115px;margin: 10px;line-height: 39px" class="business">';
+			str += '<div style="height: auto;width:auto;float: left">';
+			str += '<img src="<%=path%>/images/businessImg/' + data[i].headPicture + ' " width="200px" height="115px"/>';
+			str += '</div>';
+			str += '<div style="height: auto;width:auto;float: left;margin-left: 20px">';
+			str += '<span style="float: left;font-weight: bold;color:black">' + data[i].nickName + '</span><br/>';
+			str += '<span style="float: left;color:black">地址：'+ data[i].address +' </span><br/>'
+			str += '<span style="float: left;color:black">联系电话：'+ data[i].phoneNumber +' </span>'
+			str += '</div>'
+			str += '</div>';
+			str += '</a>';
+		}
+		return str;
 	}
 
 	window.onload = function(){
@@ -72,9 +108,7 @@
 			$("#logined").css("display","none");
 			$("#editLogin").css("display","none");
 		}
-		
-		getBusiness(0);
-		
+		getBusiness(0)
 	}
 </script>
 <body>
@@ -85,9 +119,9 @@
 				<img src="../images/logo4.png" width="233px" height="73px"/>
 			</div>
  			<div style="width:auto;height: auto;float: left;line-height: 73px;margin-left: 250px" >
-				<form style="float: left;margin-right: 70px">
-					<input type="text">
-					<button type="button">搜索</button>
+				<form style="float: left;margin-right: 70px" method="post">
+					<input type="text" name="name" id="name">
+					<button type="button" onclick="getBusinessByName()">搜索</button>
 				</form>
 			</div>
 			<div id="noLogin1" style="width:auto;height: auto;float: left;line-height: 73px;display:''">

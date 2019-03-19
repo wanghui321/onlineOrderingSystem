@@ -174,6 +174,15 @@ public class userController {
 		return json;
 	}
 	
+	//根据商家的名称或者商品的名称搜索相关的商店的信息
+	@RequestMapping("getBusinessByName")
+	@ResponseBody
+	public JSONArray getBusinessByName(String name) {
+		List<Map<String,Object>> list = userService.getBusinessByBusinessName(name);
+		JSONArray json = JSONArray.fromObject(list);
+		return json;
+	}
+	
 	
 	
 	
