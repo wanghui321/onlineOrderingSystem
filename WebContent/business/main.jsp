@@ -126,7 +126,7 @@ debugger;
 			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="unu"><span id="unusualOrder" style="font-size: 95px"></span></div>
 		</div>
 		<div style="width:64.6%;height: auto;float: left;background-color: #fff;border:1px solid red;margin-top: 10px;margin-left: 1%">
-			<div style="width:100%;height: 50px;background-color: #fff;border-bottom:1px solid #c9c9c9"align="left"><span style="line-height: 70px;margin-left:25px;font-weight: 700 ;font-size: 20px">待回复评论：</span></div>
+			<div style="width:100%;height: 50px;background-color: #fff;border-bottom:1px solid #c9c9c9"align="left"><span style="line-height: 70px;margin-left:25px;font-weight: 700 ;font-size: 20px">今日总览：</span></div>
 			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">今日订单</span></div>
 			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">今日营业额</span></div>
 			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="cmp"><span id="completedOrder" style="font-size: 95px"></span></div>

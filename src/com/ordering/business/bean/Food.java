@@ -11,7 +11,7 @@ public class Food {
 	private String id;
 	private String foodName;
 	private String imgUrl;
-	private String sellerAccount;
+	private String businessId;
 	private double price;
 	private int  quantity;
 	public String getId() {
@@ -32,12 +32,6 @@ public class Food {
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-	public String getSellerAccount() {
-		return sellerAccount;
-	}
-	public void setSellerAccount(String sellerAccount) {
-		this.sellerAccount = sellerAccount;
-	}
 	public Double getPrice() {
 		return price;
 	}
@@ -56,7 +50,6 @@ public class Food {
 	public void setBusinessId(String businessId) {
 		this.businessId = businessId;
 	}
-	private String businessId;
 	
 
 }

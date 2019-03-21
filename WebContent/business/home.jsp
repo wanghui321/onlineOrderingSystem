@@ -18,11 +18,6 @@
 
 </head>
 <script type="text/javascript">
-window.onload=function(){
-var nickName = '${business.nickName}';
-var a = 1 ;
-alert(nickName);
-}
 </script>
 <body>
 <!--顶部导航栏部分-->
@@ -57,7 +52,7 @@ alert(nickName);
                  <a href="sales.jsp" target="mainFrame" >订单</a>
              </li>
              <li role="presentation">
-                 <a href="adminLogin.jsp" target="mainFrame">商品</a>
+                 <a href="<%=path%>/business/commodityManagement.jsp" target="mainFrame">商品</a>
              </li>
              <li role="presentation">
                  <a href="adminLogin.jsp" target="mainFrame">财务</a>

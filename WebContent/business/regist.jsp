@@ -78,7 +78,7 @@
  					</tr>
  					<tr height="20px"></tr>
  					<tr>
- 						<td>用户昵称：</td>
+ 						<td>店铺名称：</td>
  						<td><input id="newNickName" name="nickName" type="text"  style="height: 25px;width: 200px"/></td>
  					</tr>
  					<tr height="20px"></tr>

@@ -97,5 +97,13 @@ public class businessServiceImpl implements businessService{
 			boolean flag = businessDao.updatePassword(businessId,password);
 			return flag;
 		}
+		
+		//获得商品信息
+		@Override
+		public List<Map<String, Object>> getCommodity(String id) {
+			// TODO Auto-generated method stub
+			List<Map<String,Object>> list = businessDao.getCommodity(id);
+			return list;
+		}
 
 }

@@ -1,16 +1,31 @@
 package com.ordering.business.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededException;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.jboss.jandex.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ordering.business.bean.Business;
 import com.ordering.business.service.businessServiceImpl;
@@ -168,5 +183,100 @@ public class businessController {
 			return "";
 		}
 		
+		//上传头像
+		@RequestMapping("uploadFild")
+		@ResponseBody
+		public String uploadFild(String Name,@RequestParam(value="files") MultipartFile file,HttpServletRequest request){
+			System.out.println("123456789456132");
+			if (!file.isEmpty()) {  
+	            try {  
+	                // 文件保存路径  
+	                String filePath = request.getSession().getServletContext().getRealPath("/images/")   
+	                        + file.getOriginalFilename();  
+	                // 转存文件 
+	                String tempPath = this.getClass().getResource("/").toURI().getPath();  
+	                System.out.println(tempPath);
+	                file.transferTo(new File(filePath));  
+	            } catch (Exception e) {  
+	                e.printStackTrace();  
+	            }  
+	        }
+			/*			// 工厂类
+	        DiskFileItemFactory dfif = new DiskFileItemFactory();
+	        // 用于文件上传
+	        ServletFileUpload fileupload = new ServletFileUpload(dfif);
+	        // 设置文件大小(单个文件大小限制100k)
+	        fileupload.setFileSizeMax(1034 * 100);
+	        //设置服务器地址
+	        ServletContext servletContext = request.getServletContext();
+	        //在服务器创建一个upload文件
+	        String realPath = servletContext.getRealPath("/upload");
+	        System.out.println("realPath"+realPath);
+	        File file = new File(realPath);
+	      //判断文件是否为空
+	        if(!file.exists()){
+	            //如果文件不存在，创建文件
+	            file.mkdir();
+	        }
+	        try {
+	            //获取前端上传的文件
+	            List<FileItem> fileList=fileupload.parseRequest(request);
+	            for(FileItem item:fileList){
+	                if(item.isFormField()){
+	                    //普通表单项
+	                    String name=item.getFieldName();
+	                    String value=item.getString("utf-8");
+	                    System.out.println(name+":"+value);
+	                }else{
+	                    //文件表单项
+	                    long size=item.getSize();//获取文件格式
+	                    //防止上传空文件
+	                    if(size ==0){
+	                        continue;
+	                    }
+	                    
+	                    System.out.println("size:"+size);
+	                    //设置新创建的文件的名字
+	                    String contentType = item.getContentType();
+	                    String name = item.getName();
+	                    if(name.contains("\\")){
+	                        name = name.substring(name.lastIndexOf("\\")+1);
+	                    }
+	                    System.out.println("name:"+name);
+	                    //防止同名文件覆盖
+	                    String prefix = UUID.randomUUID().toString();
+	                    //去除文件中的-
+	                    prefix = prefix.replace("-","");
+	                    String fileName = prefix+"_"+name;
+	                    String fieldName = item.getFieldName();
+	                    System.out.println(size+":"+contentType+":--------"+name+":"+fieldName);
+	                    
+	                    try {
+	                        item.write(new File(realPath+"\\"+fileName));
+	                    } catch (Exception e) {
+	                        // TODO Auto-generated catch block
+	                        e.printStackTrace();
+	                    }
+	                }
+	            }
+	        }catch(FileSizeLimitExceededException e){
+	            System.out.println("文件大小不可以超过50K");
+	        } catch (FileUploadException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } */
+			return "";
+		}
+		
+		
+		//获取商品信息
+		@RequestMapping("getCommodity")
+		@ResponseBody
+		public JSONArray getCommodity(String id) {
+			List<Map<String,Object>> list = businessService.getCommodity(id);
+			JSONArray json = JSONArray.fromObject(list);
+			System.out.println(json);
+			return json;
+		}
 
 }

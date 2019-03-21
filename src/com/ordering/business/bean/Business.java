@@ -21,6 +21,7 @@ public class Business {
 	private String corporation;			//法人
 	private String notice;			//店铺公告
 	private String state;		//是否开店
+	private String typeId;     //商店类别
 	public String getNotice() {
 		return notice;
 	}
@@ -92,6 +93,12 @@ public class Business {
 	}
 	public void setCorporation(String corporation) {
 		this.corporation = corporation;
+	}
+	public String getTypeId() {
+		return typeId;
+	}
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
 	}
 }
 

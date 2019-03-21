@@ -24,4 +24,6 @@ public interface businessService {
 	public Business updateQualification(Business business);
 	
 	public boolean updatePassword(String businessId,String password);
+	
+	public List<Map<String,Object>> getCommodity(String id);
 }

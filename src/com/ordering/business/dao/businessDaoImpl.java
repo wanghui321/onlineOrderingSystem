@@ -10,6 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,8 @@ import com.ordering.user.bean.User;
 public class businessDaoImpl implements businessDao{
 	@Autowired
 	private SessionFactory sessionFactory;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 	
 	
 	//获取订单类别
@@ -220,6 +223,19 @@ public class businessDaoImpl implements businessDao{
 				return true;
 			}
 			return false;
+		}
+		
+		//获得商品信息
+		@Override
+		public List<Map<String, Object>> getCommodity(String id) {
+			// TODO Auto-generated method stub
+			StringBuilder str = new StringBuilder();
+			str.append("select * from food ");
+			if(!id.equals("0")) {
+				str.append("where businessId = " + id);
+			}
+			List<Map<String,Object>> list = jdbcTemplate.queryForList(str.toString());
+			return list;
 		}
 				
 

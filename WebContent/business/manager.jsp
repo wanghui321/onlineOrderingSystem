@@ -15,9 +15,9 @@
 	window.onload = function(){
 		var msg = "${business.state}";
 		if(msg ==3){
-			$("#msg1").css("display","none");
-		}else{
 			$("#msg2").css("display","none");
+		}else{
+			$("#msg1").css("display","none");
 		}
 	}
 </script>
