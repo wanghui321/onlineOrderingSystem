@@ -21,7 +21,7 @@
 		<!-- 中间内容 -->
 		<div style="width:70%;height:575px;border:1px solid red;margin-top: 20px;line-height:33px;" align="center">
 			<div id="bottom_1" style="text-align:center;border:1px solid red;float:left"><iframe src="<%=request.getContextPath()%>/user/menu.jsp" width="200px" height="575px"></iframe></div>
-			<div id="bottom_2" style="text-align:center;border:1px solid red;float:left"><iframe src="blank.jsp" width="840px" height="575px" name="view_frame"></iframe></div>
+			<div id="bottom_2" style="text-align:center;border:1px solid red;float:left"><iframe src="<%=request.getContextPath()%>/user/blank.jsp" width="840px" height="575px" name="view_frame"></iframe></div>
         </div>
 		
 		<!-- 页面底部 -->

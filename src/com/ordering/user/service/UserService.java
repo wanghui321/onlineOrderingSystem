@@ -29,8 +29,4 @@ public interface UserService {
 	
 	public boolean updateAddress(ConsigneeAddress address);
 	
-	public List<Map<String,Object>> getBusiness(String id);
-	
-	public List<Map<String,Object>> getBusinessByBusinessName(String name);
-	
 }

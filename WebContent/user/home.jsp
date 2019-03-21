@@ -13,88 +13,8 @@
 <title>网上订餐系统</title>
 </head>
 <script src="<%=path%>/js/jquery-1.11.1.min.js"></script>
-
-
 <script type="text/javascript">
-	$.ajax({
-		type:"post",
-		url:"<%=path%>/userController/getClassify.do",
-		dataType:'json',
-		success:function(data){
-			str = "<a href='#' onclick='getBusiness(0)' style='text-decoration: none'>全部商家</a>&nbsp;&nbsp;&nbsp;";
-			for(var i = 0; i < data.length; i++){
-				 str += "<a href='#' onclick='getBusiness("+data[i].id+")' style='text-decoration: none'>"+data[i].typeName+"</a>&nbsp;&nbsp;&nbsp;"
-			}
-			$("#business").html(str);
-		}
-	})
 	
-	function getBusiness(id){
-		$.ajax({
-			type:'post',
-			url:"<%=path%>/userController/getBusiness.do",
-			data:{
-				id:id,
-			},
-			dataType:'json',
-			success:function(data){
-			<%-- 	var str = "";
-				for(var i = 0; i < data.length; i++){
-					str += '<a href="#">';
-					str += '<div style="width:95%;height: 115px;margin: 10px;line-height: 39px" class="business">';
-					str += '<div style="height: auto;width:auto;float: left">';
-					str += '<img src="<%=path%>/images/businessImg/' + data[i].headPicture + ' " width="200px" height="115px"/>';
-					str += '</div>';
-					str += '<div style="height: auto;width:auto;float: left;margin-left: 20px">';
-					str += '<span style="float: left;font-weight: bold;color:black">' + data[i].nickName + '</span><br/>';
-					str += '<span style="float: left;color:black">地址：'+ data[i].address +' </span><br/>'
-					str += '<span style="float: left;color:black">联系电话：'+ data[i].phoneNumber +' </span>'
-					str += '</div>'
-					str += '</div>';
-					str += '</a>';
-				} --%>
-				var str = getBusinessList(data);
-				$("#businessMsg").html(str);
-			}
-					
-		})
-	}
-	
-	function getBusinessByName(){
-		$.ajax({
-			type:'post',
-			url:"<%=path%>/userController/getBusinessByName.do",
-			data:{
-				name:$("#name").val(),
-			},
-			dataType:'json',
-			success:function(data){
-				var str = getBusinessList(data);
-				$("#businessMsg").html(str);
-			}
-					
-		})
-	}
-	
-	function getBusinessList(data){
-		var str = "";
-		for(var i = 0; i < data.length; i++){
-			str += '<a href="#">';
-			str += '<div style="width:95%;height: 115px;margin: 10px;line-height: 39px" class="business">';
-			str += '<div style="height: auto;width:auto;float: left">';
-			str += '<img src="<%=path%>/images/businessImg/' + data[i].headPicture + ' " width="200px" height="115px"/>';
-			str += '</div>';
-			str += '<div style="height: auto;width:auto;float: left;margin-left: 20px">';
-			str += '<span style="float: left;font-weight: bold;color:black">' + data[i].nickName + '</span><br/>';
-			str += '<span style="float: left;color:black">地址：'+ data[i].address +' </span><br/>'
-			str += '<span style="float: left;color:black">联系电话：'+ data[i].phoneNumber +' </span>'
-			str += '</div>'
-			str += '</div>';
-			str += '</a>';
-		}
-		return str;
-	}
-
 	window.onload = function(){
 		//获取用户名
 		var nickName = '${nickName}';
@@ -108,7 +28,12 @@
 			$("#logined").css("display","none");
 			$("#editLogin").css("display","none");
 		}
-		getBusiness(0)
+	}
+	
+	function getBusinessByName(){
+		var businessName = $("#name").val();
+		var childWindow = $("#businessIframe")[0].contentWindow;
+		childWindow.getBusinessByName(businessName);
 	}
 </script>
 <body>
@@ -121,7 +46,7 @@
  			<div style="width:auto;height: auto;float: left;line-height: 73px;margin-left: 250px" >
 				<form style="float: left;margin-right: 70px" method="post">
 					<input type="text" name="name" id="name">
-					<button type="button" onclick="getBusinessByName()">搜索</button>
+					<button type="button" onclick="getBusinessByName();">搜索</button>
 				</form>
 			</div>
 			<div id="noLogin1" style="width:auto;height: auto;float: left;line-height: 73px;display:''">
@@ -138,18 +63,26 @@
 			</div>
 		</div>
 		
+		<!-- 商店分类和商店信息 -->
+		<div style="width:70%;line-height:33px;" align="center">
+			<div id="businessBottom" style="text-align:center;width:100%;min-height:605px">
+				<iframe src="<%=request.getContextPath()%>/user/businessMsg.jsp" id="businessIframe" frameborder="0"
+					width="100%" ></iframe>
+			</div>
+        </div>
+		
 		<!-- 商家分类 -->
-		<div style="width:70%;height:73px;margin-top: 20px;background-color: #F4F4F4" align="center">
+<!-- 		<div style="width:70%;height:73px;margin-top: 20px;background-color: #F4F4F4" align="center">
 			<div style="width:auto;height:auto;float:left;line-height:73px">
 				<span>商家分类</span>
 			</div>
 			<div style="width:auto;height:auto;float:left;line-height:73px;margin-left: 20px" id="business">
 			</div>
-		</div>
+		</div> -->
 		
 		<!-- 商家信息 -->
-		<div style="width:70%;height:auto;margin-top: 20px;background-color: #F4F4F4" id="businessMsg">
-		</div>
+<!-- 		<div style="width:70%;height:auto;margin-top: 20px;background-color: #F4F4F4" id="businessMsg">
+		</div> -->
 		
 		<!-- 页面底部 -->
 		<div style="width:100%;height:33px;margin-top: 20px;background-color: #ac001c;line-height:33px;" align="center">

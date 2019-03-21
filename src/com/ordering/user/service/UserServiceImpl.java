@@ -116,24 +116,6 @@ public class UserServiceImpl implements UserService{
 		return flag;
 	}
 
-	//获得商家信息
-	@Override
-	public List<Map<String, Object>> getBusiness(String id) {
-		// TODO Auto-generated method stub
-		List<Map<String,Object>> list = userDao.getBusiness(id);
-		return list;
-	}
-
-	//根据商店的名称获取商家的信息
-	@Override
-	public List<Map<String, Object>> getBusinessByBusinessName(String name) {
-		// TODO Auto-generated method stub
-		List<Map<String,Object>> businessList = userDao.getBusinessByBusinessName(name);
-		List<Map<String,Object>> foodList = userDao.getBusinessByFoodName(name); 
-		businessList.removeAll(foodList);
-		businessList.addAll(foodList);
-		return businessList;
-	}
 	
 }
 
