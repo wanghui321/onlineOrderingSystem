@@ -13,7 +13,7 @@ public class Food {
 	private String imgUrl;
 	private String businessId;
 	private double price;
-	private int  quantity;
+	private String  introduction;
 	public String getId() {
 		return id;
 	}
@@ -32,18 +32,18 @@ public class Food {
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-	public Double getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(Double price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
-	public int getQuantity() {
-		return quantity;
+	public String getIntroduction() {
+		return introduction;
 	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}	
 	public String getBusinessId() {
 		return businessId;
 	}
