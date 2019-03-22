@@ -12,4 +12,6 @@ public interface UserBusinessService {
 	public List<Map<String,Object>> getBusinessByBusinessName(String name);
 
 	public Business getBusinessById(String id);
+
+	public List<Map<String, Object>> getFoodByBusinessId(String id);
 }

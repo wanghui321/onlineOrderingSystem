@@ -56,11 +56,21 @@ public class UserBusinessDaoImpl implements UserBusinessDao{
 		return businessList;
 	}
 
+	//根据商店的Id获取商店的信息
 	@Override
 	public Business getBusinessById(String id) {
 		String sql = "select * from business where businessId = " + id;
 		Business business = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Business.class));
 		return business;
+	}
+
+	//根据商店的Id获取商店中商品的信息
+	@Override
+	public List<Map<String, Object>> getFoodByBusinessId(String id) {
+		// TODO Auto-generated method stub
+		String sql = "select * from food where businessId = " + id;
+		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+		return list;
 	}
 
 }

@@ -34,11 +34,20 @@ public class UserBusinessServiceImpl implements UserBusinessService {
 		return businessList;
 	}
 
+	//根据商店的Id获取商店的信息
 	@Override
 	public Business getBusinessById(String id) {
 		// TODO Auto-generated method stub
 		Business business = userBusinessDao.getBusinessById(id);
 		return business;
+	}
+
+	//根据商店的Id获取商店中商品的信息
+	@Override
+	public List<Map<String, Object>> getFoodByBusinessId(String id) {		
+		// TODO Auto-generated method stub
+		List<Map<String,Object>> list = userBusinessDao.getFoodByBusinessId(id);
+		return list;
 	}
 
 }

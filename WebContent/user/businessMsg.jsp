@@ -88,7 +88,7 @@
 		var str = "";
 		for(var i = 0; i < data.length; i++){
 			str += '<a href="<%=path%>/userBusinessController/getBusinessById.do?id='+ data[i].businessId +'">';
-			str += '<div style="width:95%;height: 115px;margin: 10px;line-height: 39px" class="business">';
+			str += '<div style="width:95%;height: 115px;margin: 10px;padding-top:10px;border-bottom: 2px #EBEBEB solid;padding-bottom: 20px;line-height: 39px">';
 			str += '<div style="height: auto;width:auto;float: left">';
 			str += '<img src="<%=path%>/images/businessImg/' + data[i].headPicture + ' " width="200px" height="115px"/>';
 			str += '</div>';
@@ -110,8 +110,8 @@
 
 <body>
 	<!-- 商家分类 -->
- 		<div style="width:100%;height:73px;background-color: #F4F4F4" align="center">
-			<div style="width:auto;height:auto;float:left;line-height:73px">
+ 		<div style="width:100%;height:73px;background-color: #fff;border-radius: 10px" align="center">
+			<div style="width:auto;height:auto;float:left;line-height:73px;margin-left: 10px">
 				<span>商家分类</span>
 			</div>
 			<div style="width:auto;height:auto;float:left;line-height:73px;margin-left: 20px" id="business">
@@ -119,7 +119,7 @@
 		</div>
 		
 		<!-- 商家信息 -->
- 		<div style="width:100%;height:auto;margin-top: 20px;background-color: #F4F4F4" id="businessMsg">
+ 		<div style="width:100%;height:auto;margin-top: 20px;background-color: #fff;border-radius: 10px" id="businessMsg">
 		</div>
 </body>
 </html>

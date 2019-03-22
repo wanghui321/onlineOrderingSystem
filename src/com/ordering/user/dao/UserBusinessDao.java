@@ -13,4 +13,6 @@ public interface UserBusinessDao {
 	public List<Map<String, Object>> getBusinessByFoodName(String name);
 
 	public Business getBusinessById(String id);
+
+	public List<Map<String, Object>> getFoodByBusinessId(String id);
 }

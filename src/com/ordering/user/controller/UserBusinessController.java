@@ -46,4 +46,13 @@ public class UserBusinessController {
 		model.addAttribute("business",business);
 		return "user/businessDetail";
 	}
+	
+	//根据商店的Id获取商店中商品的信息
+	@RequestMapping("getFoodByBusinessId")
+	@ResponseBody
+	public JSONArray getFoodByBusinessId(String id) {
+		List<Map<String,Object>> list = userBusinessService.getFoodByBusinessId(id);
+		JSONArray json = JSONArray.fromObject(list);
+		return json;
+	}
 }

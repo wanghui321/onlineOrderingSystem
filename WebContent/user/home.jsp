@@ -39,7 +39,7 @@
 <body>
 	<div align="center" style="width:100%;height: auto;float: left">
 		<!-- 页面头部 -->
-		<div style="width:70%;height:73px;margin-top: 20px;background-color: #F4F4F4" align="left">
+		<div style="width:70%;height:73px;margin-top: 20px;align-content: left">
 			<div style="width:auto;height: auto;float: left">
 				<img src="../images/logo4.png" width="233px" height="73px"/>
 			</div>
@@ -64,8 +64,8 @@
 		</div>
 		
 		<!-- 商店分类和商店信息 -->
-		<div style="width:70%;line-height:33px;" align="center">
-			<div id="businessBottom" style="text-align:center;width:100%;min-height:605px">
+		<div style="width:100%;line-height:33px;background-color: #EBEBEB;" align="center">
+			<div id="businessBottom" style="text-align:center;width:70%;min-height:605px;border-radius: 10px">
 				<iframe src="<%=request.getContextPath()%>/user/businessMsg.jsp" id="businessIframe" frameborder="0"
 					width="100%" ></iframe>
 			</div>
@@ -85,7 +85,7 @@
 		</div> -->
 		
 		<!-- 页面底部 -->
-		<div style="width:100%;height:33px;margin-top: 20px;background-color: #ac001c;line-height:33px;" align="center">
+		<div style="width:100%;height:33px;background-color: #ac001c;line-height:33px;" align="center">
            <span style="color:#fff;align-content: center;">&copy; Copyright 2019, A OnlineOrderingSystem Apart</span>&nbsp;&nbsp;
         </div>
         

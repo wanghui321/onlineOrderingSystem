@@ -20,9 +20,38 @@
 		obj.height = this.document.body.scrollHeight + 10; //调整父页面中IFrame的高度为此页面的高度 
 	} 
 	
+	$.ajax({
+		type:'post',
+		url:"<%=path%>/userBusinessController/getFoodByBusinessId.do",
+		data:{
+			id:${business.businessId},
+		},
+		dataType:'json',
+		success:function(data){
+			var str = "";
+			for(var i = 0; i < data.length; i++){
+				str += '<div style="width:95%;height: 200px;margin: 10px;line-height: 39px;border-bottom: 2px #EBEBEB solid;padding-bottom: 20px">';
+				str += '<div style="height: auto;width:auto;float: left;margin-top: 10px">';
+				str += '<img src="<%=path%>/images/foodImg/' + data[i].imgUrl + ' " width="180px" height="180px"/>';
+				str += '</div>';
+				str += '<div style="height: auto;width:auto;float: left;margin-left: 20px;margin-top: 10px">';
+				str += '<span style="float: left;font-weight: bold;color:black">' + data[i].foodName + '</span><br/>';
+				str += '<span style="float: left;color:black">'+ data[i].introduction +' </span><br/>'
+				str += '<span style="float: left;color:#ac001c;margin-top: 60px;font-size: 50px">￥'+ data[i].price +' </span>'
+				str += '</div>';
+				str += '<div>';
+				str += '<a href="#" class="buy">点击购买</a>';
+				str += '</div>';
+				str += '</div>';
+			}
+			$("#businessDetail").html(str);
+			IFrameResize();
+		}
+	})
+	
 	window.onload = function(){
 		var notice = '${business.notice}';
-		if(notice != null && notice != "" && notice != undefined){
+		if(notice != null && notice != "" && notice != undefined){ 
 			$("#notice").html("商家公告："+notice);
 		} else {
 			$("#notice").html("商家公告：暂无");
@@ -30,7 +59,7 @@
 	}
 </script>
 <body>
-	<div style="background-color: #F4F4F4;width: 100%;height: 250px">
+	<div style="background-color: #fff;border-radius: 10px;width: 100%;height: 250px">
 		<!-- 左侧简要信息 -->
 		<div style="float: left;width: 700px;height: auto;">
 			<div style="width: 100%;height: auto;">
@@ -71,8 +100,22 @@
 			<img src="<%=path%>/images/businessImg/${business.headPicture}" style="height: 100%;width: 100%">
 		</div>
 	</div>
-	<div>
-		
+	
+	<!-- 商品详情 -->
+	<div style="background-color: #fff;border-radius: 10px;width: 100%;height: auto;margin-top: 20px" id="businessDetail">
+<%-- 		<div style="width:95%;height: 200px;margin: 10px;line-height: 39px;border-bottom: 2px #EBEBEB solid;padding-bottom: 20px">
+			<div style="height: auto;width:auto;float: left;margin-top: 10px">
+				<img src="<%=path%>/images/foodImg/food1.png" width="180px" height="180px"/>
+			</div>
+			<div style="height: auto;width:auto;float: left;margin-left: 20px;margin-top: 10px">
+				<span style="float: left;font-weight: bold;color:black">立即抢购经典清江鱼套餐，建议4人使用</span><br/>
+				<span style="float: left;color:black">商品简介商品简介商品简介商品简介商品简介</span><br/>
+				<span style="float: left;color:#ac001c;margin-top: 60px;font-size: 50px">￥138</span><br/>
+			</div>
+			<div>
+				<a href="#" class="buy">点击购买</a>
+			</div>
+		</div> --%>
 	</div>
 </body>
 </html>
