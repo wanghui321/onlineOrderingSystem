@@ -30,9 +30,9 @@
         <a class="navbar-brand" href="<%=request.getContextPath()%>/business/commodityManagement.jsp" style="color: #fff" target="Frame">全部菜品</a>
     </div>
     <div>
-        <form class="navbar-form navbar-left" role="search">
+        <form class="navbar-form navbar-left" role="search" action="<%=path%>/businessController/getCommodityByName.do" target="Frame">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" class="form-control" placeholder="Search" name="name">
             </div>
             <button type="submit" class="btn btn-default">提交按钮</button>
         </form>

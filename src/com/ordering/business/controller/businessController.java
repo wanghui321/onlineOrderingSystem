@@ -319,5 +319,18 @@ public class businessController {
 			}*/
 			return "";
 		}
+		
+		//根据商家的名称或者商品的名称搜索相关的商店的信息
+		@RequestMapping("getCommodityByName")
+		public String getCommodityByName(String name,HttpSession session,Model model) {
+			Business b = (Business)session.getAttribute("business");
+			String id = b.getBusinessId();
+			System.out.println(id);
+			List<Map<String,Object>> list = businessService.getCommodityByName(id,name);
+			JSONArray json = JSONArray.fromObject(list);
+			System.out.println(json);
+			model.addAttribute("msg",json);
+			return "business/searchGoods";
+		}
 
 }

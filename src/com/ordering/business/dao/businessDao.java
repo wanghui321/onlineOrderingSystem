@@ -31,4 +31,6 @@ public interface businessDao {
 	public List<Map<String, Object>> getCommodity(String id);
 	
 	public boolean addProduct(Food food);
+	
+	public List<Map<String, Object>> getCommodityByName(String id,String name);
 }

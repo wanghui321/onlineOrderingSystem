@@ -247,6 +247,15 @@ public class businessDaoImpl implements businessDao{
 			session.save(food);
 			return true;
 		}
-				
+		
+		
+		//根据商店的名称获取商店的信息
+		@Override
+		public List<Map<String, Object>> getCommodityByName(String id,String name) {
+			// TODO Auto-generated method stub
+			String str = "select * from food where foodName like '%"+ name +"%' and businessId = " + id;
+			List<Map<String,Object>> list = jdbcTemplate.queryForList(str);
+			return list;
+		}
 
 }

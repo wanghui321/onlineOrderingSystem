@@ -114,5 +114,16 @@ public class businessServiceImpl implements businessService{
 			boolean flag = businessDao.addProduct(food);
 			return flag;
 		}
+		
+		//根据商店的名称获取商家的信息
+		@Override
+		public List<Map<String, Object>> getCommodityByName(String id,String name) {
+			// TODO Auto-generated method stub
+			/*List<Map<String,Object>> businessList = businessDao.getBusinessByBusinessName(name);*/
+			List<Map<String,Object>> foodList = businessDao.getCommodityByName(id,name); 
+			/*businessList.removeAll(foodList);
+			businessList.addAll(foodList);*/
+			return foodList;
+		}
 
 }
