@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ordering.business.bean.Business;
+import com.ordering.business.bean.Food;
 import com.ordering.business.service.businessServiceImpl;
 import com.ordering.user.bean.User;
 
@@ -196,6 +197,7 @@ public class businessController {
 	                // 转存文件 
 	                String tempPath = this.getClass().getResource("/").toURI().getPath();  
 	                System.out.println(tempPath);
+	                System.out.println(filePath);
 	                file.transferTo(new File(filePath));  
 	            } catch (Exception e) {  
 	                e.printStackTrace();  
@@ -277,6 +279,45 @@ public class businessController {
 			JSONArray json = JSONArray.fromObject(list);
 			System.out.println(json);
 			return json;
+		}
+		
+		//上传菜品
+		@RequestMapping("addProduct")
+		@ResponseBody
+		public String addProduct(String Name,String price,String quantity,@RequestParam(value="files") MultipartFile file,HttpServletRequest request,HttpSession session){
+			System.out.println("123456789456132");
+			String filePath = null;
+			if (!file.isEmpty()) {  
+	            try {  
+	                // 文件保存路径  
+	                filePath = request.getSession().getServletContext().getRealPath("/images/")   
+	                        + file.getOriginalFilename();  
+	                // 转存文件 
+	                String tempPath = this.getClass().getResource("/").toURI().getPath();  
+	                System.out.println(tempPath);
+	                file.transferTo(new File(filePath));  
+	            } catch (Exception e) {  
+	                e.printStackTrace();  
+	            }  
+	        }
+			Food food = new Food();
+			String uuid = UUID.randomUUID().toString().replaceAll("-","");
+			Business b = (Business)session.getAttribute("business");
+			String id = b.getBusinessId();
+			double value = Double.valueOf(price.toString());
+			food.setBusinessId(id);
+			food.setFoodName(Name);
+			food.setId(uuid);			
+			food.setImgUrl(filePath);
+			food.setPrice(value);
+			food.setIntroduction(quantity);
+			boolean flag = businessService.addProduct(food);
+			/*if(flag) {
+				model.addAttribute("msg","注册成功");
+			} else {
+				model.addAttribute("msg","注册失败");
+			}*/
+			return "";
 		}
 
 }

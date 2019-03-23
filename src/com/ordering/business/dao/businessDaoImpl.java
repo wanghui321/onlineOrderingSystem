@@ -237,6 +237,16 @@ public class businessDaoImpl implements businessDao{
 			List<Map<String,Object>> list = jdbcTemplate.queryForList(str.toString());
 			return list;
 		}
+		
+		
+		//新用户注册
+		@Override
+		public boolean addProduct(Food food) {
+			// TODO Auto-generated method stub
+			Session session = sessionFactory.getCurrentSession();
+			session.save(food);
+			return true;
+		}
 				
 
 }

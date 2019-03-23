@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ordering.business.bean.Business;
+import com.ordering.business.bean.Food;
 import com.ordering.user.bean.User;
 
 public interface businessService {
@@ -26,4 +27,6 @@ public interface businessService {
 	public boolean updatePassword(String businessId,String password);
 	
 	public List<Map<String,Object>> getCommodity(String id);
+	
+	public boolean addProduct(Food food);
 }

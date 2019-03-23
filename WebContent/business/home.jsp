@@ -52,10 +52,10 @@
                  <a href="sales.jsp" target="mainFrame" >订单</a>
              </li>
              <li role="presentation">
-                 <a href="<%=path%>/business/commodityManagement.jsp" target="mainFrame">商品</a>
+                 <a href="<%=path%>/business/commodity.jsp" target="mainFrame">商品</a>
              </li>
              <li role="presentation">
-                 <a href="adminLogin.jsp" target="mainFrame">财务</a>
+                 <a href="<%=path%>/business/commodity.jsp" target="mainFrame">财务</a>
              </li>
              <!-- 开始 -->
              <li role="presentation">

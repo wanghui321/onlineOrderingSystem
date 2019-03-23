@@ -17,37 +17,38 @@
 <style type="text/css">	
 .wrap{width: 300px;list-style: none;}	
 .wrap li{height: 50px;margin:1px;float: left}	
-.active{color:#fff;font-weight:bold; background-color: #ac001c; }
+.active{font-weight:bold; background-color: pink; color:#fff;}
 </style>
 </head>
 <body>
 <div align="center" style="width:100%;height:1222px;border:1px solid red; background-color: #F4F4F4">
 <div 	 style="width:80%;height:oute;border:1px solid red; background-color: #F4F4F4">
 
-<ul class="nav  nav-pills">
-   <li role="presentation">
-                 <a class="active" href="<%=path %>/business/manager.jsp" target="main_Frame" >营业管理</a>
-             </li>
-             <li role="presentation">
-                 <a href="<%=path %>/business/qualification.jsp" target="main_Frame" >资格认证</a>
-             </li>
-             
-</ul>
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid" style="background-color: #ac001c">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/business/commodityManagement.jsp" style="color: #fff" target="Frame">全部菜品</a>
+    </div>
+    <div>
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">提交按钮</button>
+        </form>
+        <a href="<%=request.getContextPath()%>/business/addProduct.jsp" target="Frame"><button type="button" class="btn btn-default navbar-btn">
+            添加菜品
+        </button></a>
+    </div>
+	</div>
+</nav>
 
 </div>
 <div  style="width:80%;height:100%;border:1px solid red; background-color: #F4F4F4">
-      <iframe src="<%=request.getContextPath()%>/business/manager.jsp" id="mainFrame" name="main_Frame" 
+      <iframe src="<%=request.getContextPath()%>/business/commodityManagement.jsp" id="mainFrame" name="Frame" 
        frameborder="0" width="100%"  height="100%" frameBorder="0">
        </iframe> 
      </div>
 </div>
- <script type="text/javascript">
- $(".nav li").click(function() {
-        $(".active").removeClass('active');
-        $(this).addClass("active");
-    }); 
-
-
- </script>
 </body>
 </html>

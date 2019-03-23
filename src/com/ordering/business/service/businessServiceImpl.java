@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ordering.business.bean.Business;
+import com.ordering.business.bean.Food;
 import com.ordering.business.dao.businessDao;
 import com.ordering.user.bean.User;
 
@@ -104,6 +105,14 @@ public class businessServiceImpl implements businessService{
 			// TODO Auto-generated method stub
 			List<Map<String,Object>> list = businessDao.getCommodity(id);
 			return list;
+		}
+		
+		//添加商品
+		@Override
+		public boolean addProduct(Food food) {
+			// TODO Auto-generated method stub
+			boolean flag = businessDao.addProduct(food);
+			return flag;
 		}
 
 }
