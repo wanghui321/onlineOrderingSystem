@@ -23,7 +23,14 @@
 
 <script type="text/javascript">
 	var id = ${business.businessId};
-	
+	window.onload=function(){
+		var msg = '${msg}';
+		if(msg != null && msg != "" && msg != undefined){
+			if(msg == "删除成功"){
+				alert(msg);
+			}
+		}	
+	}
 	 $.ajax({
 		type:'post',
 		url:"<%=path%>/businessController/getCommodity.do",
@@ -45,7 +52,7 @@
 				str +='<div style="width:50%;border:1px solid red;float: left">';
 				str +='<div style="width: 100%;height:auto; margin-top: 10px">'+data[i].foodName+'</div>';
 				str +='<div style="width: 100%;height:auto; margin-top: 10px">'+data[i].price+'</div></div>';
-				str +='<div style="width: 80%;float: left"><a>修改</a><a>删除</a> </div></div>';
+				str +='<div style="width: 80%;float: left"><a href="<%=path%>/businessController/getFoodById.do?id='+data[i].id+'" target="Frame">修改</a><a href="<%=path%>/businessController/deleteFoodById.do?id='+data[i].id+'" target="Frame">删除</a> </div></div>';
 				
 				}
 				 
@@ -73,9 +80,8 @@
 				<div style="width: 100%;height:auto; margin-top: 10px">SADFASDFA</div>
 				</div>
 				</div>
-				<div style="width: 80%;height:auto;border:1px solid red;float: left"><a>修改</a><a>删除</a> </div>
+				<div style="width: 80%;height:auto;border:1px solid red;float: left"><a href="<%=path%>/businessController/revise.do?id=1" target="Frame">修改</a><a>删除</a> </div>
 			</div>  --%>
-			 
 		</div>
 </div>
 </body>

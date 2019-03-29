@@ -33,4 +33,10 @@ public interface businessDao {
 	public boolean addProduct(Food food);
 	
 	public List<Map<String, Object>> getCommodityByName(String id,String name);
+	
+	public Food getFoodById(String id,String businessId);
+	
+	public Food revise(Food food);
+	
+	public boolean deleteFoodById(Food food);
 }

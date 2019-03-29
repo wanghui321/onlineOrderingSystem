@@ -10,6 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -256,6 +257,33 @@ public class businessDaoImpl implements businessDao{
 			String str = "select * from food where foodName like '%"+ name +"%' and businessId = " + id;
 			List<Map<String,Object>> list = jdbcTemplate.queryForList(str);
 			return list;
+		}
+		
+		//根据商品Id获取商品
+		@Override
+		public Food getFoodById(String id,String businessId) {
+			// TODO Auto-generated method stub
+			String str = "select * from food where id = " + id + " and businessId = " + businessId;
+			Food food = jdbcTemplate.queryForObject(str, new BeanPropertyRowMapper<>(Food.class));
+			return food;
+		}
+		
+		//修改商品
+		@Override
+		public Food revise(Food food) {
+			// TODO Auto-generated method stub
+			Session session = sessionFactory.getCurrentSession();
+			session.update(food);
+			return food;
+		}
+		
+		//删除商品
+		@Override
+		public boolean deleteFoodById(Food food) {
+			// TODO Auto-generated method stub
+			Session session = sessionFactory.getCurrentSession();
+			session.delete(food);
+			return true;
 		}
 
 }

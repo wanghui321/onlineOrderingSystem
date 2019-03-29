@@ -10,16 +10,28 @@
 <title>Insert title here</title>
 </head>
 <script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+	var msg = '${msg}';
+	if(msg != null && msg != "" && msg != undefined){
+		if(msg == "添加成功"){
+			$("#msg").css('display',"");
+			alert(msg);
+		}
+	}	
+}
+</script>
 <body>
 <form action="<%=path%>/businessController/addProduct.do" method="post" enctype="multipart/form-data">
  
  
-    头像：<input type="file" name="files" > <br />
+	菜品图片：<input type="file" name="files" > <br />
         
        菜品名称：<input type="text" name="Name"><br />
  	价格：<input type="text" name="price"><br />
  	简介：<input type="text" name="quantity"><br />
- 	<input type="submit" value="上传">
+ 	<input type="submit" value="添加">
+ 	<span id="msg" style="display:none">添加成功</span>
  </form>  
 </body>
 </html>

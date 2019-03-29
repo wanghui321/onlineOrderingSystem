@@ -1,0 +1,23 @@
+@charset "UTF-8";
+input[type="text"] {
+    height:20px;
+    border:none;
+    border-bottom:1px solid #ccc;
+    width:150px;
+    margin-right:10px; 
+    outline:none;
+    height:25px;
+     
+}
+.file {
+   outline: none;
+       border:none;
+    background: #ac001c;
+    border-radius: 4px;
+    padding: 4px 12px;
+   cursor:pointer;
+    color: #fff;
+    font-size:18px;
+    line-height: 20px;
+    vertical-align: middle;
+}

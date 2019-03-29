@@ -125,5 +125,29 @@ public class businessServiceImpl implements businessService{
 			businessList.addAll(foodList);*/
 			return foodList;
 		}
+		
+		//根据商品ID获取商品
+		@Override
+		public Food getFoodById(String id,String businessId) {
+			// TODO Auto-generated method stub
+			Food food = businessDao.getFoodById(id,businessId);
+			return food;
+		}
+		
+		//修改商品
+		@Override
+		public Food revise(Food food) {
+			// TODO Auto-generated method stub
+			Food one = businessDao.revise(food);
+			return one;
+		}
+		
+		//删除商品
+		@Override
+		public boolean deleteFoodById(Food food) {
+			// TODO Auto-generated method stub
+			boolean flag = businessDao.deleteFoodById(food);
+			return flag;
+		}
 
 }

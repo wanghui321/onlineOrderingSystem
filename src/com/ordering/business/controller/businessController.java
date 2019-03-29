@@ -283,8 +283,7 @@ public class businessController {
 		
 		//上传菜品
 		@RequestMapping("addProduct")
-		@ResponseBody
-		public String addProduct(String Name,String price,String quantity,@RequestParam(value="files") MultipartFile file,HttpServletRequest request,HttpSession session){
+		public String addProduct(String Name,String price,String quantity,@RequestParam(value="files") MultipartFile file,HttpServletRequest request,HttpSession session,Model model){
 			System.out.println("123456789456132");
 			String filePath = null;
 			if (!file.isEmpty()) {  
@@ -308,19 +307,19 @@ public class businessController {
 			food.setBusinessId(id);
 			food.setFoodName(Name);
 			food.setId(uuid);			
-			food.setImgUrl(filePath);
+			food.setImgUrl(file.getOriginalFilename());
 			food.setPrice(value);
 			food.setIntroduction(quantity);
 			boolean flag = businessService.addProduct(food);
-			/*if(flag) {
-				model.addAttribute("msg","注册成功");
+			if(flag) {
+				model.addAttribute("msg","添加成功");
 			} else {
-				model.addAttribute("msg","注册失败");
-			}*/
-			return "";
+				model.addAttribute("msg","添加失败");
+			}
+			return "business/addProduct";
 		}
 		
-		//根据商家的名称或者商品的名称搜索相关的商店的信息
+		//商品的名称搜索相关的商品的信息
 		@RequestMapping("getCommodityByName")
 		public String getCommodityByName(String name,HttpSession session,Model model) {
 			Business b = (Business)session.getAttribute("business");
@@ -332,5 +331,74 @@ public class businessController {
 			model.addAttribute("msg",json);
 			return "business/searchGoods";
 		}
+		
+		//根据id获取商品
+		@RequestMapping("getFoodById")
+		public String getFoodById(String id,HttpSession session,Model model) {
+			Business b = (Business)session.getAttribute("business");
+			String businessId = b.getBusinessId();
+			Food food = businessService.getFoodById(id,businessId);
+			JSONArray json = JSONArray.fromObject(food);
+			System.out.println(json);
+			model.addAttribute("msg",food);
+			return  "business/revise";
+		}
+		
+		//修改商品
+		@RequestMapping("revise")
+		public String revise(String img,String id,String Name,String price,String quantity,@RequestParam(value="files") MultipartFile file,HttpServletRequest request,HttpSession session,Model model){
+			String filePath = null;
+			Food food = new Food();
+			if (!file.isEmpty()) {  
+	            try {  
+	                // 文件保存路径  
+	                filePath = request.getSession().getServletContext().getRealPath("/images/")   
+	                        + file.getOriginalFilename();  
+	                // 转存文件 
+	                String tempPath = this.getClass().getResource("/").toURI().getPath();  
+	                System.out.println(tempPath);
+	                file.transferTo(new File(filePath));
+	                food.setImgUrl(file.getOriginalFilename());
+	            } catch (Exception e) {  
+	                e.printStackTrace();  
+	            }  
+	        }else {
+	        	food.setImgUrl(img);
+	        }
+			Business b = (Business)session.getAttribute("business");
+			String businessId = b.getBusinessId();
+			double value = Double.valueOf(price.toString());
+			food.setBusinessId(businessId);
+			food.setFoodName(Name);
+			food.setId(id);			
+			food.setPrice(value);
+			food.setIntroduction(quantity);
+			Food flag = businessService.revise(food);
+			if(flag!=null) {
+				model.addAttribute("msg1","修改成功");
+				model.addAttribute("msg",flag);
+			} else {
+				model.addAttribute("msg1","修改失败");
+			}
+			return "business/revise";
+		}
+		
+		//修改商品
+		@RequestMapping("deleteFoodById")
+		public String deletFoodById(String id,HttpSession session,Model model) {
+			Business b = (Business)session.getAttribute("business");
+			String businessId = b.getBusinessId();
+			Food food = new Food();
+			food.setId(id);
+			boolean flag = businessService.deleteFoodById(food);
+			if(flag) {
+				model.addAttribute("msg","删除成功");
+			} else {
+				model.addAttribute("msg","删除失败");
+			}
+			return  "business/commodityManagement";
+		}
+		
+		
 
 }
