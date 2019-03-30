@@ -8,30 +8,44 @@ import javax.persistence.Table;
 public class Order {
 	@Id
 	private String id;
-	private String accountNumber;
-	private String businessNumber;
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getBusinessId() {
+		return businessId;
+	}
+	public void setBusinessId(String businessId) {
+		this.businessId = businessId;
+	}
+	public String getAddressId() {
+		return addressId;
+	}
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
+	}
+	public String getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	private String userId;
+	private String businessId;
 	private String consigneeAddress;
 	private String phoneNumber;
 	private String remake;
 	private String state;
 	private String date;
+	private String addressId;
+	private String totalPrice;
 	public String getDate() {
 		return date;
 	}
 	public void setDate(String date) {
 		this.date = date;
-	}
-	public String getAccountNumber() {
-		return accountNumber;
-	}
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
-	public String getBusinessNumber() {
-		return businessNumber;
-	}
-	public void setBusinessNumber(String businessNumber) {
-		this.businessNumber = businessNumber;
 	}
 	public String getConsigneeAddress() {
 		return consigneeAddress;
