@@ -24,14 +24,21 @@ window.onload = function(){
 		function getfoodlist(data){
 				 var str = ""; 
 			for(var i = 0; i< data.length; i++){
-				str +='<div style="width:23%;border:1px solid red;margin: 1%;float: left">';
+				<%-- str +='<div style="width:23%;border:1px solid red;margin: 1%;float: left">';
 				str +='<div style="width:40%;border:1px solid red;float: left">';
 				str +='<img alt="sss" src="<%=path%>/images/'+[i]+'.jpg"  width="100%" height="70px"></div>';
 				str +='<div style="width:50%;border:1px solid red;float: left">';
 				str +='<div style="width: 100%;height:auto; margin-top: 10px">'+data[i].foodName+'</div>';
 				str +='<div style="width: 100%;height:auto; margin-top: 10px">'+data[i].price+'</div></div>';
-				str +='<div style="width: 80%;float: left"><a>修改</a><a>删除</a> </div></div>';
+				str +='<div style="width: 80%;float: left"><a>修改</a><a>删除</a> </div></div>'; --%>
 				
+				str +='<div style="width:23%;margin: 0.9%;float: left;background-color:#fff;border:1px solid #e0e0e0;">';
+				str +='<div style="width:40%;border:1px solid black;float: left">';
+				str +='<img alt="sss" src="<%=path%>/images/'+[i]+'.jpg"  width="100%" height="70px"></div>';
+				str +='<div style="width:50%;float: left">';
+				str +='<div style="width: 100%;height:auto; margin-top: 10px"><span style="float: left">名称：</span>'+data[i].foodName+'</div>';
+				str +='<div style="width: 100%;height:auto; margin-top: 10px"><span style="float: left">价格：</span>'+data[i].price+'</div></div>';
+				str +='<div style="width: 80%;float: left"><span style="float: left;margin-left:20px;"><a href="<%=path%>/businessController/getFoodById.do?id='+data[i].id+'" target="Frame">修改</a></span><span style="float: right"><a href="<%=path%>/businessController/deleteFoodById.do?id='+data[i].id+'" target="Frame">删除</a></span> </div></div>';
 				}
 			return str; 
 			

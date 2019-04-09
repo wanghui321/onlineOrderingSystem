@@ -36,7 +36,7 @@ public class businessDaoImpl implements businessDao{
 	@Override
 	public Map<String,String> getState(String id){
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("select state from Order where businessNumber = ?");
+		Query query = session.createQuery("select state from Order where businessId = ?");
 		query.setString(0, id);
 		List<String> state = query.list();
 		List<Map<String,Integer>> list = new ArrayList();
@@ -59,11 +59,11 @@ public class businessDaoImpl implements businessDao{
 			System.out.println(l);
 		}
 		Map map = new HashMap();
-		map.put("newOrder",a );
-		map.put("unusualOrder", b);
-		map.put("reminder", c);
-		map.put("chargeback", d);
-		map.put("completedOrder", e);
+		map.put("newOrder",a );//新订单
+		map.put("unusualOrder", b);//异常订单
+		map.put("reminder", c);//催单
+		map.put("chargeback", d);//退单
+		map.put("completedOrder", e);//完成订单
 		return map;
 	}
 	
@@ -72,7 +72,7 @@ public class businessDaoImpl implements businessDao{
 	@Override
 	public Map<String,String> getsales(String id){
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Order where state = ? and businessNumber = ?");
+		Query query = session.createQuery("from Order where state = ? and businessId = ?");
 		query.setString(0, "4");
 		query.setString(1, id);
 		List<Order> orders = query.list();
@@ -254,7 +254,7 @@ public class businessDaoImpl implements businessDao{
 		@Override
 		public List<Map<String, Object>> getCommodityByName(String id,String name) {
 			// TODO Auto-generated method stub
-			String str = "select * from food where foodName like '%"+ name +"%' and businessId = " + id;
+			String str = "select * from food where foodName like '%"+ name +"%' and businessId = '" + id + "'";
 			List<Map<String,Object>> list = jdbcTemplate.queryForList(str);
 			return list;
 		}
@@ -263,7 +263,7 @@ public class businessDaoImpl implements businessDao{
 		@Override
 		public Food getFoodById(String id,String businessId) {
 			// TODO Auto-generated method stub
-			String str = "select * from food where id = " + id + " and businessId = " + businessId;
+			String str = "select * from food where id = '" + id + "' and businessId = '" + businessId + "'";
 			Food food = jdbcTemplate.queryForObject(str, new BeanPropertyRowMapper<>(Food.class));
 			return food;
 		}
@@ -285,5 +285,61 @@ public class businessDaoImpl implements businessDao{
 			session.delete(food);
 			return true;
 		}
+		
+		//获取新订单
+		@Override
+		public List<Order> getNewOrders(String id) {
+			// TODO Auto-generated method stub
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from Order where state = ? and businessId = ?");
+			query.setString(0, "0");
+			query.setString(1, id);
+			List<Order> orders = query.list();
+			return orders;
+		}
+		
+		//通过订单获取食物
+		@Override
+		public List<Map<String,Object>> getFoodByOrders(String id){
+			// TODO Auto-generated method stub
+			System.out.println(id);
+			String str = "select * from order_food where orderId = '" + id + "'";
+			List<Map<String,Object>> list = jdbcTemplate.queryForList(str);
+			List<Map<String,Object>> newlist = new ArrayList();
+			for(int i = 0;i < list.size();i++) {
+				Map map = new HashMap();
+				Map map1 = new HashMap();
+				map = list.get(i);
+				String foodId = map.get("foodId").toString();
+				System.out.println(foodId);
+				String str1 = "select * from food where id = '" + foodId + "'";
+				Food food = jdbcTemplate.queryForObject(str1, new BeanPropertyRowMapper<>(Food.class));
+				map1.put("foodName",food.getFoodName() );
+				map1.put("price", food.getPrice());
+				map1.put("number", map.get("number").toString());
+				newlist.add(map1);
+			}
+			System.out.println(newlist);
+			return newlist;
+		}
+		
+		//接受订单
+		@Override
+		public boolean acceptOrder(String id) {
+			// TODO Auto-generated method stub
+			String str = "update orders set state = 4 where id = '" + id + "'"; 
+			jdbcTemplate.update(str); 
+			return true;
+		}
+		
+		//拒绝订单
+		@Override
+		public boolean denialOrder(String id) {
+			// TODO Auto-generated method stub
+			String str = "update orders set state = 5 where id = '" + id + "'"; 
+			jdbcTemplate.update(str); 
+			return true;
+		}
+
 
 }

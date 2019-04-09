@@ -8,6 +8,40 @@ import javax.persistence.Table;
 public class Order {
 	@Id
 	private String id;
+	private String userId;
+	private String businessId;
+	private String remake;
+	private String state;
+	private String date;
+	private String address;
+	private String totalPrice;
+	private String name;
+	private String phone;
+	private String sex;
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -20,44 +54,17 @@ public class Order {
 	public void setBusinessId(String businessId) {
 		this.businessId = businessId;
 	}
-	public String getAddressId() {
-		return addressId;
-	}
-	public void setAddressId(String addressId) {
-		this.addressId = addressId;
-	}
 	public String getTotalPrice() {
 		return totalPrice;
 	}
 	public void setTotalPrice(String totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-	private String userId;
-	private String businessId;
-	private String consigneeAddress;
-	private String phoneNumber;
-	private String remake;
-	private String state;
-	private String date;
-	private String addressId;
-	private String totalPrice;
 	public String getDate() {
 		return date;
 	}
 	public void setDate(String date) {
 		this.date = date;
-	}
-	public String getConsigneeAddress() {
-		return consigneeAddress;
-	}
-	public void setConsigneeAddress(String consigneeAddress) {
-		this.consigneeAddress = consigneeAddress;
-	}
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
 	}
 	public String getRemake() {
 		return remake;

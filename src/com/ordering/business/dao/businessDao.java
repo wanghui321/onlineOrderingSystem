@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ordering.business.bean.Business;
 import com.ordering.business.bean.Food;
+import com.ordering.business.bean.Order;
 import com.ordering.user.bean.User;
 
 public interface businessDao {
@@ -39,4 +40,12 @@ public interface businessDao {
 	public Food revise(Food food);
 	
 	public boolean deleteFoodById(Food food);
+	
+	public List<Order> getNewOrders(String id);
+	
+	public List<Map<String,Object>> getFoodByOrders(String id);
+	
+	public boolean acceptOrder(String id);
+	
+	public boolean denialOrder(String id);
 }

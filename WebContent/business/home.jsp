@@ -45,11 +45,11 @@
      <!-- 左侧导航栏 -->
      <div class="pageSidebar">
          <ul class="nav nav-stacked nav-pills">
-         <li role="presentation">
-                 <a href="<%=path %>/business/main.jsp" target="mainFrame" >首页</a>
+         	 <li role="presentation" class="active">
+                 <a href="<%=path %>/business/main.jsp" target="mainFrame">首页</a>
              </li>
              <li role="presentation">
-                 <a href="sales.jsp" target="mainFrame" >订单</a>
+                 <a href="<%=path%>/business/orders.jsp" target="mainFrame" >订单</a>
              </li>
              <li role="presentation">
                  <a href="<%=path%>/business/commodity.jsp" target="mainFrame">商品</a>

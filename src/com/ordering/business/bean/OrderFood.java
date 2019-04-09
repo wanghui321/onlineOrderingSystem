@@ -12,6 +12,13 @@ public class OrderFood {
 	private String id;
 	private String orderId;
 	private String foodId;
+	private String number;
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
 	public String getId() {
 		return id;
 	}

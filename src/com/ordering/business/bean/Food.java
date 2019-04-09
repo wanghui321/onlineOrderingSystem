@@ -13,7 +13,7 @@ public class Food {
 	private String imgUrl;
 	private String businessId;
 	private double price;
-	private String  introduction;
+	private String introduction;
 	public String getId() {
 		return id;
 	}

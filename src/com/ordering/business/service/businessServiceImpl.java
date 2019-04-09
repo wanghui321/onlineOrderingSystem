@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ordering.business.bean.Business;
 import com.ordering.business.bean.Food;
+import com.ordering.business.bean.Order;
 import com.ordering.business.dao.businessDao;
 import com.ordering.user.bean.User;
 
@@ -147,6 +148,38 @@ public class businessServiceImpl implements businessService{
 		public boolean deleteFoodById(Food food) {
 			// TODO Auto-generated method stub
 			boolean flag = businessDao.deleteFoodById(food);
+			return flag;
+		}
+		
+		//获取新订单
+		@Override
+		public List<Order> getNewOrders(String id){
+			// TODO Auto-generated method stub
+			List<Order> list = businessDao.getNewOrders(id);
+			return list;
+		}
+		
+		//通过订单获取食物
+		@Override
+		public List<Map<String,Object>> getFoodByOrders(String id){
+			// TODO Auto-generated method stub
+			List<Map<String,Object>> list = businessDao.getFoodByOrders(id);
+			return list;
+		}
+		
+		//接受订单
+		@Override
+		public boolean acceptOrder(String id) {
+			// TODO Auto-generated method stub
+			boolean flag = businessDao.acceptOrder(id);
+			return flag;
+		}
+		
+		//拒绝订单
+		@Override
+		public boolean denialOrder(String id) {
+			// TODO Auto-generated method stub
+			boolean flag = businessDao.denialOrder(id);
 			return flag;
 		}
 

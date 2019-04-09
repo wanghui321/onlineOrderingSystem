@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ordering.business.bean.Business;
 import com.ordering.business.bean.Food;
+import com.ordering.business.bean.Order;
 import com.ordering.business.service.businessServiceImpl;
 import com.ordering.user.bean.User;
 
@@ -399,6 +400,55 @@ public class businessController {
 			return  "business/commodityManagement";
 		}
 		
+		//获取新订单
+		@RequestMapping("getNewOrders")
+		@ResponseBody
+		public JSONArray getNewOrders(HttpSession session) {
+			Business b = (Business)session.getAttribute("business");
+			String id = b.getBusinessId();
+			List<Order> list = businessService.getNewOrders(id);
+			JSONArray json = JSONArray.fromObject(list);
+			System.out.println(json);
+			return json;
+		}
 		
-
+		//通过订单获取食物
+		@RequestMapping("getFoodByOrders")
+		@ResponseBody
+		public JSONArray getFoodByOrders(String id) {
+			System.out.println(id);
+			List<Map<String,Object>> list = businessService.getFoodByOrders(id);
+			JSONArray json = JSONArray.fromObject(list);
+			System.out.println(json);
+			return json;
+		}
+		
+		//接受订单
+		@RequestMapping("acceptOrder")
+		public String acceptOrder(String id,Model model) {
+			boolean flag = businessService.acceptOrder(id);
+			if(flag) {
+				model.addAttribute("msg","成功接受");
+			} else {
+				model.addAttribute("msg","接受失败");
+			}
+			return  "business/newOrders";
+			
+		}
+		
+		//拒绝订单
+		@RequestMapping("denialOrder")
+		public String denialOrder(String id,Model model) {
+			boolean flag = businessService.denialOrder(id);
+			if(flag) {
+				model.addAttribute("msg","成功拒绝");
+			} else {
+				model.addAttribute("msg","拒绝失败");
+			}
+			return  "business/newOrders";
+			
+		}		
+		
+		
+		
 }

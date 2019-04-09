@@ -1,0 +1,41 @@
+@charset "UTF-8";
+.menu {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 0px;
+	padding: 10px;
+	background-color: #fff;
+	float: left;
+}
+
+.menu li {
+	text-decoration: none;
+	list-style: none;
+	display: inline; 		
+}
+
+.menu li a {
+	text-decoration: none; //
+	margin-right: 50px;
+	margin-left: 50px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+}
+
+
+.menu li a:hover {
+	color: #505050;
+	
+}
+.unactive{
+	color: #828282;
+	padding-bottom:10px;
+	font-size: 25px;
+}
+.active{
+	color: #ac001c;
+	padding-bottom:10px;
+	border-bottom: 5px solid #ac001c;
+	font-size: 25px;
+}
