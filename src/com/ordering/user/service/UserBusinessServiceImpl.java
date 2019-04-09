@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ordering.business.bean.Business;
+import com.ordering.business.bean.Food;
 import com.ordering.user.dao.UserBusinessDao;
 
 @Service
@@ -48,6 +49,14 @@ public class UserBusinessServiceImpl implements UserBusinessService {
 		// TODO Auto-generated method stub
 		List<Map<String,Object>> list = userBusinessDao.getFoodByBusinessId(id);
 		return list;
+	}
+
+	//商家商品的Id获取商品的相关信息
+	@Override
+	public Food getFoodById(String id) {
+		// TODO Auto-generated method stub
+		Food food = userBusinessDao.getFoodById(id);
+		return food;
 	}
 
 }

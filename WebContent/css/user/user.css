@@ -10,3 +10,35 @@
 	color: white;
 	margin-top: 85px
 }
+.payFor{
+	width: 120px;
+	height: 40px;
+	background-color:#ac001c;
+	border-radius: 100px;
+	text-decoration:none;
+	float: left;
+	text-align: center;
+	line-height: 40px;
+	color: white;
+	margin-top: 10px;
+	margin-left:500px;
+}
+
+.pay{
+	width: 206px;
+	height: 50px;
+	background-color:#ac001c;
+	border-bottom-right-radius:10px;
+	text-decoration:none;
+	float: right;
+	text-align: center;
+	line-height: 40px;
+	color: white;
+}
+.numberTable tr td{
+	width: 25px;
+	height: 25px;
+	text-align: center;
+	size: 10px;
+}
+
