@@ -12,12 +12,18 @@ public class Order {
 	private String businessId;
 	private String remake;
 	private String state;
-	private String date;
+	private String data;
 	private String address;
 	private String totalPrice;
 	private String name;
 	private String phone;
 	private String sex;
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
+	}
 	public String getSex() {
 		return sex;
 	}
@@ -59,12 +65,6 @@ public class Order {
 	}
 	public void setTotalPrice(String totalPrice) {
 		this.totalPrice = totalPrice;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
 	}
 	public String getRemake() {
 		return remake;
