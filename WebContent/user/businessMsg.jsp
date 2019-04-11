@@ -68,22 +68,6 @@
 		})
 	}
 	
-	function getBusinessByName(businessName){
-		$.ajax({
-			type:'post',
-			url:"<%=path%>/userBusinessController/getBusinessByName.do",
-			data:{
-				name:businessName,
-			},
-			dataType:'json',
-			success:function(data){
-				var str = getBusinessList(data);
-				$("#businessMsg").html(str);
-				IFrameResize();
-			}
-		})
-	}
-	
 	function getBusinessList(data){
 		var str = "";
 		for(var i = 0; i < data.length; i++){
@@ -104,13 +88,22 @@
 	}
 
 	window.onload = function(){
-		getBusiness(0);
+		var businessMsg = window.parent.$("#businessData").text();
+		if(businessMsg != null && businessMsg != '' && businessMsg != '[]'){
+			var data = JSON.parse(businessMsg);
+			var str = getBusinessList(data);
+			$("#businessMsg").html(str);
+			IFrameResize();
+		} else {
+			getBusiness(0);
+		}  
 	}
 </script>
 
-<body>
+<body style="align: center">
+	<div align="center">
 	<!-- 商家分类 -->
- 		<div style="width:100%;height:73px;background-color: #fff;border-radius: 10px" align="center">
+ 		<div style="width:70%;height:73px;background-color: #fff;border-radius: 10px" align="center">
 			<div style="width:auto;height:auto;float:left;line-height:73px;margin-left: 10px">
 				<span>商家分类</span>
 			</div>
@@ -119,7 +112,8 @@
 		</div>
 		
 		<!-- 商家信息 -->
- 		<div style="width:100%;height:auto;margin-top: 20px;background-color: #fff;border-radius: 10px" id="businessMsg">
+ 		<div style="width:70%;height:auto;margin-top: 20px;background-color: #fff;border-radius: 10px" id="businessMsg">
 		</div>
+	</div>
 </body>
 </html>

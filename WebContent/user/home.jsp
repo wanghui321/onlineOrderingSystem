@@ -28,13 +28,21 @@
 			$("#logined").css("display","none");
 			$("#editLogin").css("display","none");
 		}
+		
+		$("#businessData").html("");
+		var businessData = '${businessMsg}';
+		if(businessData != null && businessData != '' && businessData != '[]'){
+			$("#businessData").html(businessData);
+		}
+		$("#businessIframe").attr('src','<%=request.getContextPath()%>/user/businessMsg.jsp');
 	}
 	
-	function getBusinessByName(){
+/* 	function getBusinessByName(){
+		debugger;
 		var businessName = $("#name").val();
 		var childWindow = $("#businessIframe")[0].contentWindow;
 		childWindow.getBusinessByName(businessName);
-	}
+	} */
 </script>
 <body>
 	<div align="center" style="width:100%;height: auto;float: left">
@@ -44,9 +52,9 @@
 				<img src="../images/logo4.png" width="233px" height="73px"/>
 			</div>
  			<div style="width:auto;height: auto;float: left;line-height: 73px;margin-left: 250px" >
-				<form style="float: left;margin-right: 70px" method="post">
-					<input type="text" name="name" id="name">
-					<button type="button" onclick="getBusinessByName();">搜索</button>
+				<form style="float: left;margin-right: 70px" method="post" action="<%=path%>/userBusinessController/getBusinessByName.do">
+					<input type="text" name="name" id="name" />
+					<button type="submit">搜索</button>
 				</form>
 			</div>
 			<div id="noLogin1" style="width:auto;height: auto;float: left;line-height: 73px;display:''">
@@ -65,9 +73,9 @@
 		
 		<!-- 商店分类和商店信息 -->
 		<div style="width:100%;line-height:33px;background-color: #EBEBEB;" align="center">
-			<div id="businessBottom" style="text-align:center;width:70%;min-height:605px;border-radius: 10px">
-				<iframe src="<%=request.getContextPath()%>/user/businessMsg.jsp" id="businessIframe" frameborder="0"
-					width="100%" ></iframe>
+			<div id="businessBottom" style="text-align:center;width:100%;min-height:605px;border-radius: 10px;">
+				<span style="display: none" id="businessData"></span>
+				<iframe id="businessIframe" frameborder="0" width="100%"></iframe>
 			</div>
         </div>
 		

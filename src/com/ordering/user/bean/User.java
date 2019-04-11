@@ -19,6 +19,7 @@ public class User {
 	private String password;	//用户密码
 	private String headPicture;		//用户头像
 	private String phone;	//联系电话
+	private double balance;	//余额
 	@OneToMany(mappedBy="user",targetEntity=ConsigneeAddress.class,cascade=CascadeType.ALL)
 	private Set<ConsigneeAddress> consigneeAddressSet;	//收货地址
 	public Set<ConsigneeAddress> getConsigneeAddressSet() {
@@ -62,5 +63,11 @@ public class User {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public double getBalance() {
+		return balance;
+	}
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 }
