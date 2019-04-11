@@ -13,7 +13,9 @@ public class Comment {
 	private String userId;
 	private int level;
 	private String foodId;
-	private int state;
+	private String state;
+	private String businessId;
+	private String businessContent;
 	public String getId() {
 		return id;
 	}
@@ -44,11 +46,23 @@ public class Comment {
 	public void setFoodId(String foodId) {
 		this.foodId = foodId;
 	}
-	public int getState() {
+	public String getState() {
 		return state;
 	}
-	public void setState(int state) {
+	public void setState(String state) {
 		this.state = state;
+	}
+	public String getBusinessId() {
+		return businessId;
+	}
+	public void setBusinessId(String businessId) {
+		this.businessId = businessId;
+	}
+	public String getBusinessContent() {
+		return businessContent;
+	}
+	public void setBusinessContent(String businessContent) {
+		this.businessContent = businessContent;
 	}
 
 }

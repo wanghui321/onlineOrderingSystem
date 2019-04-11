@@ -14,7 +14,7 @@
 </head>
 
 <body>
-
+<img alt="phone" src="<%=path %>/images/phone.png" height="25px" width="25px" style="float: right;">
 <div class="panel-group" id="accordion">
 	<div class="panel panel-info">
 		<div class="panel-heading">

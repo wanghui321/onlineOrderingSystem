@@ -11,21 +11,21 @@
 <title>Insert title here</title>
 </head>
 <script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
-<body">
+<body>
 <div style="width:100%;;height: auto;float: left;border:1px solid red;background-color: #F4F4F4">
 	<div style="width:100%;height:60px;border:1px solid red;float: left;background-color: #fff">
 		<ul style="border:1px solid red" class="menu">
-			<li><a class="active" href="#">新订单</a></li>
-			<li><a class="unactive" href="#">取消订单</a></li>
-			<li><a class="unactive" href="#">催单</a></li>
-			<li><a class="unactive" href="#">配送异常</a></li>
-			<li><a class="unactive" href="#">售后退款</a></li>
-			<li><a class="unactive" href="#">所有订单</a></li>
+			<li><a class="active" href="<%=request.getContextPath()%>/business/newOrders.jsp" target="ordersFrame">新订单</a></li>
+			<li><a class="unactive" href="<%=request.getContextPath()%>/business/cancelOrder.jsp" target="ordersFrame">取消订单</a></li>
+			<li><a class="unactive" href="<%=request.getContextPath()%>/business/reminder.jsp" target="ordersFrame">催单</a></li>
+			<li><a class="unactive" href="<%=request.getContextPath()%>/business/unusualOrder.jsp" target="ordersFrame">配送异常</a></li>
+			<li><a class="unactive" href="<%=request.getContextPath()%>/business/chargeback.jsp" target="ordersFrame">售后退款</a></li>
+			<li><a class="unactive" href="<%=request.getContextPath()%>/business/completedOrder.jsp" target="ordersFrame">所有订单</a></li>
 		</ul>
 	</div>
-	<div align="center" style="width:98%;border:1px solid red;">
-		<div style="width:64%;min-height:700px;float: left;background-color: #fff;margin: 1%">
-			<iframe src="<%=request.getContextPath()%>/business/newOrders.jsp" id="ordersFrame" name="ordersFrame" frameborder="0" width="100%" height="1000px" frameBorder="0">
+	<div align="center" style="width:98%;min-height:800px;border:1px solid red;">
+		<div style="width:64%;min-height:20px;float: left;background-color: #fff;margin: 1%">
+			<iframe src="<%=request.getContextPath()%>/business/newOrders.jsp" id="ordersFrame" name="ordersFrame" frameborder="0" width="100%" frameBorder="0">
 	       </iframe> 
 		</div>
 		<div align="center" style="width:32%;height:auto;float: left;margin: 1%">

@@ -21,7 +21,7 @@ window.onload=function(){
 	}
 
 }
-var state = "0";
+var state = "2";
 $.ajax({
 	type:"post",
 	url:"<%=path%>/businessController/getOrders.do",
@@ -44,8 +44,8 @@ $.ajax({
 			str += '<span style="font-size: 15px;float: right;">￥'+data[i].totalPrice+'</span></div>';
 			str += '<div style="width: 98%;height: 50px;line-height:50px; background-color: #fff;border-bottom:5px solid #f0f0f0;">';
 			str += '<span style="font-size: 25px;float: left;">'+data[i].remake+'</span>';
-			str += '<span style="font-size: 25px;float: right;margin-right: 50px;"><a href="<%=path%>/businessController/acceptOrder.do?id='+data[i].id+'">接受订单</a></span>';
-			str += '<span style="font-size: 25px;float: right;margin-right: 50px;"><a href="<%=path%>/businessController/denialOrder.do?id='+data[i].id+'">拒绝订单</a></span></div>';
+			str += '<span style="font-size: 25px;float: right;margin-right: 50px;">买家催单</span>';
+			str += '</div>';
 			str += '<span style="float: left;;height: 30px;line-height: 30px;font-size: 15px;margin-left: 100px;">商品</span>';
 			str += '<span style="float: right;height: 30px;line-height: 30px;font-size: 15px;margin-right: 90px;">';
 			str += '<a class="show" data-toggle="collapse" data-parent="#accordion" href="#'+data[i].id+'" style="text-decoration:none;margin-right: 20px">展开</a></span></div>';
@@ -113,11 +113,10 @@ function getFoodByOrders(ordersId){
 		<div align="center" style="width: 100%;height: 180px;background-color: #fff;">
 			<div style="width: 98%;height: 60px;line-height:60px; background-color: #fff;">
 				<span style="font-size: 30px;float: left;">展开</span>
-				<span style="font-size: 15px;float: right;color: #ac001c;">12345678912</span>
-				<img alt="phone" src="<%=path %>/images/phone.png" height="20px" width="20px" style="float: right;margin-top: 20px"/>
+				<span style="font-size: 15px;float: right;">12345678912</span>
 			</div>
 			<div style="width: 98%;height: 30px;line-height:30px; background-color: #fff;">
-				<span style="font-size: 15px;float: left;color: #aaa">展开展开展开展开展开展开展开</span>
+				<span style="font-size: 15px;float: left;">展开展开展开展开展开展开展开</span>
 				<span style="font-size: 15px;float: right;">展开8912</span>
 			</div>
 			<div style="width: 98%;height: 50px;line-height:50px; background-color: #fff;border-bottom:5px solid #f0f0f0;">

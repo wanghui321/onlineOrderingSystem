@@ -31,7 +31,7 @@ public class businessDaoImpl implements businessDao{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	
+	//0:新订单1:异常订单2:催单3:退单4:完成订单5:拒绝订单（商家）6:接受订单（商家）
 	//获取订单类别
 	@Override
 	public Map<String,String> getState(String id){
@@ -47,7 +47,7 @@ public class businessDaoImpl implements businessDao{
 		int e = 0;
 		for (String l : state) {
 			if (l.equals("0"))
-			a=a+1;
+				a=a+1;
 			if (l.equals("1"))
 				b=b+1;
 			if (l.equals("2"))
@@ -111,7 +111,7 @@ public class businessDaoImpl implements businessDao{
 			List<Map<String,Integer>> list = new ArrayList();
 			
 			for (Comment c : comment) {
-				if (c.getState()==0) {
+				if (c.getState().equals("0")) {
 				if(c.getLevel()<=2) {
 					b=b+1;
 					}else {
@@ -288,11 +288,11 @@ public class businessDaoImpl implements businessDao{
 		
 		//获取新订单
 		@Override
-		public List<Order> getNewOrders(String id) {
+		public List<Order> getOrders(String id,String state) {
 			// TODO Auto-generated method stub
 			Session session = sessionFactory.getCurrentSession();
 			Query query = session.createQuery("from Order where state = ? and businessId = ?");
-			query.setString(0, "0");
+			query.setString(0, state);
 			query.setString(1, id);
 			List<Order> orders = query.list();
 			return orders;
@@ -327,7 +327,7 @@ public class businessDaoImpl implements businessDao{
 		@Override
 		public boolean acceptOrder(String id) {
 			// TODO Auto-generated method stub
-			String str = "update orders set state = 4 where id = '" + id + "'"; 
+			String str = "update orders set state = 6 where id = '" + id + "'"; 
 			jdbcTemplate.update(str); 
 			return true;
 		}

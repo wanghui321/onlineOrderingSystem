@@ -400,13 +400,13 @@ public class businessController {
 			return  "business/commodityManagement";
 		}
 		
-		//获取新订单
-		@RequestMapping("getNewOrders")
+		//获取订单
+		@RequestMapping("getOrders")
 		@ResponseBody
-		public JSONArray getNewOrders(HttpSession session) {
+		public JSONArray getOrders(String state,HttpSession session) {
 			Business b = (Business)session.getAttribute("business");
 			String id = b.getBusinessId();
-			List<Order> list = businessService.getNewOrders(id);
+			List<Order> list = businessService.getOrders(id,state);
 			JSONArray json = JSONArray.fromObject(list);
 			System.out.println(json);
 			return json;

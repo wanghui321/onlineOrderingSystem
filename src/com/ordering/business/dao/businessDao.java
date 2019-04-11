@@ -41,7 +41,7 @@ public interface businessDao {
 	
 	public boolean deleteFoodById(Food food);
 	
-	public List<Order> getNewOrders(String id);
+	public List<Order> getOrders(String id,String state);
 	
 	public List<Map<String,Object>> getFoodByOrders(String id);
 	

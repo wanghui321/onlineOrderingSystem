@@ -151,11 +151,11 @@ public class businessServiceImpl implements businessService{
 			return flag;
 		}
 		
-		//获取新订单
+		//获取订单
 		@Override
-		public List<Order> getNewOrders(String id){
+		public List<Order> getOrders(String id,String state){
 			// TODO Auto-generated method stub
-			List<Order> list = businessDao.getNewOrders(id);
+			List<Order> list = businessDao.getOrders(id,state);
 			return list;
 		}
 		
