@@ -15,6 +15,20 @@ public class Comment {
 	private String state;
 	private String businessId;
 	private String businessContent;
+	private String data;
+	private String businessData;
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
+	}
+	public String getBusinessData() {
+		return businessData;
+	}
+	public void setBusinessData(String businessData) {
+		this.businessData = businessData;
+	}
 	public String getId() {
 		return id;
 	}
