@@ -116,6 +116,23 @@ public class UserServiceImpl implements UserService{
 		return flag;
 	}
 
+	//修改用户的余额
+	@Override
+	public void reduce(String userId,double balance, String totalPrice) {
+		// TODO Auto-generated method stub
+		double total = Double.parseDouble(totalPrice);
+		double newBalance = balance - total;
+		userDao.reduce(userId,newBalance);
+	}	
+	
+	//根据Id获取地址的信息
+	@Override
+	public ConsigneeAddress getAddressById(String addressId) {
+		// TODO Auto-generated method stub
+		ConsigneeAddress address = userDao.getAddressById(addressId);
+		return address;
+	}
+
 	
 }
 

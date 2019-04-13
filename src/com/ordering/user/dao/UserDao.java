@@ -31,5 +31,9 @@ public interface UserDao {
 
 	public boolean updateAddress(ConsigneeAddress address);
 
+	public void reduce(String userId, double newBalance);
+
+	public ConsigneeAddress getAddressById(String addressId);
+
 	
 }

@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ordering.business.bean.Business;
 import com.ordering.business.bean.Food;
+import com.ordering.user.bean.ConsigneeAddress;
+import com.ordering.user.bean.User;
 import com.ordering.user.service.UserBusinessService;
+import com.ordering.user.service.UserService;
 
 import net.sf.json.JSONArray;
 
@@ -25,6 +28,8 @@ public class UserBusinessController {
 	
 	@Autowired
 	private UserBusinessService userBusinessService;
+	@Autowired
+	private UserService userService;
 	
 	//获取商家信息
 	@RequestMapping("getBusiness")
@@ -49,6 +54,8 @@ public class UserBusinessController {
 	public String getBusinessById(String id,HttpSession session) {
 		Business business = userBusinessService.getBusinessById(id);
 		session.setAttribute("business",business);
+		String score = userBusinessService.getScore(id);
+		session.setAttribute("score", score);
 		return "user/businessDetail";
 	}
 	
@@ -158,8 +165,118 @@ public class UserBusinessController {
 		return json;
 	}
 	
+	//支付订单
+	@RequestMapping("pay")
+	@ResponseBody
+	public JSONArray pay(HttpSession session,String addressId,String totalPrice,String remarke) {
+		Business business = (Business)session.getAttribute("business");
+		String businessId = business.getBusinessId();
+		User user = (User)session.getAttribute("user");
+		String userId = user.getUserId();
+		//修改客户的余额
+		userService.reduce(userId,user.getBalance(),totalPrice);
+		double total = Double.parseDouble(totalPrice);
+		double newBalance = user.getBalance() - total;
+		user.setBalance(newBalance);
+		//根据地址Id获取地址的信息
+		ConsigneeAddress address = userService.getAddressById(addressId);
+		//向订单表中添加基本信息
+		String orderId = userBusinessService.addToOrder(address,userId,businessId,remarke,totalPrice);
+		//获取购物车中的信息
+		List<Map<String,Object>> cartList = (List<Map<String,Object>>) session.getAttribute(businessId);
+		//向中间表添加数据
+		boolean flag = userBusinessService.addToOrderFood(cartList,orderId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("msg", "true");
+		JSONArray json = JSONArray.fromObject(map);
+		session.removeAttribute(businessId);
+		return json;
+	}
 	
+	//删除购物车中的信息
+	@RequestMapping("deleteCart")
+	@ResponseBody
+	public JSONArray deleteCart(HttpSession session) {
+		Business business = (Business)session.getAttribute("business");
+		String businessId = business.getBusinessId();
+		List<Map<String,Object>> cartList = (List<Map<String,Object>>) session.getAttribute(businessId);
+		session.removeAttribute(businessId);
+		JSONArray json = JSONArray.fromObject(cartList);
+		return json;
+	}
 	
+	//获得我的订单
+	@RequestMapping("getMyOrder")
+	@ResponseBody
+	public JSONArray getMyOrder(HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		List<Map<String,Object>> orderList = userBusinessService.getMyOrder(user.getUserId());
+		if(orderList.size() > 0) {
+			JSONArray json = JSONArray.fromObject(orderList);
+			return json;
+		} else {
+			return null;
+		}
+	}
+	
+	//获取订单中的商品信息
+	@RequestMapping("getFoodDetail")
+	@ResponseBody
+	public JSONArray getFoodDetail(String orderId) {
+		List<Map<String,Object>> list = userBusinessService.getFoodDetail(orderId);
+		JSONArray json = JSONArray.fromObject(list);
+		return json;
+	}
+	
+	//获取订单的基本信息
+	@RequestMapping("getOrderDetail")
+	@ResponseBody
+	public JSONArray getOrderDetail(String orderId) {
+		Map<String,Object> map = userBusinessService.getOrderDetail(orderId);
+		JSONArray json = JSONArray.fromObject(map);
+		return json;
+	}
+	
+	//改变订单状态
+	@RequestMapping("updateOrder")
+	public String updateOrder(String orderId,String state,Model model,HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		double balance = user.getBalance();
+		String userId = user.getUserId();
+		double newBalance = userBusinessService.updateOrder(orderId,state,balance,userId);
+		if(balance != newBalance) {
+			model.addAttribute("msg","时间超过五分钟，已无法取消，如要取消，请于商家联系");
+			user.setBalance(newBalance);
+		}
+		return "user/myOrder";
+	}
+	
+	//添加评论
+	@RequestMapping("addComment")
+	@ResponseBody
+	public JSONArray addComment(String orderId,String score,String comment,HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		String userId = user.getUserId();
+		boolean flag = userBusinessService.addComment(orderId,score,comment,userId);
+		if(flag){
+			JSONArray json = new JSONArray();
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("msg", "true");
+			json.fromObject(map);
+			return json;
+		}
+		return null;
+	}
+	
+	//获取评论内容
+	@RequestMapping("getComment")
+	@ResponseBody
+	public JSONArray getComment(HttpSession session) {
+		Business business = (Business)session.getAttribute("business");
+		List<Map<String,Object>> list = userBusinessService.getComment(business.getBusinessId());
+		JSONArray json = JSONArray.fromObject(list);
+		return json;
+	}
 	
 	
 	

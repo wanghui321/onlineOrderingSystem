@@ -10,6 +10,18 @@
 	color: white;
 	margin-top: 85px
 }
+.comment{
+	width: 120px;
+	height: 40px;
+	background-color:#ac001c;
+	border-radius: 100px;
+	text-decoration:none;
+	float: left;
+	text-align: center;
+	line-height: 40px;
+	color: white;
+	margin: 10px
+}
 .payFor{
 	width: 120px;
 	height: 40px;
@@ -34,6 +46,20 @@
 	text-align: center;
 	line-height: 40px;
 	color: white;
+}
+
+.orderDetail{
+	width: 120px;
+	height: 40px;
+	background-color:#ac001c;
+	border-radius: 100px;
+	text-decoration:none;
+	float: right;
+	text-align: center;
+	line-height: 40px;
+	color: white;
+	margin-top: 10px;
+	margin-left: 10px
 }
 .numberTable tr td{
 	width: 25px;

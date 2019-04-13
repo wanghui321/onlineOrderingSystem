@@ -37,6 +37,15 @@
 		$("#businessIframe").attr('src','<%=request.getContextPath()%>/user/businessMsg.jsp');
 	}
 	
+	function getMyOrder(){
+		var nickName = '${nickName}';
+		if(nickName != null && nickName != ""){
+			$("#businessIframe").attr('src','<%=request.getContextPath()%>/user/myOrder.jsp');
+		} else {
+			alert("登录之后才能查看我的订单信息");
+		}
+	}
+	
 /* 	function getBusinessByName(){
 		debugger;
 		var businessName = $("#name").val();
@@ -67,7 +76,8 @@
 			<div style="width:auto;height: auto;float: left;line-height: 73px;margin-left: 20px">
 				<a class="noLogin" href="<%=path%>/business/regist.jsp" style="text-decoration:none">我要开店</a>
 				<a id="editLogin" href="<%=path%>/userController/editLogin.do" style="text-decoration: none">退出登录</a>
-				<a href="#" style="text-decoration: none">我的订单</a> 
+				<a href="javascript:void(0)" onclick="getMyOrder()" style="text-decoration: none">我的订单</a> 
+				<a href="<%=path%>/user/home.jsp" style="text-decoration: none">首页</a>
 			</div>
 		</div>
 		

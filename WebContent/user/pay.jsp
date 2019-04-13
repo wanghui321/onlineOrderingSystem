@@ -28,7 +28,7 @@
 				var str = "";
 				for (var i = 0; i < msg.length; i++){
 					str += '<div style="height: 60px;width: 100%;border-bottom: 2px #EBEBEB solid;">';
-					str += '<div style="float: left;width: 50%;line-height: 60px">';
+					str += '<div style="float: left;width: 50%;line-height: 60px" align="left">';
 					str += '<span>' + msg[i].foodName + '</span>';
 					str += '</div>'
 					str += '<div style="height: auto;float: left;margin-left: 300px;line-height: 60px">';
@@ -43,6 +43,29 @@
 			}
 		})
 		
+		$.ajax({
+		type:'post',
+		url:'<%=path%>/userController/getAddress.do',
+		data:"",
+		dataType:"json",
+		success:function(data){
+			var str = '<tr><th width="80px">选择</th><th width="80px">收货人</th><th width="580px">收获地址</th><th width="80px">联系电话</th></tr>'
+			for(var i = 0; i < data.length; i++){
+				str += '<tr>',
+				str += '<td>',
+				str += '<input name="address" type="radio"  value="' + data[i].id + '"/>',
+				str += '</td>',
+				str += '<td align="center" width="80px">' + data[i].name + '</td>';
+				str += '<td align="center" width="580px">' + data[i].address + '</td>';
+				str += '<td align="center" width="80px">' + data[i].phone + '</td>';
+				str += '</tr>';
+			}
+			$("#selectAddress").html(str);
+			
+		}
+		
+	})
+		
 		IFrameResize();
 	}
 	
@@ -54,11 +77,26 @@
 	} 
 	
 	function goPay(){
-		var balance = '${user.balance}';
-		if(balance < <%=totalPrice%>){
+		var balanceVal = '${user.balance}';
+		var addressIdVal = $('input[name="address"]:checked').val(); 
+		var remarkeVal = $("#remake").val();
+		if(balanceVal < <%=totalPrice%>){
 			alert("余额不足");
+		} else if(addressIdVal == undefined || addressIdVal == null || addressIdVal == ""){
+			alert("请选择收货地址");
 		} else {
-			
+			$.ajax({
+				type:'post',
+				url:'<%=path%>/userBusinessController/pay.do',
+				data:{
+					addressId:addressIdVal,
+					totalPrice:<%=totalPrice%>,
+					remarke:remarkeVal
+				},
+				success:function(){
+					window.location.href="<%=path%>/user/myOrder.jsp";
+				}
+			})
 		}
 	}
 </script>
@@ -92,6 +130,13 @@
 						<textarea style="width: 922px;height: 50px" id="remake"></textarea>
 					</form>
 				</div>
+			</div>
+			<!-- 收货地址 -->
+			<div style="height: auto;width: 100%;border-bottom: 2px #EBEBEB solid;">
+				<div style="height: auto;float: left;margin-left: 18px;line-height: 60px">
+					<span>选择收货地址:</span>	
+				</div>
+ 				<table id="selectAddress" style="text-align: center;margin: 5px" cellspacing="0px" border="1px" bordercolor="#EBEBEB"></table>
 			</div>
 			<div style="height: 60px;width: 100%;border-bottom: 2px #EBEBEB solid;" align="center">
 				<a href="javascript:void(0)" onclick="goPay()" class="payFor">支付：￥<%=totalPrice%></a>

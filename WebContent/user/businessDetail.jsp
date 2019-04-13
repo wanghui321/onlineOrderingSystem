@@ -15,6 +15,11 @@
 <script type="text/javascript">
 	var totalPrice = 0;
 	window.onload = function(){
+		var i = '${score}';
+		var q = i * 30;
+		$("#xing").css("width",q);	
+		$("#score").html(i + "分");
+		
 		//加载商店中商品的信息
 		$.ajax({
 			type:'post',
@@ -190,43 +195,97 @@
 		
 	}
 	
+	function deleteCart(){
+		$.ajax({
+			type:'post',
+			url:'<%=path%>/userBusinessController/deleteCart.do',
+			dataType:'json',
+			success:function(data){
+				for(var i = 0; i < data.length; i++){
+					$("#" + data[i].foodId).css({"background-color":"#ac001c","color":"#fff"});
+					$("#" + data[i].foodId).html("点击购买");
+					$("#" + data[i].foodId).attr("onclick","addCart("+ data[i].foodId +")");
+				}
+				$("#noCart").css("display","");
+				$("#cart").css("display","none");
+				$("#totalPrice").html("￥0");	
+				totalPrice = 0;
+			}
+		})
+	}
+	
+	function getFoodMsg(){
+		$("#businessDetail").css("display","");
+		$("#commentDetail").css("display","none");
+		IFrameResize()
+	}
+	function getComment(){
+		$("#businessDetail").css("display","none");
+		$("#commentDetail").css("display","");
+		$.ajax({
+			type:'post',
+			url:"<%=path%>/userBusinessController/getComment.do",
+			dataType:'json',
+			success:function(msg){
+				var str = "";
+				for(var i = 0; i < msg.length; i++){
+					str += '<div style="width:95%;height: auto;margin: 10px;line-height: 39px;border-bottom: 2px #EBEBEB solid;padding-bottom: 20px">';
+					str += '<div>';
+					str += '<span style="font-size: 20px">'+ msg[i].userName +'</span>';
+					str += '<span style="float: right">'+ msg[i].data +'</span><br/>';
+					for(var j = 1; j <= 5;j++){
+						if(j <= msg[i].level){
+							str += '<img src="<%=path%>/images/xingxing1.png" class="star" style="width: 20px;height: 20px"/>';
+						} else {
+							str += '<img src="<%=path%>/images/xingxing.png" class="star" style="width: 20px;height: 20px"/>';
+						}
+					}
+					str += '</div>';
+					str += '<div>';
+					str += '<span>'+ msg[i].content +'</span>';
+					str += '</div>';
+					if(msg[i].state == "1"){
+						str += '<div>';
+						str += '<span style="font-size: 20px">商家回复</span>';
+						str += '<span style="float: right">'+msg[i].businessData+'</span>';
+						str += '</div>';
+						str += '<div>';
+						str += '<span>'+ msg[i].businessContent +'</span>';
+						str += '</div>';
+					}
+					str += '</div>';
+				}
+				$("#commentDetail").html(str);
+			}
+		})
+		setTimeout("IFrameResize()","100");
+	}
+	
 </script>
 <body>
 	<div style="width: 100%;height: auto;overflow: hidden">
-		<div style="background-color: #fff;border-radius: 10px;width: 70%;float:left;height: 250px;">
+		<div style="background-color: #fff;border-radius: 10px;width: 70%;float:left;height: 300px;">
 			<!-- 左侧简要信息 -->
 			<div style="float: left;width: 680px;height: auto;">
 				<div style="width: 100%;height: auto;">
 					<span style="font-size: 25px;margin: 15px">${business.nickName}</span>
 				</div>
 				<div style="float: left;width: 700px;height: auto;border-bottom: 2px #EBEBEB solid">
-					<div style="width: auto;float:left;align: center;">
-						<ul style="list-style: none;padding-left: 0px;margin-left: 15px" >
-							<li style="display: inline-block;height: 30px;width: 30px">
-								<img src="<%=path%>/images/xingxing1.png" style="height: 100%;width: 100%"/>
-							</li>
-							<li style="display: inline-block;height: 30px;width: 30px">
-								<img src="<%=path%>/images/xingxing1.png" style="height: 100%;width: 100%"/>
-							</li>
-							<li style="display: inline-block;height: 30px;width: 30px">
-								<img src="<%=path%>/images/xingxing1.png" style="height: 100%;width: 100%"/>
-							</li>
-							<li style="display: inline-block;height: 30px;width: 30px">
-								<img src="<%=path%>/images/xingxing1.png" style="height: 100%;width: 100%"/>
-							</li>
-							<li style="display: inline-block;height: 30px;width: 30px">
-								<img src="<%=path%>/images/xingxing1.png" style="height: 100%;width: 100%"/>
-							</li>
-						</ul>
+					<div style="width: auto;float:left;align: center;margin-top: 15px;margin-left: 15px">
+						<span style="width: 150px;height: 30px;line-height: 12px;overflow: hidden;background-image: url(<%=path%>/images/xingxing.png);background-repeat: repeat-x;display: inline-block;background-size: contain;">
+							<span id="xing" style="width: 150px;height: 30px;line-height: 12px;overflow: hidden;background-image: url(<%=path%>/images/xingxing1.png);background-repeat: repeat-x;display: inline-block;background-size: contain;"></span>
+						</span>
 					</div>
 					<div style="width: auto;float:left;line-height: 68px;margin-left: 20px;">
-						<span style="font-size: 18px">5分</span>
+						<span style="font-size: 18px" id="score"></span>
 					</div>
 				</div>
 				<div style="width: 600px;height: auto;float:left;">
 					<p style="margin: 20px">地址：${business.address}</p>
 					<p style="margin: 20px">联系电话：${business.phoneNumber}</p>
 					<p style="margin: 20px" id="introduce">商家简介：</p>
+					<a href="javascript:void(0)" onclick="getFoodMsg()" class="comment">商品信息</a>
+					<a href="javascript:void(0)" onclick="getComment()" class="comment">评论内容</a>
 				</div>
 			</div>
 			<!-- 右侧图片 -->
@@ -235,7 +294,7 @@
 			</div>
 		</div>
 		<!-- 商店公告 -->
-		<div style="background-color: #fff;border-radius: 10px;width: 28%;height: 250px;float: right">
+		<div style="background-color: #fff;border-radius: 10px;width: 28%;height: 300px;float: right">
 			<!-- 头部内容 -->
 			<div style="border-bottom: 2px #EBEBEB solid;width: 100%" align="center">
 				<div style="width: 15%;height: auto;float: left">
@@ -259,6 +318,35 @@
 		<!-- 商品列表 -->
 		<div style="background-color: #fff;float:left;border-radius: 10px;width: 70%;height: auto;margin-top: 20px;" id="businessDetail">
 		</div>
+		
+		<!-- 评论列表 -->
+		<div style="background-color: #fff;float:left;border-radius: 10px;width: 70%;height: auto;margin-top: 20px;display: none" id="commentDetail">
+			<%-- <div style="width:95%;height: auto;margin: 10px;line-height: 39px;border-bottom: 2px #EBEBEB solid;padding-bottom: 20px">
+				<!-- 用户评论 -->
+				<div>
+					<span style="font-size: 20px">张三</span>
+					<span style="float: right">2019-04-12 16:57:36</span><br/>
+					<img src="<%=path%>/images/xingxing1.png" title="1" class="star" style="width: 20px;height: 20px"/>
+					<img src="<%=path%>/images/xingxing1.png" title="2" class="star" style="width: 20px;height: 20px"/>
+					<img src="<%=path%>/images/xingxing1.png" title="3" class="star" style="width: 20px;height: 20px"/>
+					<img src="<%=path%>/images/xingxing1.png" title="4" class="star" style="width: 20px;height: 20px"/>
+					<img src="<%=path%>/images/xingxing1.png" title="5" class="star" style="width: 20px;height: 20px"/>
+				</div>
+				<div>
+					<span>asdsdasdasdasd</span>
+				</div>
+				
+				<!-- 商家回复 -->
+				<div>
+					<span style="font-size: 20px">商家回复</span>
+					<span style="float: right">2019-04-12 16:57:36</span>
+				</div>
+				<div>
+					<span>asdsdasdasdasd</span>
+				</div>
+			</div> --%>
+		</div>
+		
 		<!-- 购物车 -->
 		<div style="background-color: #fff;border-radius: 10px;width: 28%;height: aut0;margin-top:20px;float: right">
 			<!-- 头部内容 -->
@@ -270,7 +358,9 @@
 					<font size="5px">购物车</font>
 				</div>
 				<div style="width: 9%;height: auto;margin-top: 12px;float:right;margin-right: 10px">
-					<a href="#"><img src="<%=path%>/images/delete.png" width=100% height="30%"/></a>
+					<a href="javascript:void(0)" onclick="deleteCart()">
+						<img src="<%=path%>/images/delete.png" width=100% height="30%"/>
+					</a>
 				</div>
 			</div>
 			<!-- 商品信息 -->

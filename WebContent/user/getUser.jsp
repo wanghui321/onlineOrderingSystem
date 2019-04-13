@@ -40,7 +40,7 @@
 </script>
 <body>
 	<div style="margin: 20px">
-		<form action="<%=path%>/userController/updateUser.do">
+		<form action="<%=path%>/userController/updateUser.do" method="post">
 			<table border="1px" bordercolor="#EBEBEB" cellspacing="0px">
 				<tr>
 					<td>用户账号：</td>

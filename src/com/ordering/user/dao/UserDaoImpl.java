@@ -10,10 +10,12 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ordering.business.bean.Business;
 import com.ordering.user.bean.ConsigneeAddress;
 import com.ordering.user.bean.ShopType;
 import com.ordering.user.bean.User;
@@ -201,6 +203,25 @@ public class UserDaoImpl implements UserDao{
 		if(count > 0)
 			return true;
 		return false;
+	}
+
+	//修改用户余额
+	@Override
+	public void reduce(String userId, double newBalance) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("update User set balance = " + newBalance + "where userId = '" + userId + "'");
+		query.executeUpdate();
+		
+	}
+
+	//根据地址Id获取地址信息
+	@Override
+	public ConsigneeAddress getAddressById(String addressId) {
+		// TODO Auto-generated method stub
+		String sql = "select * from consigneeaddress where id = '" + addressId + "'";
+		ConsigneeAddress address = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(ConsigneeAddress.class));
+		return address;
 	}
 
 	

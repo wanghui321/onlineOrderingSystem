@@ -28,5 +28,9 @@ public interface UserService {
 	public ConsigneeAddress getOneAddress(String id);
 	
 	public boolean updateAddress(ConsigneeAddress address);
-	
+
+	public void reduce(String userId, double balance, String totalPrice);
+
+	public ConsigneeAddress getAddressById(String addressId);
+
 }
