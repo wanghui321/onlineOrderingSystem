@@ -12,7 +12,6 @@ public class Comment {
 	private String content;
 	private String userId;
 	private int level;
-	private String foodId;
 	private String state;
 	private String businessId;
 	private String businessContent;
@@ -39,12 +38,6 @@ public class Comment {
 	}
 	public void setLevel(int level) {
 		this.level = level;
-	}
-	public String getFoodId() {
-		return foodId;
-	}
-	public void setFoodId(String foodId) {
-		this.foodId = foodId;
 	}
 	public String getState() {
 		return state;
