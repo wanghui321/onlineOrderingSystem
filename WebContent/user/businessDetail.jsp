@@ -245,11 +245,11 @@
 					str += '<span>'+ msg[i].content +'</span>';
 					str += '</div>';
 					if(msg[i].state == "1"){
-						str += '<div>';
+						str += '<div style="background-color:#EBEBEB">';
 						str += '<span style="font-size: 20px">商家回复</span>';
 						str += '<span style="float: right">'+msg[i].businessData+'</span>';
 						str += '</div>';
-						str += '<div>';
+						str += '<div style="background-color:#EBEBEB">';
 						str += '<span>'+ msg[i].businessContent +'</span>';
 						str += '</div>';
 					}
