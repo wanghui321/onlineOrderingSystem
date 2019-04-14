@@ -1,23 +1,14 @@
 package com.ordering.business.controller;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededException;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.jboss.jandex.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ordering.business.bean.Business;
 import com.ordering.business.bean.Food;
 import com.ordering.business.bean.Order;
-import com.ordering.business.service.businessServiceImpl;
-import com.ordering.user.bean.User;
+import com.ordering.business.service.businessService;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -40,7 +30,7 @@ import net.sf.json.JSONObject;
 @RequestMapping("businessController")
 public class businessController {
 	@Autowired
-	private businessServiceImpl businessService;
+	private businessService businessService;
 	
 	//获取订单状态
 	@RequestMapping("getState")
@@ -447,8 +437,90 @@ public class businessController {
 			}
 			return  "business/newOrders";
 			
-		}		
+		}
 		
+		//拒绝订单
+		@RequestMapping("financial")
+		public String financial(Model model,HttpSession session) {
+			Business b = (Business)session.getAttribute("business");
+			String id = b.getBusinessId();
+			List<String> datalist = new ArrayList();
+			for(int i = 6;i >= 0;i --) {
+				String flag = businessService.getPastDate(i);
+				datalist.add(flag);
+			}
+			List<String> sumlist = businessService.sumList(datalist,id);
+			List<String> orderlist = businessService.orderList(datalist,id);
+			
+			System.out.println(datalist);
+			System.out.println(sumlist);
+			System.out.println(orderlist);
+			model.addAttribute("datalist",datalist);
+			model.addAttribute("sumlist",sumlist);
+			model.addAttribute("orderlist",orderlist);
+			model.addAttribute("todaysum",sumlist.get(0));
+			model.addAttribute("todayorder",orderlist.get(0));
+			return  "business/financial";
+			
+		}
 		
+		//上传头像
+		@RequestMapping("setHeadPicture")
+		public String setHeadPicture(@RequestParam(value="files") MultipartFile file,HttpServletRequest request,Model model,HttpSession session){
+			Business b = (Business)session.getAttribute("business");
+			String id = b.getBusinessId();
+			String filePath = null;
+		System.out.println("123456789456132");
+					if (!file.isEmpty()) {  
+			            try {  
+			            	// 文件保存路径  
+			                filePath = request.getSession().getServletContext().getRealPath("/images/businessImg/")   
+			                        + file.getOriginalFilename();  
+			                // 转存文件 
+			                String tempPath = this.getClass().getResource("/").toURI().getPath();  
+			                System.out.println(tempPath);
+			                file.transferTo(new File(filePath));
+			            } catch (Exception e) { 
+			                e.printStackTrace();  
+			            }
+			            
+			        }
+					String head = file.getOriginalFilename();
+					boolean flag = businessService.setHeadPicture(head,id);
+					b.setHeadPicture(head);
+					session.setAttribute("business", b);
+					session.setAttribute("bnickName", b.getNickName());
+					if(flag) {
+						model.addAttribute("msg","修改成功");
+					} else {
+						model.addAttribute("msg","修改失败");
+					}
+					return  "business/headPicture";
+		}
+		
+		//获取评论内容
+		@RequestMapping("updateComment")
+		public String updateComment(HttpSession session,String id,String quantity,Model model) {
+			Business business = (Business)session.getAttribute("business");
+			boolean flag = businessService.updateComment(id,quantity);
+			if(flag) {
+				model.addAttribute("msg","保存成功");
+			} else {
+				model.addAttribute("msg","保存失败");
+			}
+			return "business/comment";
+		}
+		
+		//获取评论数量
+		@RequestMapping("getCommentstate")
+		@ResponseBody
+		public JSONObject getCommentstate(HttpSession session) {
+			Business business = (Business)session.getAttribute("business");
+			Map<String,Object> list = businessService.getCommentstate(business.getBusinessId());
+			JSONObject data=JSONObject.fromObject(list);
+			System.out.println(list);
+			System.out.println(list);
+			return data;
+		}
 		
 }

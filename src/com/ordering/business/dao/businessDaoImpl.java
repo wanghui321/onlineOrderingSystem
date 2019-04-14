@@ -1,6 +1,8 @@
 package com.ordering.business.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +33,7 @@ public class businessDaoImpl implements businessDao{
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	//0:新订单1:异常订单2:催单3:退单4:完成订单5:拒绝订单（商家）6:接受订单（商家）
+	//0:新订单1:异常订单2:催单3:退单4:完成订单5:拒绝订单（商家）6:接受订单（商家）7:yipinglun
 	//获取订单类别
 	@Override
 	public Map<String,String> getState(String id){
@@ -56,6 +58,8 @@ public class businessDaoImpl implements businessDao{
 				d=d+1;
 			if (l.equals("4"))
 				e=e+1;
+			if (l.equals("7"))
+				e=e+1;
 			System.out.println(l);
 		}
 		Map map = new HashMap();
@@ -78,8 +82,12 @@ public class businessDaoImpl implements businessDao{
 		List<Order> orders = query.list();
 		double a = 0;
 		for(Order o : orders) {
-			Query query1 = session.createQuery("from OrderFood where orderId = ?");
+			String c= o.getTotalPrice();
+			double aa=Double.parseDouble(c);
+			a += aa;
+			/*Query query1 = session.createQuery("from OrderFood where orderId = ?");
 			String d = o.getId();
+			
 			query1.setString(0, d);
 			List<OrderFood> of = (List<OrderFood>)query1.list();
 			for(OrderFood f : of) {
@@ -88,7 +96,7 @@ public class businessDaoImpl implements businessDao{
 				query2.setString(0,e );
 				Food b = (Food)query2.uniqueResult();
 				a=a+b.getPrice();
-			}
+			}*/
 		}
 		Map map = new HashMap();
 		map.put("sales", a);
@@ -101,15 +109,9 @@ public class businessDaoImpl implements businessDao{
 		int a = 0 ;
 		int b = 0 ;
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Food where businessId = ?");
+		Query query = session.createQuery("from Comment where businessId = ?");
 		query.setString(0, id);
-		List<Food> food = query.list();
-		for(Food f : food) {
-			Query query1 = session.createQuery("from Comment where foodId = ?");
-			query1.setString(0, f.getId());
-			List<Comment> comment = query1.list();
-			List<Map<String,Integer>> list = new ArrayList();
-			
+		List<Comment> comment = query.list();
 			for (Comment c : comment) {
 				if (c.getState().equals("0")) {
 				if(c.getLevel()<=2) {
@@ -120,7 +122,6 @@ public class businessDaoImpl implements businessDao{
 				System.out.println(c);
 				}
 			}
-		}
 		Map map = new HashMap();
 		map.put("noResponseToComments",a );
 		map.put("noResponseToNegativeComment", b);
@@ -340,6 +341,90 @@ public class businessDaoImpl implements businessDao{
 			jdbcTemplate.update(str); 
 			return true;
 		}
+		
+		//获取七日销售金额
+		@Override
+		public List<String> sumList(List<String> datalist,String id){
+			// TODO Auto-generated method stub
+			List<String> sumList = new ArrayList();
+			for (String data : datalist) {
+				String str = "select totalPrice from orders where data like '%" + data + "%' and businessId = '"+id+"' and (state = '7' or state = '4')";
+				List<Map<String,Object>> list = jdbcTemplate.queryForList(str);
+				double d = 0;
+				for(Map<String,Object> m : list) {
+					double price = (double) m.get("totalPrice");
+					d += price;
+				}
+				String s = String.valueOf(d);
+				sumList.add(s);
+			}
+			return sumList;
+		}
+		
+		//获取七日订单数量
+		@Override
+		public List<String> orderList(List<String> datalist,String id){
+			// TODO Auto-generated method stub
+			List<String> orderList = new ArrayList();
+			for (String data : datalist) {
+				String str = "select totalPrice from orders where data like '%" + data + "%' and businessId = '"+id+"' and (state = '7' or state = '4')";
+				List<Map<String,Object>> list = jdbcTemplate.queryForList(str);
+				int d = 0;
+				for(Map<String,Object> m : list) {
+					d ++;
+				}
+				String s = String.valueOf(d);
+				orderList.add(s);
+			}
+			return orderList;
+		}
+
+		//修改店铺照片
+		@Override
+		public boolean setHeadPicture(String head,String id){
+			// TODO Auto-generated method stub
+			String str = "update business set headPicture = '"+head+"' where businessId = '" + id + "'"; 
+			jdbcTemplate.update(str); 
+			return true;
+		}
+
+		//回复评论
+		@Override
+		public boolean updateComment(String id, String quantity) {
+			// TODO Auto-generated method stub
+			Date date = new Date(); 
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String data = dateFormat.format(date);
+			String str = "update comment set businessContent = '"+quantity+"', businessData = '"+data+"', state = '1' where id = '" + id + "'"; 
+			jdbcTemplate.update(str);
+			return false;
+		}
 
 
+		@Override
+		public Map<String, Object> getCommentstate(String businessId) {
+			// TODO Auto-generated method stub
+			Map map = new HashMap();
+			int comment = 0;
+			int bed = 0;
+			int nobed = 0;
+			String str = "select * from comment where businessId = '"+businessId+"'";
+			List<Map<String,Object>> list = jdbcTemplate.queryForList(str);
+			for(Map<String,Object> m : list) {
+				comment++;
+				int a = Integer.parseInt(m.get("level").toString());
+				if(a<=2) {
+					bed++;
+					if(m.get("state").toString().equals("0")) {
+						nobed++;
+					}
+				}
+				
+			}
+			map.put("comment", comment);
+			map.put("bed", bed);
+			map.put("nobed", nobed);
+			System.out.println(map);
+			return map;
+		}
 }

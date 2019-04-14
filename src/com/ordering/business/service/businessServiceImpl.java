@@ -1,5 +1,8 @@
 package com.ordering.business.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -182,5 +185,59 @@ public class businessServiceImpl implements businessService{
 			boolean flag = businessDao.denialOrder(id);
 			return flag;
 		}
+		
+		//获取日期
+		@Override
+		public String getPastDate(int past) {
+			// TODO Auto-generated method stub
+			Calendar calendar = Calendar.getInstance();
+			calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) - past);
+			Date today = calendar.getTime();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			String result = format.format(today);
+			System.out.println(result);
+			return result;
+		}
+		
+		//获取其日销售金额
+		@Override
+		public List<String> sumList(List<String> datalist,String id){
+			// TODO Auto-generated method stub
+			List<String> list = businessDao.sumList(datalist,id);
+			return list;
+		}
+		
+		//获取其日订单数量
+		@Override
+		public List<String> orderList(List<String> datalist,String id){
+			// TODO Auto-generated method stub
+			List<String> list = businessDao.orderList(datalist,id);
+			return list;
+		}
+		
+		//修改店铺照片
+		@Override
+		public boolean setHeadPicture(String head,String id){
+			// TODO Auto-generated method stub
+			boolean flag = businessDao.setHeadPicture(head,id);
+			return flag;
+		}
 
+		//回复评论
+		@Override
+		public boolean updateComment(String id, String quantity) {
+			// TODO Auto-generated method stub
+			boolean flag = businessDao.updateComment(id,quantity);
+			return false;
+		}
+
+		//获取各种类评论数量
+		@Override
+		public Map<String, Object> getCommentstate(String businessId) {
+			// TODO Auto-generated method stub
+			Map<String,Object> list = businessDao.getCommentstate(businessId);
+			return list;
+		}
+
+		
 }

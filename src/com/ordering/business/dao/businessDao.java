@@ -48,4 +48,14 @@ public interface businessDao {
 	public boolean acceptOrder(String id);
 	
 	public boolean denialOrder(String id);
+	
+	public List<String> sumList(List<String> datalist,String id);
+	
+	public List<String> orderList(List<String> datalist,String id);
+	
+	public boolean setHeadPicture(String head,String id);
+
+	public boolean updateComment(String id, String quantity);
+
+	public Map<String, Object> getCommentstate(String businessId);
 }
