@@ -256,6 +256,9 @@ public class UserBusinessServiceImpl implements UserBusinessService {
 		// TODO Auto-generated method stub
 		Map<String,Object> map = userBusinessDao.getCommentNumber(id);
 		int count = Integer.parseInt(map.get("count").toString());
+		if(map.get("count").toString().equals("0")) {
+			return "0";
+		}
 		double sum = Double.parseDouble(map.get("sum").toString());
 		double dou = sum/count;
 		DecimalFormat df = new DecimalFormat("0.0");//格式化小数，不足的补0

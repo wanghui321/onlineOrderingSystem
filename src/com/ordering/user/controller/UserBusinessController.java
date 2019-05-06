@@ -244,7 +244,9 @@ public class UserBusinessController {
 		double balance = user.getBalance();
 		String userId = user.getUserId();
 		double newBalance = userBusinessService.updateOrder(orderId,state,balance,userId);
-		if(balance != newBalance) {
+		String balanceStr = String.valueOf(balance);
+		String newBalanceStr = String.valueOf(newBalance);
+		if(balanceStr.equals(newBalanceStr)) {
 			model.addAttribute("msg","时间超过五分钟，已无法取消，如要取消，请于商家联系");
 			user.setBalance(newBalance);
 		}

@@ -17,8 +17,12 @@
 	window.onload = function(){
 		var i = '${score}';
 		var q = i * 30;
-		$("#xing").css("width",q);	
-		$("#score").html(i + "分");
+		$("#xing").css("width",q);
+		if(i == '0'){
+			$("#score").html("暂无评价");
+		} else {
+			$("#score").html(i + "分");
+		}
 		
 		//加载商店中商品的信息
 		$.ajax({

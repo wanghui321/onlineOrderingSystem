@@ -7,9 +7,9 @@
 <title>个人主页</title>
 </head>
 <body>
-	<div align="center" style="width:100%;height: auto;border:1px solid red;float: left">
+	<div align="center" style="width:100%;height: auto;float: left">
 		<!-- 页面头部 -->
-		<div style="width:70%;height:73px;border:1px solid red;margin-top: 20px;background-color: #ac001c" align="left">
+		<div style="width:70%;height:73px;margin-top: 20px;background-color: #ac001c" align="left">
 			<div style="width:auto;height: auto;float: left">
 				<img src="../images/apex.png" width="233px" height="73px"/>
 			</div>
@@ -19,13 +19,13 @@
 		</div>
 		
 		<!-- 中间内容 -->
-		<div style="width:70%;height:575px;border:1px solid red;margin-top: 20px;line-height:33px;" align="center">
-			<div id="bottom_1" style="text-align:center;border:1px solid red;float:left"><iframe src="<%=request.getContextPath()%>/user/menu.jsp" width="200px" height="575px"></iframe></div>
-			<div id="bottom_2" style="text-align:center;border:1px solid red;float:left"><iframe src="<%=request.getContextPath()%>/user/blank.jsp" width="840px" height="575px" name="view_frame"></iframe></div>
+		<div style="width:70%;height:575px;margin-top: 20px;line-height:33px;" align="center">
+			<div id="bottom_1" style="text-align:center;float:left"><iframe src="<%=request.getContextPath()%>/user/menu.jsp" width="200px" height="575px"></iframe></div>
+			<div id="bottom_2" style="text-align:center;float:left"><iframe src="<%=request.getContextPath()%>/user/blank.jsp" width="840px" height="575px" name="view_frame"></iframe></div>
         </div>
 		
 		<!-- 页面底部 -->
-		<div style="width:70%;height:33px;border:1px solid red;margin-top: 20px;background-color: #ac001c;line-height:33px;" align="center">
+		<div style="width:70%;height:33px;margin-top: 20px;background-color: #ac001c;line-height:33px;" align="center">
            <span style="color:#fff;align-content: center;">&copy; Copyright 2019, A OnlineOrderingSystem Apart</span>&nbsp;&nbsp;
         </div>
         

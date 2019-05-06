@@ -116,7 +116,7 @@ public class UserBusinessDaoImpl implements UserBusinessDao{
 	@Override
 	public List<Map<String, Object>> getMyOrder(String userId) {
 		// TODO Auto-generated method stub
-		String sql = "select * from orders where userId = '" + userId + "'" + "order by data";
+		String sql = "select * from orders where userId = '" + userId + "'" + "order by data desc";
 		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
 		return list;
 	}
@@ -166,6 +166,7 @@ public class UserBusinessDaoImpl implements UserBusinessDao{
 					String sql1 = "update user set balance = " + newBalance + "where userId = '" + userId +"'";
 					jdbcTemplate.batchUpdate(sql);
 					jdbcTemplate.batchUpdate(sql1);
+					return newBalance;
 				} else {
 					String sql = "update orders set state = '6' where id = '" + orderId + "'";
 					jdbcTemplate.batchUpdate(sql);
@@ -199,7 +200,7 @@ public class UserBusinessDaoImpl implements UserBusinessDao{
 	@Override
 	public List<Map<String, Object>> getComment(String businessId) {
 		// TODO Auto-generated method stub
-		String sql = "select * from comment where businessId = '" + businessId + "'";
+		String sql = "select * from comment where businessId = '" + businessId + "' order by data desc";
 		List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
 		return list;
 	}
