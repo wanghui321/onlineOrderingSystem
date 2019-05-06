@@ -55,11 +55,11 @@
                  <a href="<%=path%>/business/commodity.jsp" target="mainFrame">商品</a>
              </li>
              <li role="presentation">
-                 <a href="<%=path%>/business/commodity.jsp" target="mainFrame">财务</a>
+                 <a href="<%=path%>/businessController/financial.do" target="mainFrame">财务</a>
              </li>
              <!-- 开始 -->
              <li role="presentation">
-                     <a href="adminLogin.jsp" target="mainFrame">顾客</a>
+                     <a href="<%=path%>/business/comment.jsp" target="mainFrame">顾客</a>
              </li>
              <!-- 结束 -->
              <li role="presentation">

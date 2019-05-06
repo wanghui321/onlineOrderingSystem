@@ -15,7 +15,6 @@
 <script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/jquery.easyui.min.js"></script>
 <script type="text/javascript">
-debugger;
 	$.ajax({
 		type:"post",
 		url:"<%=request.getContextPath()%>/businessController/getState.do",

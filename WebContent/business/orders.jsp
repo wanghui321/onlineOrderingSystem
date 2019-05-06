@@ -11,6 +11,37 @@
 <title>Insert title here</title>
 </head>
 <script src="<%=request.getContextPath()%>/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$.ajax({
+		type:"post",
+		url:"<%=request.getContextPath()%>/businessController/getState.do",
+		dataType:'json',
+		success:function(msg){
+ 			if(msg != null && msg != undefined){
+ 				var newOrder = msg.newOrder;
+ 				var reminder = msg.reminder;
+ 				var chargeback = msg.chargeback;
+ 				var unusualOrder = msg.unusualOrder;
+ 				var completedOrder = msg.completedOrder;
+			}
+ 			var str = "订单量"+completedOrder+"量";
+ 			$("#completedOrder").html(str);
+		}
+	})
+		$.ajax({
+		type:"post",
+		url:"<%=request.getContextPath()%>/businessController/getsales.do",
+		dataType:'json',
+		success:function(msg1){
+ 			if(msg1 != null && msg1 != undefined){
+ 				var sales = msg1.sales;
+			} 
+			var str = "营业额"+sales+"元";
+			$("#sales").html(str);
+		
+		}
+	})
+</script>
 <body>
 <div style="width:100%;;height: auto;float: left;border:1px solid red;background-color: #F4F4F4">
 	<div style="width:100%;height:60px;border:1px solid red;float: left;background-color: #fff">
@@ -34,8 +65,8 @@
 					<span style="font-weight: bold;float: left;color: #383838;font-size: 25px">今日营业总揽</span>
 				</div>
 				<div style="width:95%;height:auto;line-height:auto;padding-bottom: 60px;padding-top: 60px;">
-					<div style="width:95%;height:40px;border:1px solid red"><span style="float: left;color: #828282;font-size: 25px">订单量</span></div>
-					<div style="width:95%;height:40px;border:1px solid red"><span style="float: left;color: #828282;font-size: 25px">营业额</span></div>
+					<div style="width:95%;height:40px;border:1px solid red"><span id="completedOrder" style="float: left;color: #828282;font-size: 20px">订单量</span></div>
+					<div style="width:95%;height:40px;border:1px solid red"><span id="sales" style="float: left;color: #828282;font-size: 20px">营业额</span></div>
 				</div>
 			</div>
 			<div align="center" style="width:100%;height:auto;background-color: #fff;border:1px solid #e0e0e0;margin-top: 30px">
@@ -43,8 +74,8 @@
 					<span style="font-weight: bold;float: left;color: #383838;font-size: 25px">订单小贴士</span>
 				</div>
 				<div style="width:95%;height:auto;line-height:auto;padding-bottom: 60px;padding-top: 20px;">
-					<div style="width:95%;height:40px;border:1px solid red"><span style="float: left;color: #828282;font-size: 25px">建议每天10点之前进行开店</span></div>
-					<div style="width:95%;height:40px;border:1px solid red"><span style="float: left;color: #828282;font-size: 25px">建议填写接单手机号</span></div>
+					<div style="width:95%;height:40px;border:1px solid red"><span style="float: left;color: #828282;font-size: 20px">建议每天10点之前进行开店</span></div>
+					<div style="width:95%;height:40px;border:1px solid red"><span style="float: left;color: #828282;font-size: 20px">建议填写接单手机号</span></div>
 				</div>
 			</div>
 		</div>

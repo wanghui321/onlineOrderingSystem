@@ -43,7 +43,7 @@ $.ajax({
 			str += '<span style="font-size: 15px;float: left;color: #666">'+data[i].address+'</span>';
 			str += '<span style="font-size: 15px;float: right;">￥'+data[i].totalPrice+'</span></div>';
 			str += '<div style="width: 98%;height: 50px;line-height:50px; background-color: #fff;border-bottom:5px solid #f0f0f0;">';
-			str += '<span style="font-size: 25px;float: left;">'+data[i].remake+'</span>';
+			str += '<span style="font-size: 25px;float: left;">'+data[i].remake+'</span>';//无备注信息
 			str += '<span style="font-size: 25px;float: right;margin-right: 50px;"><a href="<%=path%>/businessController/acceptOrder.do?id='+data[i].id+'">接受订单</a></span>';
 			str += '<span style="font-size: 25px;float: right;margin-right: 50px;"><a href="<%=path%>/businessController/denialOrder.do?id='+data[i].id+'">拒绝订单</a></span></div>';
 			str += '<span style="float: left;;height: 30px;line-height: 30px;font-size: 15px;margin-left: 100px;">商品</span>';

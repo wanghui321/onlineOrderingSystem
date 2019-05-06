@@ -12,6 +12,7 @@
 </head>
 <script src="<%=path%>/js/jquery-1.11.1.min.js"></script>
 <script  type="text/javascript">
+/* 0:闭店 1： 开店 3：没资格 */
 	window.onload = function(){
 		var msg = "${business.state}";
 		if(msg ==3){
@@ -24,6 +25,11 @@
 <body>
 <div align="center" style="width:100%;height:100%;border:1px solid red;float: left; background-color: #F4F4F4">
 	<div align="center" style="width:90%;height:auto;border:1px solid red; background-color: #fff">
+	<div align="center" style="width:20%;height:95px;line-height:95px; border:1px solid red;float: left; background-color: #fff">店铺照片</div>
+	<div align="center" style="width:78%;height:auto;border:1px solid red;float: left; background-color: #fff">
+	<img alt="123" src="<%=path%>/images/businessImg/${business.headPicture}" style="width: 100px;height: 90px">
+	<button type="submit"><a href="<%=path %>/business/headPicture.jsp" target="main_Frame">修改图片</a></button> 
+	</div>
 	<div align="center" style="width:20%;height:auto;border:1px solid red;float: left; background-color: #fff">店铺名称</div>
 	<div align="center" style="width:78%;height:auto;border:1px solid red;float: left; background-color: #fff">
 	<form action="<%=path%>/businessController/updateBusiness.do" method="post">
