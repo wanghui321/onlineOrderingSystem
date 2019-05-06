@@ -10,7 +10,7 @@
 <title>个人中心左侧菜单栏</title>
 </head>
 <body>
-	<ul>
+	<ul style="list-style-type:none">
 		<li><a href="<%=path%>/userController/editLogin.do" target="_parent">退出登录</a></li>
 		<li><a href="<%=path%>/user/getUser.jsp" target="view_frame">个人信息</a></li>
 		<li><a href="<%=path%>/user/updatePassword.jsp" target="view_frame">修改密码</a></li>

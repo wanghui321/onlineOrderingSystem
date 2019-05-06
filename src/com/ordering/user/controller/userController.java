@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ordering.business.bean.Business;
 import com.ordering.user.bean.ConsigneeAddress;
 import com.ordering.user.bean.User;
 import com.ordering.user.service.UserServiceImpl;
@@ -68,8 +69,13 @@ public class userController {
 			} 
 			model.addAttribute("msg","用户名或密码错误");
 			return "user/login";
+		} else {
+			Business business = new Business();
+			business.setAccountNumber(user.getAccountNumber());
+			business.setPassword(user.getPassword());
+			return "redirect:../businessController/login.do?accountNumber=" + user.getAccountNumber() +
+					"&password="+user.getPassword()+"&loginType=business";
 		}
-		return "";
 	}
 	
 	//退出登录

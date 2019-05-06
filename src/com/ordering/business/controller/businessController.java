@@ -15,6 +15,7 @@ import javax.xml.ws.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,9 +78,16 @@ public class businessController {
 		
 		//商家登录
 		@RequestMapping("login")
+<<<<<<< HEAD
 		public String login(HttpServletResponse response,HttpSession session,Model model,Business business,String loginType) throws IOException {
+=======
+		public String login(HttpSession session,Model model,String accountNumber,String password,String loginType) {
+>>>>>>> branch 'master' of https://github.com/wanghui321/onlineOrderingSystem.git
 			System.out.println(loginType);
-			System.out.println(business);
+//			System.out.println(business);
+			Business business = new Business();
+			business.setAccountNumber(accountNumber);
+			business.setPassword(password);
 			if(loginType.equals("business")) {
 				Business b = businessService.login(business);
 				if(b != null) {
