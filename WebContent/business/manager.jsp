@@ -13,6 +13,7 @@
 <script src="<%=path%>/js/jquery-1.11.1.min.js"></script>
 <script  type="text/javascript">
 /* 0:闭店 1： 开店 3：没资格 */
+	
 	window.onload = function(){
 		var msg = "${business.state}";
 		if(msg ==3){
@@ -21,55 +22,84 @@
 			$("#msg1").css("display","none");
 		}
 	}
+	$("#bnickName", window.parent.parent.document).html('${bnickName}');
+	var msg1 = "${msg1}";
+	if(msg1=="修改成功"){
+		alert(msg1);
+		window.location.reload(); 
+	}
 </script>
 <body>
-<div align="center" style="width:100%;height:100%;border:1px solid red;float: left; background-color: #F4F4F4">
-	<div align="center" style="width:90%;height:auto;border:1px solid red; background-color: #fff">
-	<div align="center" style="width:20%;height:95px;line-height:95px; border:1px solid red;float: left; background-color: #fff">店铺照片</div>
-	<div align="center" style="width:78%;height:auto;border:1px solid red;float: left; background-color: #fff">
+<div align="center" style="width:100%;height:100%;float: left; background-color: #F4F4F4">
+	<div align="center" style="width:90%;height:auto; background-color: #fff">
+	<div align="center" style="width:100%;height:95px;line-height:95px;float: left;border:1px solid #d0d0d0; background-color: #fff;border-radius: 10px">
+	<div align="center" style="width:20%;height:95px;line-height:95px;float: left;">店铺照片</div>
+	<div align="center" style="width:78%;height:auto;float: left;">
 	<img alt="123" src="<%=path%>/images/businessImg/${business.headPicture}" style="width: 100px;height: 90px">
 	<button type="submit"><a href="<%=path %>/business/headPicture.jsp" target="main_Frame">修改图片</a></button> 
 	</div>
-	<div align="center" style="width:20%;height:auto;border:1px solid red;float: left; background-color: #fff">店铺名称</div>
-	<div align="center" style="width:78%;height:auto;border:1px solid red;float: left; background-color: #fff">
+	</div>
+	
+	<div align="center" style="width:100%;height:95px;line-height:95px;float: left;border:1px solid #d0d0d0; background-color: #fff;border-radius: 10px;margin-top: 5px">
+	<div align="center" style="width:20%;height:auto;float: left; ">店铺名称</div>
+	<div align="center" style="width:78%;height:auto;float: left; ">
 	<form action="<%=path%>/businessController/updateBusiness.do" method="post">
 	<input style="width:80%;height:100%" value="${business.nickName}" name="nickName"/> 
 	<button type="submit">修改</button>
-
 	</div>
-	<div align="center" style="width:20%;height:auto;border:1px solid red;float: left; background-color: #fff">联系电话</div>
-	<div align="center" style="width:78%;height:auto;border:1px solid red;float: left; background-color: #fff">
+	</div>
+	
+		<div align="center" style="width:100%;height:95px;line-height:95px;float: left;border:1px solid #d0d0d0; background-color: #fff;border-radius: 10px;margin-top: 5px">
+	
+	<div align="center" style="width:20%;height:auto;float: left; ">联系电话</div>
+	<div align="center" style="width:78%;height:auto;float: left; ">
 
 	<input style="width:80%;height:100%" value="${business.phoneNumber}" name="phoneNumber"/> 
 	<button type="submit">修改</button>
 
 	</div>
-	<div align="center" style="width:20%;height:auto;border:1px solid red;float: left; background-color: #fff">店铺地址</div>
-	<div align="center" style="width:78%;height:auto;border:1px solid red;float: left; background-color: #fff">
+	</div>
+	
+			<div align="center" style="width:100%;height:95px;line-height:95px;float: left;border:1px solid #d0d0d0; background-color: #fff;border-radius: 10px;margin-top: 5px">
+	
+	<div align="center" style="width:20%;height:auto;float: left; ">店铺地址</div>
+	<div align="center" style="width:78%;height:auto;float: left; ">
 
 	<input style="width:80%;height:100%" value="${business.address}" name="address"/> 
 	<button type="submit">修改</button>
 
 	</div>
-	<div align="center" style="width:20%;height:auto;border:1px solid red;float: left; background-color: #fff">店铺简介</div>
-	<div align="center" style="width:78%;height:auto;border:1px solid red;float: left; background-color: #fff">
+	</div>
+	
+	<div align="center" style="width:100%;height:95px;line-height:95px;float: left;border:1px solid #d0d0d0; background-color: #fff;border-radius: 10px;margin-top: 5px">
+	
+	<div align="center" style="width:20%;height:auto;float: left; ">店铺简介</div>
+	<div align="center" style="width:78%;height:auto;float: left; ">
 
 	<input style="width:80%;height:100%" value="${business.introduce}" name="introduce"/> 
 	<button type="submit">修改</button>
 
 	</div>
-	<div align="center" style="width:20%;height:auto;border:1px solid red;float: left; background-color: #fff">店铺公告</div>
-	<div align="center" style="width:78%;height:auto;border:1px solid red;float: left; background-color: #fff">
+	</div>
+	
+	<div align="center" style="width:100%;height:95px;line-height:95px;float: left;border:1px solid #d0d0d0; background-color: #fff;border-radius: 10px;margin-top: 5px">
+	
+	<div align="center" style="width:20%;height:auto;float: left; ">店铺公告</div>
+	<div align="center" style="width:78%;height:auto;float: left; ">
 
 	<input style="width:80%;height:100%" value="${business.notice}" name="notice"/> 
 	<button type="submit">修改</button>
 
 	</div>
-	<div align="center" style="width:20%;height:auto;border:1px solid red;float: left; background-color: #fff">是否开店</div>
-	<div id="msg1" align="center" style="width:78%;height:auto;border:1px solid red;float: left; background-color: #fff;display:''" >
+	</div>
+	
+	<div align="center" style="width:100%;height:40px;line-height:40px;float: left;border:1px solid #d0d0d0; background-color: #fff;border-radius: 10px;margin-top: 5px">
+	
+	<div align="center" style="width:20%;height:auto;float: left; ">是否开店</div>
+	<div id="msg1" align="center" style="width:78%;height:auto;float: left;display:''" >
 	无开店资格
 	</div>
-	<div id="msg2" align="center" style="width:78%;height:auto;border:1px solid red;float: left; background-color: #fff;display:''" >
+	<div id="msg2" align="center" style="width:78%;height:auto;float: left;display:''" >
 	
 	<c:choose> 
      					<c:when test="${business.state == '0'}"> 
@@ -83,6 +113,7 @@
 				</c:choose>
 	<button type="submit">修改</button>
 </form>
+	</div>
 	</div>
 	</div>
 </div>

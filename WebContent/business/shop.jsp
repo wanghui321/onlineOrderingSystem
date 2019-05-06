@@ -21,8 +21,8 @@
 </style>
 </head>
 <body>
-<div align="center" style="width:100%;height:1222px;border:1px solid red; background-color: #F4F4F4">
-<div 	 style="width:80%;height:oute;border:1px solid red; background-color: #F4F4F4">
+<div align="center" style="width:100%;height:1222px; background-color: #F4F4F4">
+<div 	 style="width:80%;height:oute;border-buttom:1px solid red; background-color: #F4F4F4">
 
 <ul class="nav  nav-pills">
    <li role="presentation">
@@ -35,7 +35,7 @@
 </ul>
 
 </div>
-<div  style="width:80%;height:100%;border:1px solid red; background-color: #F4F4F4">
+<div  style="width:80%;height:100%;border-top:1px solid red; background-color: #F4F4F4">
       <iframe src="<%=request.getContextPath()%>/business/manager.jsp" id="mainFrame" name="main_Frame" 
        frameborder="0" width="100%"  height="100%" frameBorder="0">
        </iframe> 

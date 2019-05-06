@@ -1,13 +1,16 @@
 package com.ordering.business.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,7 +77,7 @@ public class businessController {
 		
 		//商家登录
 		@RequestMapping("login")
-		public String login(HttpSession session,Model model,Business business,String loginType) {
+		public String login(HttpServletResponse response,HttpSession session,Model model,Business business,String loginType) throws IOException {
 			System.out.println(loginType);
 			System.out.println(business);
 			if(loginType.equals("business")) {
@@ -83,6 +86,7 @@ public class businessController {
 					System.out.println(b);
 					session.setAttribute("business", b);
 					session.setAttribute("bnickName", b.getNickName());
+					response.sendRedirect("../business/home.jsp");
 					return "business/home";
 				} 
 				model.addAttribute("msg","用户名或密码错误");
@@ -125,7 +129,7 @@ public class businessController {
 		
 		//修改用户信息，并更新session中的用户信息
 		@RequestMapping("updateBusiness")
-		public String updateBusiness(Business business,HttpSession session,Model model) {
+		public String updateBusiness(HttpServletResponse response,Business business,HttpSession session,Model model) throws IOException {
 			Business b = (Business)session.getAttribute("business");
 			if(business.getNickName()!=null && business.getNickName()!= "")
 				b.setNickName(business.getNickName());
@@ -141,7 +145,8 @@ public class businessController {
 			Business newBusiness = businessService.updateBusiness(b);
 			session.setAttribute("business", newBusiness);
 			session.setAttribute("bnickName", newBusiness.getNickName());
-			model.addAttribute("msg","修改成功");
+			model.addAttribute("msg1","修改成功");
+			response.sendRedirect("../business/manager.jsp");
 			return "business/manager";
 		}
 		

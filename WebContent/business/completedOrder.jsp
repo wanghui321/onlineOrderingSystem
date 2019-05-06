@@ -107,7 +107,7 @@ function getFoodByOrders(ordersId){
 	})
 }
 </script>
-<body>
+<body style="background-color: #F4F4F4">
 <div class="panel-group" id="accordion">
 	<div class="panel panel-default">
 		<div align="center" style="width: 100%;height: 180px;background-color: #fff;">

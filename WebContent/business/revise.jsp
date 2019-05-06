@@ -54,7 +54,7 @@ $("#upload_file").change(function () {
  	<span style="display: none"><input type="text" name="img" value="${msg.imgUrl}"></span> 
 	<div style="margin: 20px">
 	<span style="border:1px solid yellow;float: left;margin-top: 25px">菜品图片：</span>
-	<img id="showImg" alt="food" src="<%=path%>/images/${msg.imgUrl}" width="200px" height="220px"><br />
+	<img id="showImg" alt="food" src="<%=path%>/images/foodImg/${msg.imgUrl}" width="200px" height="220px"><br />
 	<input type="file"  id="upload_file" style="display: none;" name="files">  
     <button type="button" class="file" id="select_file"  onclick="upload_file.click();" >  
         选择图片

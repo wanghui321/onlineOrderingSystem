@@ -112,11 +112,11 @@
 
 
             
-	<div align="center" style="width:100%;height:800px;border:1px solid red;float: left; background-color: #F4F4F4">
-		<div style="width:98%;height: auto;float: left;background-color: #fff;border:1px solid red;margin-top: 10px;margin-left: 1%">
-			<div style="width:100%;height: 50px;background-color: #fff;border-bottom:1px solid #c9c9c9"align="left"><span style="line-height: 70px;margin-left:25px;font-weight: 700 ;font-size: 20px">待处理订单：</span></div>
-			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">新订单</span></div>
-			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">催单</span></div>
+	<div align="center" style="width:100%;height:755px;float: left; background-color: #F4F4F4">
+		<div style="width:98%;height: auto;float: left;background-color: #fff;border:1px solid #a0a0a0;border-radius:10px; margin-top: 10px;margin-left: 1%">
+			<div style="width:100%;height: 50px;border-bottom:1px solid #c9c9c9"align="left"><span style="line-height: 70px;margin-left:25px;font-weight: 700 ;font-size: 20px">待处理订单：</span></div>
+			<div style="width:25%;height: auto;float: left;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">新订单</span></div>
+			<div style="width:25%;height: auto;float: left;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">催单</span></div>
 			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">退单</span></div>
 			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">异常订单</span></div>
 			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="new"><span id="newOrder" style="font-size: 95px"></span></div>
@@ -124,15 +124,15 @@
 			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="cha"><span id="chargeback" style="font-size: 95px"></span></div>
 			<div style="width:25%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="unu"><span id="unusualOrder" style="font-size: 95px"></span></div>
 		</div>
-		<div style="width:64.6%;height: auto;float: left;background-color: #fff;border:1px solid red;margin-top: 10px;margin-left: 1%">
-			<div style="width:100%;height: 50px;background-color: #fff;border-bottom:1px solid #c9c9c9"align="left"><span style="line-height: 70px;margin-left:25px;font-weight: 700 ;font-size: 20px">今日总览：</span></div>
+		<div style="width:64.6%;height: auto;float: left;background-color: #fff;border:1px solid #a0a0a0;border-radius:10px;margin-top: 10px;margin-left: 1%">
+			<div style="width:100%;height: 50px;border-bottom:1px solid #c9c9c9"align="left"><span style="line-height: 70px;margin-left:25px;font-weight: 700 ;font-size: 20px">今日总览：</span></div>
 			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">今日订单</span></div>
 			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">今日营业额</span></div>
 			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="cmp"><span id="completedOrder" style="font-size: 95px"></span></div>
 			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="sal"><span id="sales" style="font-size: 95px"></span></div>
 			</div>
-		<div style="width:32.3%;height: auto;float: right;background-color: #fff;border:1px solid red;margin-right: 1%;margin-top: 10px">
-			 <div style="width:100%;height: 50px;background-color: #fff;border-bottom:1px solid #c9c9c9"align="left"><span style="line-height: 70px;margin-left:25px;font-weight: 700 ;font-size: 20px">待回复评论：</span></div>
+		<div style="width:32.3%;height: auto;float: right;background-color: #fff;border:1px solid #a0a0a0;border-radius:10px;margin-right: 1%;margin-top: 10px">
+			 <div style="width:100%;height: 50px;border-bottom:1px solid #c9c9c9"align="left"><span style="line-height: 70px;margin-left:25px;font-weight: 700 ;font-size: 20px">待回复评论：</span></div>
 			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">未回复差评</span></div>
 			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-top: 50px"><span style="line-height: 50px;font-weight: 700;color: #7b7b7b;font-size: 20px">未回复评论</span></div>
 			<div style="width:50%;height: auto;float: left;background-color: #fff;margin-bottom: 50px" id="nrn"><span id="noResponseToNegativeComment" style="font-size: 95px"></span></div>

@@ -48,7 +48,7 @@
 			for(var i = 0; i< data.length; i++){
 				str +='<div style="width:23%;margin: 0.9%;float: left;background-color:#fff;border:1px solid #e0e0e0;">';
 				str +='<div style="width:40%;border:1px solid black;float: left">';
-				str +='<img alt="sss" src="<%=path%>/images/'+[i]+'.jpg"  width="100%" height="70px"></div>';
+				str +='<img alt="sss" src="<%=path%>/images/foodImg/'+data[i].imgUrl+'"  width="100%" height="70px"></div>';
 				str +='<div style="width:50%;float: left">';
 				str +='<div style="width: 100%;height:auto; margin-top: 10px"><span style="float: left">名称：</span>'+data[i].foodName+'</div>';
 				str +='<div style="width: 100%;height:auto; margin-top: 10px"><span style="float: left">价格：</span>'+data[i].price+'</div></div>';
@@ -63,13 +63,13 @@
 	 
 </script>
 <body>
-<div align="center" style="width:100%;height:100%;border:1px solid red;float: left; background-color: #F4F4F4">
+<div align="center" style="width:100%;height:100%;float: left; background-color: #F4F4F4">
 		<!-- <div style="width:90%;height:100%;border:1px solid red">
 		<div style="width:80%;height:auto;border:1px solid red">
 			<span style="float: left"><form><input value="搜索菜品" type="text" class="aa"><button type="submit">搜索</button> </form> </span>    
 			<span><a href="#"><button>添加菜品</button></a></span>
 		</div> -->
-		<div style="width:80%;height:auto;border:1px solid red" id="business">
+		<div style="width:80%;height:auto" id="business">
 			<%-- <div style="width:23%;height:auto;border:1px solid red;margin: 1%;float: left" id="#business">
 				<div style="width:80%;height:auto;border:1px solid red">
 				<div style="width:40%;height:auto;border:1px solid red;float: left">

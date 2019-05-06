@@ -86,7 +86,7 @@ $.ajax({
 </script>
 <body>
 <div style="width:100%;min-height: 800px;float: left;border:1px solid red;background-color: #F4F4F4">
-<div id="commentDetail" style="width: 60%;height: auto;background-color: #fff;float: left;margin:20px;">
+<div id="commentDetail" style="width: 60%;height: auto;background-color: #fff;float: left;margin:20px;border-radius: 10px;border: 1px solid #D0D0D0">
 <div style="width:95%;height: auto;margin: 10px;line-height: 39px;border-bottom: 2px #EBEBEB solid;padding-bottom: 20px">
 				<!-- 用户评论 -->
 				<div>
@@ -115,7 +115,7 @@ $.ajax({
 				</form>
 			</div>
 </div>
-<div style="width: 30%;height: auto;background-color: #fff;float: right;margin:20px;">
+<div style="width: 30%;height: auto;background-color: #fff;float: right;margin:20px;border-radius: 10px;border: 1px solid #D0D0D0">
 <div style="width: 100%;height: 25px;line-height: 25px;margin-top: 50px;margin-left: 20px;"><span style="font-size: 20px;" id="comment">asadad</span></div>
 <div style="width: 100%;height: 25px;line-height: 25px;margin-left: 20px;"><span style="font-size: 20px;" id="bed">asadad</span></div>
 <div style="width: 100%;height: 25px;line-height: 25px;margin-bottom: 50px;margin-left: 20px;"><span style="font-size: 20px;" id="nobed">asadad</span></div>

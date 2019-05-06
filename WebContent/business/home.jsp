@@ -29,7 +29,7 @@
        <div class="collapse navbar-collapse">
            <ul class="nav navbar-nav navbar-right">
                <li role="presentation">
-                   <a href="#">当前商铺：<span class="badge">${bnickName}</span></a>
+                   <a href="#">当前商铺：<span class="badge" id="bnickName">${bnickName}</span></a>
                </li>
                <li>
                    <a href="<%=path%>/businessController/editLogin.do" target="_parent">

@@ -47,8 +47,8 @@ window.onload = function(){
 	 
 </script>
 <body>
-<div align="center" style="width:100%;height:100%;border:1px solid red;float: left; background-color: #F4F4F4">
-		<div style="width:80%;height:auto;border:1px solid red" id="business">
+<div align="center" style="width:100%;height:100%;float: left; background-color: #F4F4F4">
+		<div style="width:80%;height:auto;" id="business">
 		</div></div>
 </body>
 </html>

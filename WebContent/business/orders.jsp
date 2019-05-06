@@ -43,9 +43,9 @@
 	})
 </script>
 <body>
-<div style="width:100%;;height: auto;float: left;border:1px solid red;background-color: #F4F4F4">
-	<div style="width:100%;height:60px;border:1px solid red;float: left;background-color: #fff">
-		<ul style="border:1px solid red" class="menu">
+<div align="center" style="width:100%;;height: auto;float: left;background-color: #F4F4F4">
+	<div style="width:95%;height:60px;background-color: #fff">
+		<ul class="menu">
 			<li><a class="active" href="<%=request.getContextPath()%>/business/newOrders.jsp" target="ordersFrame">新订单</a></li>
 			<li><a class="unactive" href="<%=request.getContextPath()%>/business/cancelOrder.jsp" target="ordersFrame">取消订单</a></li>
 			<li><a class="unactive" href="<%=request.getContextPath()%>/business/reminder.jsp" target="ordersFrame">催单</a></li>
@@ -54,9 +54,9 @@
 			<li><a class="unactive" href="<%=request.getContextPath()%>/business/completedOrder.jsp" target="ordersFrame">所有订单</a></li>
 		</ul>
 	</div>
-	<div align="center" style="width:98%;min-height:800px;border:1px solid red;">
+	<div align="center" style="width:98%;min-height:800px;">
 		<div style="width:64%;min-height:20px;float: left;background-color: #fff;margin: 1%">
-			<iframe src="<%=request.getContextPath()%>/business/newOrders.jsp" id="ordersFrame" name="ordersFrame" frameborder="0" width="100%" frameBorder="0">
+			<iframe src="<%=request.getContextPath()%>/business/newOrders.jsp" style="background-color: #000;" id="ordersFrame" name="ordersFrame" frameborder="0" width="100%" frameBorder="0">
 	       </iframe> 
 		</div>
 		<div align="center" style="width:32%;height:auto;float: left;margin: 1%">
@@ -65,8 +65,8 @@
 					<span style="font-weight: bold;float: left;color: #383838;font-size: 25px">今日营业总揽</span>
 				</div>
 				<div style="width:95%;height:auto;line-height:auto;padding-bottom: 60px;padding-top: 60px;">
-					<div style="width:95%;height:40px;border:1px solid red"><span id="completedOrder" style="float: left;color: #828282;font-size: 20px">订单量</span></div>
-					<div style="width:95%;height:40px;border:1px solid red"><span id="sales" style="float: left;color: #828282;font-size: 20px">营业额</span></div>
+					<div style="width:95%;height:40px;"><span id="completedOrder" style="float: left;color: #828282;font-size: 20px">订单量</span></div>
+					<div style="width:95%;height:40px;"><span id="sales" style="float: left;color: #828282;font-size: 20px">营业额</span></div>
 				</div>
 			</div>
 			<div align="center" style="width:100%;height:auto;background-color: #fff;border:1px solid #e0e0e0;margin-top: 30px">
@@ -74,8 +74,8 @@
 					<span style="font-weight: bold;float: left;color: #383838;font-size: 25px">订单小贴士</span>
 				</div>
 				<div style="width:95%;height:auto;line-height:auto;padding-bottom: 60px;padding-top: 20px;">
-					<div style="width:95%;height:40px;border:1px solid red"><span style="float: left;color: #828282;font-size: 20px">建议每天10点之前进行开店</span></div>
-					<div style="width:95%;height:40px;border:1px solid red"><span style="float: left;color: #828282;font-size: 20px">建议填写接单手机号</span></div>
+					<div style="width:95%;height:40px;"><span style="float: left;color: #828282;font-size: 20px">建议每天10点之前进行开店</span></div>
+					<div style="width:95%;height:40px;"><span style="float: left;color: #828282;font-size: 20px">建议填写接单手机号</span></div>
 				</div>
 			</div>
 		</div>
